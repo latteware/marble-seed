@@ -144,7 +144,7 @@ class Reports extends Component {
             <h1
               className='is-size-3 is-padding-top-small is-padding-bottom-small'
             >
-              Reportes test
+              Reportes
             </h1>
             <div className='card'>
               <div className='card-content is-paddingless'>
