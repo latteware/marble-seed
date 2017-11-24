@@ -98,9 +98,11 @@ class Reports extends Component {
       {
         'title': 'Counts',
         'property': 'count',
-        'default': 'N/A',
+        'default': 0,
         'sortable': false,
-        'totals': true
+        'totals': true,
+        'editable': true,
+        'type': 'number'
       }
     ]
   }
@@ -122,6 +124,18 @@ class Reports extends Component {
     })
   }
 
+  handleChange (data) {
+    const reports = this.state.reports.map((item) => {
+      if (data.uuid === item.uuid) {
+        return data
+      } else {
+        return item
+      }
+    })
+
+    this.setState({reports})
+  }
+
   render () {
     return (
       <div className='columns c-flex-1 is-marginless'>
@@ -130,7 +144,7 @@ class Reports extends Component {
             <h1
               className='is-size-3 is-padding-top-small is-padding-bottom-small'
             >
-              Reportes
+              Reportes test
             </h1>
             <div className='card'>
               <div className='card-content is-paddingless'>
@@ -140,6 +154,7 @@ class Reports extends Component {
                   className='table is-striped is-fullwidth has-text-centered is-marginless'
                   columns={this.getColumns()}
                   sortAscending={this.state.sortAscending}
+                  handleChange={(data) => this.handleChange(data)}
                   sortBy={this.state.sort}
                  />
               </div>
