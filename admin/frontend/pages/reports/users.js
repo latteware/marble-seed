@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { branch } from 'baobab-react/higher-order'
 import PropTypes from 'baobab-react/prop-types'
 import api from '~base/api'
+import Slider from 'rc-slider'
 
 import Page from '~base/page'
 import {loggedIn} from '~base/middlewares/'
@@ -12,10 +13,15 @@ class Reports extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      selectValue: '',
       sortAscending: true,
       sort: 'screenName',
       sortable: true,
       filters: {},
+      disableSlider: true,
+      selectedRows: {},
+      previousRangeValue: 0,
+      rangeValue: 0,
       stats: {
         leads: {
           total: 0,
@@ -98,17 +104,20 @@ class Reports extends Component {
       {
         'title': 'Counts',
         'property': 'count',
-        'default': 'N/A',
+        'default': 0,
         'sortable': false,
-        'totals': true
+        'totals': true,
+        'editable': true,
+        'type': 'number'
       }
     ]
   }
 
   handleSort (sort) {
     let sortAscending = sort !== this.state.sort ? false : !this.state.sortAscending
-    this.setState({sort, sortAscending}, function () {
+    this.setState({sort, sortAscending, selectedRows: {}}, function () {
       this.loadOrgs()
+      this.toggleSlider()
     })
   }
 
@@ -122,7 +131,79 @@ class Reports extends Component {
     })
   }
 
+  handleChange (data) {
+    const reports = this.state.reports.map((item) => data.uuid === item.uuid ? data : item)
+    this.setState({reports})
+  }
+
+  onChangeSlider (rangeValue) {
+    let rows = {...this.state.selectedRows}
+    let valueToSum = rangeValue - this.state.previousRangeValue
+
+    for (var item in rows) {
+      rows[item].edited = true
+      rows[item].count = parseInt(rows[item].count) + (this.state.rangeValue <= rangeValue ? valueToSum : valueToSum)
+    }
+    this.setState({rangeValue, previousRangeValue: rangeValue})
+  }
+
+  onBeforeChangeSlider (previousRangeValue) {
+    this.setState({previousRangeValue})
+  }
+
+  onAfterChangeSlider (e) {
+  }
+
+  toggleSlider () {
+    let disable = true
+    let rows = {...this.state.selectedRows}
+    if (Object.keys(rows).length) disable = false
+
+    this.setState({
+      disableSlider: disable,
+      rangeValue: disable ? 0 : this.state.rangeValue
+    })
+  }
+
+  setRowsToEdit (row, index) {
+    let rows = {...this.state.selectedRows}
+
+    if (rows.hasOwnProperty(row.uuid)) {
+      row.selected = !row.selected
+      delete rows[row.uuid]
+    } else {
+      row.selected = true
+      rows[row.uuid] = row
+    }
+
+    this.setState({selectedRows: rows}, function () {
+      this.toggleSlider()
+    })
+  }
+
+  selectRows (selectAll) {
+    let selectedRows = {}
+    let reports = this.state.reports.map((item) => {
+      if (selectAll) selectedRows[item.uuid] = item
+
+      item.selected = selectAll
+      return item
+    })
+
+    this.setState({reports, selectedRows}, function () {
+      this.toggleSlider()
+    })
+  }
+
   render () {
+    const wrapperStyle = { width: 200, margin: '0px 0px 30px 20px' }
+    const marks = {
+      '-10': '-10',
+      '-5': '-5',
+      0: <strong>0</strong>,
+      5: '5',
+      10: '10'
+    }
     return (
       <div className='columns c-flex-1 is-marginless'>
         <div className='column is-paddingless'>
@@ -132,6 +213,33 @@ class Reports extends Component {
             >
               Reportes
             </h1>
+            <div className='card' style={{marginBottom: 20}}>
+              <div className='card-content' style={{padding: '1em'}}>
+
+                <div className='columns'>
+
+                  <div className='column'>
+                    <button style={{marginRight: 10}} onClick={(e) => this.selectRows(true)} className='button is-light'>Seleccionar todos</button>
+                    <button onClick={(e) => this.selectRows(false)} className='button is-light'>Deseleccionar todos</button>
+                  </div>
+                  <div className='column'>
+                    <div style={wrapperStyle} className='is-pulled-right'>
+                      <Slider
+                        min={-10}
+                        max={10}
+                        marks={marks}
+                        value={this.state.rangeValue}
+                        defaultValue={this.state.rangeValue}
+                        onChange={(e) => this.onChangeSlider(e)}
+                        onAfterChange={(e) => this.onAfterChangeSlider(e)}
+                        onBeforeChange={(e) => this.onBeforeChangeSlider(e)}
+                        disabled={this.state.disableSlider} />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
             <div className='card'>
               <div className='card-content is-paddingless'>
                 <BaseTable
@@ -140,7 +248,10 @@ class Reports extends Component {
                   className='table is-striped is-fullwidth has-text-centered is-marginless'
                   columns={this.getColumns()}
                   sortAscending={this.state.sortAscending}
+                  handleChange={(data) => this.handleChange(data)}
                   sortBy={this.state.sort}
+                  setRowsToEdit={(row) => this.setRowsToEdit(row)}
+                  selectable
                  />
               </div>
             </div>

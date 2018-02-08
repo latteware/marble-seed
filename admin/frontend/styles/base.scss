@@ -249,7 +249,12 @@ select.placeholder {
 }
 
 .is-pulled-right-by-margin {
-  margin-left: auto
+  margin-left: auto;
+}
+
+.is-edited {
+  background-color: #cfffe0 !important;
+  color: #363636;
 }
 
 pre.json {
