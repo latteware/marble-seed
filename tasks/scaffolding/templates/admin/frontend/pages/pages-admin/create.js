@@ -29,7 +29,7 @@ class Create{{ name | capitalize }} extends Component {
         hideModal={this.hideModal}
       >
         <{{ name | capitalize }}Form
-          baseUrl='/admin/{{ name | lower }}s'
+          baseUrl='/admin/{{ name | pluralize | lower }}'
           url={this.props.url}
           finishUp={this.props.finishUp}
           initialState={initialState}

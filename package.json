@@ -84,6 +84,7 @@
     "co-supertest": "0.0.10",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
+    "pluralize": "^7.0.0",
     "supertest": "^1.0"
   }
 }

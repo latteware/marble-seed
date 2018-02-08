@@ -8,13 +8,13 @@ import Page from '~base/page'
 import {loggedIn} from '~base/middlewares/'
 import { BranchedPaginatedTable } from '~base/components/base-paginatedTable'
 
-class Deleted{{ name | capitalize }}s extends Component {
+class Deleted{{ name | pluralize | capitalize }} extends Component {
   constructor (props) {
     super(props)
   }
 
   componentWillMount () {
-    this.context.tree.set('deleted{{ name | capitalize }}s', {
+    this.context.tree.set('deleted{{ name | pluralize | capitalize }}', {
       page: 1,
       totalItems: 0,
       items: [],
@@ -58,10 +58,10 @@ class Deleted{{ name | capitalize }}s extends Component {
   }
 
   async restoreOnClick (uuid) {
-    var url = '/admin/{{ name | lower }}s/restore/' + uuid
+    var url = '/admin/{{ name | pluralize | lower }}/restore/' + uuid
     const {{ name | lower }} = await api.post(url)
 
-    this.props.history.push('/admin/{{ name | lower }}s/detail/' + uuid)
+    this.props.history.push('/admin/{{ name | pluralize | lower }}/detail/' + uuid)
   }
 
   render () {
@@ -69,14 +69,14 @@ class Deleted{{ name | capitalize }}s extends Component {
       <div className='columns c-flex-1 is-marginless'>
         <div className='column is-paddingless'>
           <div className='section is-paddingless-top'>
-            <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>{{ name | capitalize }}s</h1>
+            <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Deleted {{ name | pluralize | capitalize }}</h1>
             <div className='card'>
               <div className='card-content'>
                 <div className='columns'>
                   <div className='column'>
                     <BranchedPaginatedTable
-                      branchName='deleted{{ name | lower }}s'
-                      baseUrl='/admin/{{ name | lower }}s/deleted'
+                      branchName='deleted{{ name | pluralize | lower }}'
+                      baseUrl='/admin/{{ name | pluralize | lower }}/deleted'
                       columns={this.getColumns()}
                     />
                   </div>
@@ -90,17 +90,17 @@ class Deleted{{ name | capitalize }}s extends Component {
   }
 }
 
-Deleted{{ name | capitalize }}s.contextTypes = {
+Deleted{{ name | pluralize | capitalize }}.contextTypes = {
   tree: PropTypes.baobab
 }
 
-const branchedDeleted{{ name | capitalize }}s = branch({deleted{{ name | lower }}s: 'deleted{{ name | lower }}s'}, Deleted{{ name | capitalize }}s)
+const branchedDeleted{{ name | pluralize | capitalize }} = branch({deleted{{ name | pluralize | capitalize }}: 'deleted{{ name | pluralize | capitalize }}'}, Deleted{{ name | pluralize | capitalize }})
 
 export default Page({
-  path: '/{{ name | lower }}s/deleted',
-  title: 'Deleted {{ name | lower }}s',
+  path: '/{{ name | pluralize | lower }}/deleted',
+  title: 'Deleted {{ name | pluralize | capitalize }}',
   icon: 'trash',
   exact: true,
   validate: loggedIn,
-  component: branchedDeleted{{ name | capitalize }}s
+  component: branchedDeleted{{ name | pluralize | capitalize }}
 })

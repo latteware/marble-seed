@@ -23,7 +23,7 @@ class {{ name | capitalize }}Detail extends Component {
   }
 
   async load () {
-    var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
+    var url = '/admin/{{ name | pluralize | lower }}/' + this.props.match.params.uuid
     const body = await api.get(url)
 
     this.setState({
@@ -34,9 +34,9 @@ class {{ name | capitalize }}Detail extends Component {
   }
 
   async deleteOnClick () {
-    var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
+    var url = '/admin/{{ name | pluralize | lower }}/' + this.props.match.params.uuid
     const body = await api.del(url)
-    this.props.history.push('/admin/{{ name | lower }}s')
+    this.props.history.push('/admin/{{ name | pluralize | lower }}')
   }
 
 
@@ -78,8 +78,8 @@ class {{ name | capitalize }}Detail extends Component {
                     <div className='columns'>
                       <div className='column'>
                         <{{ name | capitalize }}Form
-                          baseUrl='/admin/{{ name | lower }}s'
-                          url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
+                          baseUrl='/admin/{{ name | pluralize | lower }}'
+                          url={'/admin/{{ name | pluralize | lower }}/' + this.props.match.params.uuid}
                           initialState={ {{ name | lower }} }
                           load={this.load.bind(this)}
                         >
@@ -106,10 +106,10 @@ class {{ name | capitalize }}Detail extends Component {
   tree: PropTypes.baobab
 }
 
-const branched{{ name | capitalize }}Details = branch({ {{ name | lower }}s: '{{ name | lower }}s'}, {{ name | capitalize }}Detail)
+const branched{{ name | capitalize }}Details = branch({ {{ name | pluralize | lower }}: '{{ name | pluralize | lower }}'}, {{ name | capitalize }}Detail)
 
 export default Page({
-  path: '/{{ name | lower }}s/:uuid',
+  path: '/{{ name | pluralize | lower }}/:uuid',
   title: '{{ name | capitalize }} details',
   exact: true,
   validate: loggedIn,

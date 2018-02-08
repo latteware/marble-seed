@@ -6,6 +6,7 @@ const Task = require('lib/task')
 const scaffolding = require('lib/scaffolding')
 const path = require('path')
 const s = require('underscore.string')
+const pluralize = require('pluralize')
 
 const task = new Task(async function (argv) {
   if (!argv.model) {
@@ -33,13 +34,13 @@ const task = new Task(async function (argv) {
   const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/detail.js')
-  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
+  const dirPath = path.join('./admin/frontend/pages/' + pluralize(modelSchema.name) + '/')
   const filePath = dirPath + 'detail.js'
   const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const routerPath = path.join('./admin/frontend/router.js')
 
-  scaffolding.replaceInFile(routerPath, '// #Import', 'import ' + s.capitalize(modelSchema.name) + 'Detail from \'./pages/' + modelSchema.name + 's/detail\'\n// #Import')
+  scaffolding.replaceInFile(routerPath, '// #Import', 'import ' + s.capitalize(modelSchema.name) + 'Detail from \'./pages/' + pluralize(modelSchema.name) + '/detail\'\n// #Import')
   scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{' + s.capitalize(modelSchema.name) + 'Detail.asRouterItem()}\n          <div id=\'route\' />')
 
   return true

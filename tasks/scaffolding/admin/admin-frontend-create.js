@@ -5,6 +5,7 @@ require('lib/databases/mongo')
 const Task = require('lib/task')
 const scaffolding = require('lib/scaffolding')
 const path = require('path')
+const pluralize = require('pluralize')
 
 const task = new Task(async function (argv) {
   if (!argv.model) {
@@ -32,12 +33,12 @@ const task = new Task(async function (argv) {
   const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/create.js')
-  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
+  const dirPath = path.join('./admin/frontend/pages/' + pluralize(modelSchema.name) + '/')
   const filePath = dirPath + 'create.js'
   const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const templatePath2 = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/create-form.js')
-  const dirPath2 = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
+  const dirPath2 = path.join('./admin/frontend/pages/' + pluralize(modelSchema.name) + '/')
   const filePath2 = dirPath + 'create-form.js'
   const fileApi2 = await scaffolding.createFileFromTemplate(dirPath2, filePath2, templatePath2, modelSchema)
 
