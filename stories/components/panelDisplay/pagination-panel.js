@@ -6,20 +6,27 @@ class PaginationPanel extends Component {
   }
 
   render () {
+    console.log(this.props.pageNumbers)
+    const renderPageNumber = this.props.pageNumbers.map(number => {
+      return (
+        <li key={number}>
+          <a 
+            className="pagination-link is-current" 
+            aria-label="Page 1" 
+            aria-current="page"
+            id={number}
+            onClick={this.props.onPageNumber}
+          >{number}</a>
+        </li>
+      )
+    })
+
     return (
       <nav className="pagination" role="navigation" aria-label="pagination">
         <a className="pagination-previous" title="This is the first page" disabled>Previous</a>
         <a className="pagination-next">Next page</a>
         <ul className="pagination-list">
-          <li>
-            <a className="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
-          </li>
-          <li>
-            <a className="pagination-link" aria-label="Goto page 2">2</a>
-          </li>
-          <li>
-            <a className="pagination-link" aria-label="Goto page 3">3</a>
-          </li>
+          {renderPageNumber}
         </ul>
       </nav>
     )

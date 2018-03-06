@@ -99,7 +99,10 @@ class PanelDisplayData extends Component {
 							items={this.props.data}
 							onRemoveItem={this.props.onRemoveItem}/>
 					</div>
-					<PaginationPanel/>
+					<PaginationPanel 
+						pageNumbers={this.props.pageNumbers}
+						onPageNumber={this.props.onPageNumber}
+					/>
 				</div>
 			</div>
 		)
