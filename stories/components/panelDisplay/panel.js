@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import PaginationPanel from './pagination-panel'
 
 class DisplayDataList extends Component {
 	render () {
@@ -58,7 +59,6 @@ class PanelDisplayData extends Component {
 				inputValue: this.state.inputValue = ''
 			})
 		}
-		
 	}
 
 	handlerRemoveData (itemId) {
@@ -97,8 +97,9 @@ class PanelDisplayData extends Component {
 						</div>
 						<DisplayDataList 
 							items={this.props.data}
-							onRemoveItem={this.handlerRemoveData}/>
+							onRemoveItem={this.props.onRemoveItem}/>
 					</div>
+					<PaginationPanel/>
 				</div>
 			</div>
 		)
