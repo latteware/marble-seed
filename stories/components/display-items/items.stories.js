@@ -2,13 +2,13 @@ import React from 'react'
 
 import { storiesOf } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import PanelDisplayData from './../../../lib/frontend/components/base-panelDisplay'
+import DisplayItems from './display-items'
 
-storiesOf('Panel', module)
-  .add('Display Data', 
+storiesOf('Display Items', module)
+  .add('Default',
     withInfo(`
       Description and documentation
       ~~~js
       <Button>Click Here</Button>
       ~~~
-    `)(() => <PanelDisplayData />))
+    `)(() => <DisplayItems />))
