@@ -2,7 +2,7 @@ import React from 'react'
 
 import { storiesOf } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import DisplayItems from './display-items'
+import StorybookDisplayItems from './display-items'
 
 storiesOf('Display Items', module)
   .add('Default',
@@ -11,4 +11,4 @@ storiesOf('Display Items', module)
       ~~~js
       <Button>Click Here</Button>
       ~~~
-    `)(() => <DisplayItems />))
+    `)(() => <StorybookDisplayItems />))

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import ItemList from './../../../lib/frontend/components/base-item-list'
+import Spinner from './../../../lib/frontend/components/spinner'
 
 const lotsOfData = [
   {id: '4rgsda24', text: 'Text 1'},
@@ -56,12 +57,14 @@ class PanelDisplayItems extends Component {
           <div className='content'>
             <div className='field is-grouped'>
               <p className='control'>
-                <input
-                  className='input'
-                  type='text'
-                  value={this.props.value}
-                  onChange={this.props.onChangeData}
-                />
+                <form onSubmit={this.props.onSaveData}>
+                  <input
+                    className='input'
+                    type='text'
+                    value={this.props.value}
+                    onChange={this.props.onChangeData}
+                  />
+                </form>
               </p>
               <p className='control'>
                 <button
@@ -72,6 +75,7 @@ class PanelDisplayItems extends Component {
                 </button>
               </p>
             </div>
+            <Spinner />
             <ItemList
               items={this.props.items}
               onRemoveItem={this.props.onRemoveItem}
@@ -83,7 +87,7 @@ class PanelDisplayItems extends Component {
   }
 }
 
-class DisplayItems extends Component {
+class StorybookDisplayItems extends Component {
   constructor () {
     super()
     this.state = {
@@ -112,7 +116,8 @@ class DisplayItems extends Component {
     this.setState({inputValue: event.target.value})
   }
 
-  handlerSaveData () {
+  handlerSaveData (event) {
+    event.preventDefault()
     if (this.state.inputValue) {
       var itemData = {
         id: Math.random().toString(36).substr(2, 16),
@@ -143,6 +148,10 @@ class DisplayItems extends Component {
             <a className='button' onClick={this.addData}>Data</a>
             <a className='button' onClick={this.addLotsOfData}>Lots of Data</a>
           </h1>
+          <h1>
+            <a className='button'>Error</a>
+            <a className='button'>Spinner</a>
+          </h1>
           <p>Show Data</p>
           <pre>
             { pre }
@@ -162,4 +171,4 @@ class DisplayItems extends Component {
   }
 }
 
-export default DisplayItems
+export default StorybookDisplayItems
