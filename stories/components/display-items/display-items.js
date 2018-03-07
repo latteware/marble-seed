@@ -45,7 +45,21 @@ const data = [
 ]
 
 class PanelDisplayItems extends Component {
+  renderSpinner () {
+    if (this.props.showSpinner) {
+      return <Spinner />
+    }
+  }
+
+  renderInputError () {
+    if (this.props.error) {
+      return <p className='help is-danger'>This input is invalid</p>
+    }
+  }
+
   render () {
+    const danger = this.props.error ? 'is-danger' : ''
+
     return (
       <div className='card'>
         <header className='card-header'>
@@ -59,12 +73,13 @@ class PanelDisplayItems extends Component {
               <p className='control'>
                 <form onSubmit={this.props.onSaveData}>
                   <input
-                    className='input'
+                    className={`input ${danger}`}
                     type='text'
                     value={this.props.value}
                     onChange={this.props.onChangeData}
                   />
                 </form>
+                {this.renderInputError()}
               </p>
               <p className='control'>
                 <button
@@ -75,7 +90,7 @@ class PanelDisplayItems extends Component {
                 </button>
               </p>
             </div>
-            <Spinner />
+            {this.renderSpinner()}
             <ItemList
               items={this.props.items}
               onRemoveItem={this.props.onRemoveItem}
@@ -92,12 +107,16 @@ class StorybookDisplayItems extends Component {
     super()
     this.state = {
       inputValue: '',
+      showSpinner: false,
+      error: false,
       dataList: []
     }
     this.addData = this.addData.bind(this)
     this.addLotsOfData = this.addLotsOfData.bind(this)
     this.removeAllData = this.removeAllData.bind(this)
     this.handlerRemoveItem = this.handlerRemoveItem.bind(this)
+    this.handlerShowSpinner = this.handlerShowSpinner.bind(this)
+    this.handlerErrors = this.handlerErrors.bind(this)
   }
 
   addData () {
@@ -137,6 +156,15 @@ class StorybookDisplayItems extends Component {
     this.setState({dataList: this.state.dataList})
   }
 
+  handlerShowSpinner () {
+    this.setState({showSpinner: !this.state.showSpinner})
+    this.removeAllData()
+  }
+
+  handlerErrors () {
+    this.setState({error: !this.state.error})
+  }
+
   render () {
     const pre = JSON.stringify(this.state.dataList, null, 2)
 
@@ -149,8 +177,8 @@ class StorybookDisplayItems extends Component {
             <a className='button' onClick={this.addLotsOfData}>Lots of Data</a>
           </h1>
           <h1>
-            <a className='button'>Error</a>
-            <a className='button'>Spinner</a>
+            <a className='button' onClick={this.handlerErrors}>Error</a>
+            <a className='button' onClick={this.handlerShowSpinner}>Spinner</a>
           </h1>
           <p>Show Data</p>
           <pre>
@@ -164,6 +192,8 @@ class StorybookDisplayItems extends Component {
             onChangeData={e => this.handlerChangeData(e)}
             onSaveData={e => this.handlerSaveData(e)}
             onRemoveItem={this.handlerRemoveItem}
+            showSpinner={this.state.showSpinner}
+            error={this.state.error}
           />
         </div>
       </div>
