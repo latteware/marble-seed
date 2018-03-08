@@ -58,16 +58,32 @@ class PanelDisplayItems extends Component {
     }
   }
 
+  renderPagination () {
+    if (this.props.showPagination) {
+      return <Pagination
+        loadPage={(page) => this.props.loadMore(page)}
+        totalItems={this.props.totalItems}
+        pageLength={this.props.pageLength}
+        page={this.props.page}
+      />
+    }
+  }
+
+  renderMessageError () {
+    if (this.props.error) {
+      return <article className='message is-danger'>
+        <div className='message-body'>
+          <h1>404 Not Found</h1>
+        </div>
+      </article>
+    }
+  }
+
   render () {
     const danger = this.props.error ? 'is-danger' : ''
 
     return (
       <div className='card'>
-        <header className='card-header'>
-          <p className='card-header-title'>
-            TItulo
-          </p>
-        </header>
         <div className='card-content'>
           <div className='content'>
             <div className='field is-grouped'>
@@ -92,16 +108,12 @@ class PanelDisplayItems extends Component {
               </p>
             </div>
             {this.renderSpinner()}
+            {this.renderMessageError()}
             <ItemList
               items={this.props.items}
               onRemoveItem={this.props.onRemoveItem}
             />
-            <Pagination 
-              loadPage={(page) => this.props.loadMore(page)}
-              totalItems={this.props.totalItems}
-              pageLength={this.props.pageLength}
-              page={this.props.page}
-            />
+            {this.renderPagination()}
           </div>
         </div>
       </div>
@@ -116,6 +128,7 @@ class StorybookDisplayItems extends Component {
       inputValue: '',
       showSpinner: false,
       error: false,
+      showPagination: false,
       pageLength: 10,
       page: 1,
       dataList: []
@@ -130,11 +143,21 @@ class StorybookDisplayItems extends Component {
   }
 
   addData () {
-    this.setState({dataList: data})
+    this.setState({
+      dataList: data,
+      showPagination: true,
+      error: false,
+      showSpinner: false
+    })
   }
 
   addLotsOfData () {
-    this.setState({dataList: lotsOfData})
+    this.setState({
+      dataList: lotsOfData,
+      showPagination: true,
+      error: false,
+      showSpinner: false
+    })
   }
 
   removeAllData () {
@@ -152,7 +175,7 @@ class StorybookDisplayItems extends Component {
         id: Math.random().toString(36).substr(2, 16),
         text: this.state.inputValue
       }
-      
+
       var dataList = this.state.dataList
       dataList.unshift(itemData)
       this.setState({
@@ -170,30 +193,36 @@ class StorybookDisplayItems extends Component {
   }
 
   handlerShowSpinner () {
-    this.setState({showSpinner: !this.state.showSpinner})
+    this.setState({
+      showSpinner: !this.state.showSpinner,
+      showPagination: false
+    })
     this.removeAllData()
   }
 
   handlerErrors () {
-    this.setState({error: !this.state.error})
+    this.setState({
+      error: !this.state.error,
+      showPagination: false
+    })
+    this.removeAllData()
   }
 
   loadMore (page) {
-    console.log('Numper Page' + page)
     this.setState({
       page: page
-    });
+    })
   }
 
   render () {
     const pre = JSON.stringify(this.state.dataList, null, 2)
     const totallItems = this.state.dataList.length
-    const { dataList, page, pageLength } = this.state;
+    const { dataList, page, pageLength } = this.state
 
-    const indexOfLastItem = page * pageLength;
-    const indexOfFirstItem = indexOfLastItem - pageLength;
-    const items = dataList.slice(indexOfFirstItem, indexOfLastItem);
- 
+    const indexOfLastItem = page * pageLength
+    const indexOfFirstItem = indexOfLastItem - pageLength
+    const items = dataList.slice(indexOfFirstItem, indexOfLastItem)
+
     return (
       <div className='columns'>
         <div className='column is-one-quarter'>
@@ -224,6 +253,7 @@ class StorybookDisplayItems extends Component {
             totalItems={totallItems}
             pageLength={this.state.pageLength}
             page={this.state.page}
+            showPagination={this.state.showPagination}
           />
         </div>
       </div>
