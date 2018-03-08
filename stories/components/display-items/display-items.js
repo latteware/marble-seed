@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import ItemList from './../../../lib/frontend/components/base-item-list'
 import Spinner from './../../../lib/frontend/components/spinner'
+import { Pagination } from './../../../lib/frontend/components/base-pagination'
 
 const lotsOfData = [
   {id: '4rgsda24', text: 'Text 1'},
@@ -95,6 +96,12 @@ class PanelDisplayItems extends Component {
               items={this.props.items}
               onRemoveItem={this.props.onRemoveItem}
             />
+            <Pagination 
+              loadPage={(page) => this.props.loadMore(page)}
+              totalItems={this.props.totalItems}
+              pageLength={this.props.pageLength}
+              page={this.props.page}
+            />
           </div>
         </div>
       </div>
@@ -109,6 +116,8 @@ class StorybookDisplayItems extends Component {
       inputValue: '',
       showSpinner: false,
       error: false,
+      pageLength: 10,
+      page: 1,
       dataList: []
     }
     this.addData = this.addData.bind(this)
@@ -117,6 +126,7 @@ class StorybookDisplayItems extends Component {
     this.handlerRemoveItem = this.handlerRemoveItem.bind(this)
     this.handlerShowSpinner = this.handlerShowSpinner.bind(this)
     this.handlerErrors = this.handlerErrors.bind(this)
+    this.loadMore = this.loadMore.bind(this)
   }
 
   addData () {
@@ -142,8 +152,11 @@ class StorybookDisplayItems extends Component {
         id: Math.random().toString(36).substr(2, 16),
         text: this.state.inputValue
       }
+      
+      var dataList = this.state.dataList
+      dataList.unshift(itemData)
       this.setState({
-        dataList: this.state.dataList.concat([itemData]),
+        dataList: dataList,
         inputValue: this.state.inputValue = ''
       })
     }
@@ -165,9 +178,22 @@ class StorybookDisplayItems extends Component {
     this.setState({error: !this.state.error})
   }
 
+  loadMore (page) {
+    console.log('Numper Page' + page)
+    this.setState({
+      page: page
+    });
+  }
+
   render () {
     const pre = JSON.stringify(this.state.dataList, null, 2)
+    const totallItems = this.state.dataList.length
+    const { dataList, page, pageLength } = this.state;
 
+    const indexOfLastItem = page * pageLength;
+    const indexOfFirstItem = indexOfLastItem - pageLength;
+    const items = dataList.slice(indexOfFirstItem, indexOfLastItem);
+ 
     return (
       <div className='columns'>
         <div className='column is-one-quarter'>
@@ -187,13 +213,17 @@ class StorybookDisplayItems extends Component {
         </div>
         <div className='column'>
           <PanelDisplayItems
-            items={this.state.dataList}
+            items={items}
             value={this.state.inputValue}
             onChangeData={e => this.handlerChangeData(e)}
             onSaveData={e => this.handlerSaveData(e)}
             onRemoveItem={this.handlerRemoveItem}
             showSpinner={this.state.showSpinner}
             error={this.state.error}
+            loadMore={this.loadMore}
+            totalItems={totallItems}
+            pageLength={this.state.pageLength}
+            page={this.state.page}
           />
         </div>
       </div>
