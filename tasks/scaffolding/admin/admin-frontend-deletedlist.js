@@ -6,6 +6,7 @@ const Task = require('lib/task')
 const scaffolding = require('lib/scaffolding')
 const path = require('path')
 const s = require('underscore.string')
+const pluralize = require('pluralize')
 
 const task = new Task(async function (argv) {
   if (!argv.model) {
@@ -32,14 +33,14 @@ const task = new Task(async function (argv) {
   const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/deleted-list.js')
-  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
+  const dirPath = path.join('./admin/frontend/pages/' + pluralize(modelSchema.name) + '/')
   const filePath = dirPath + 'deleted-list.js'
   const fileList = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const routerPath = path.join('./admin/frontend/router.js')
 
-  scaffolding.replaceInFile(routerPath, '// #Import', 'import Deleted' + s.capitalize(modelSchema.name) + 's from \'./pages/' + modelSchema.name + 's/deleted-list\'\n// #Import')
-  scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{Deleted' + s.capitalize(modelSchema.name) + 's.asRouterItem()}\n          <div id=\'route\' />')
+  scaffolding.replaceInFile(routerPath, '// #Import', 'import Deleted' + s.capitalize(pluralize(modelSchema.name)) + ' from \'./pages/' + pluralize(modelSchema.name) + '/deleted-list\'\n// #Import')
+  scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{Deleted' + s.capitalize(pluralize(modelSchema.name)) + '.asRouterItem()}\n          <div id=\'route\' />')
 
   return true
 }, 500)
