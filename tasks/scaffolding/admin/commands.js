@@ -29,10 +29,6 @@ module.exports = {
         file: 'admin-api-restore',
         command: 'tasks/scaffolding/admin/admin-api-restore'
       },
-      deletedList: {
-        file: 'admin-api-deletedlist',
-        command: 'tasks/scaffolding/admin/admin-api-deletedlist'
-      },
       detail: {
         file: 'admin-api-detail',
         command: 'tasks/scaffolding/admin/admin-api-detail'

@@ -117,7 +117,7 @@ class {{ name | capitalize }}sDeletedList extends ListPageComponent {
   },
 
   // Api url to fetch from
-  apiUrl: '/admin/{{ name | lower }}s/deleted'
+  apiUrl: '/admin/{{ name | lower }}s'
 })
 
 export default {{ name | capitalize }}sDeletedList
