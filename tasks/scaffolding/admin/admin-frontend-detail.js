@@ -21,7 +21,7 @@ const task = new Task(async function (argv) {
     {
       name: 'properties',
       type: 'checkbox',
-      message: 'Select properties to use in list:',
+      message: 'Select properties to use in detail:',
       choices: scaffolding.getModelProperties(model)
     }
   ]
