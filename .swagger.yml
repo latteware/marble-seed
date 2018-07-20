@@ -1,0 +1,2632 @@
+options:
+  routes:
+    sample:
+      options:
+        routes:
+          simpleEndpoint:
+            options:
+              method: get
+              path: /
+            method: get
+            path: /sample/
+            middlewares: {}
+            bodySize: 1mb
+            name: simpleEndpoint
+        middlewares: {}
+        prefix: /sample
+      prefix: /sample
+      routes:
+        simpleEndpoint:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /sample/
+          middlewares: {}
+          bodySize: 1mb
+          name: simpleEndpoint
+      middlewares: {}
+      _routes:
+        '0':
+          options:
+            method: get
+            path: /
+          method: get
+          path: /sample/
+          middlewares: {}
+          bodySize: 1mb
+          name: simpleEndpoint
+      name: sample
+  prefix: /webhooks
+prefix: /webhooks
+routes:
+  sample:
+    options:
+      routes:
+        simpleEndpoint:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /sample/
+          middlewares: {}
+          bodySize: 1mb
+          name: simpleEndpoint
+      middlewares: {}
+      prefix: /sample
+    prefix: /sample
+    routes:
+      simpleEndpoint:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /sample/
+        middlewares: {}
+        bodySize: 1mb
+        name: simpleEndpoint
+    middlewares: {}
+    _routes:
+      '0':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /sample/
+        middlewares: {}
+        bodySize: 1mb
+        name: simpleEndpoint
+    name: sample
+_routes:
+  '0':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /sample/
+    middlewares: {}
+    bodySize: 1mb
+    name: simpleEndpoint
+     method: post
+        path: /set-password
+        validator:
+          _keys:
+            uuid: {}
+            password: {}
+      method: post
+      path: /set-password
+      validator:
+        _keys:
+          uuid: {}
+          password: {}
+      middlewares: {}
+      bodySize: 1mb
+      name: setPassword
+    updatePassword:
+      options:
+        method: post
+        path: /me/update-password
+        validator:
+          _keys:
+            password: {}
+            newPassword: {}
+            confirmPassword: {}
+            uuid: {}
+      method: post
+      path: /me/update-password
+      validator:
+        _keys:
+          password: {}
+          newPassword: {}
+          confirmPassword: {}
+          uuid: {}
+      middlewares: {}
+      bodySize: 1mb
+      name: updatePassword
+    update:
+      options:
+        method: post
+        path: /me/update
+        validator:
+          _keys:
+            email: {}
+            screenName: {}
+            uuid: {}
+      method: post
+      path: /me/update
+      validator:
+        _keys:
+          email: {}
+          screenName: {}
+          uuid: {}
+      middlewares: {}
+      bodySize: 1mb
+      name: update
+  prefix: /user
+prefix: /user
+routes:
+  createApiToken:
+    options:
+      method: post
+      path: /tokens
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: /tokens
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: createApiToken
+  create:
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          name: {}
+          email: {}
+          password: {}
+          screenName: {}
+    method: post
+    path: /
+    validator:
+      _keys:
+        name: {}
+        email: {}
+        password: {}
+        screenName: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  deleteApiToken:
+    options:
+      method: del
+      path: '/tokens/:uuid'
+    method: del
+    path: '/tokens/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: deleteApiToken
+  deleteToken:
+    options:
+      method: del
+      path: /
+    method: del
+    path: /
+    middlewares: {}
+    bodySize: 1mb
+    name: deleteToken
+  getApiTokens:
+    options:
+      method: get
+      path: /tokens
+    method: get
+    path: /tokens
+    middlewares: {}
+    bodySize: 1mb
+    name: getApiTokens
+  login:
+    options:
+      method: post
+      path: /login
+    method: post
+    path: /login
+    middlewares: {}
+    bodySize: 1mb
+    name: login
+  me:
+    options:
+      method: get
+      path: /me
+    method: get
+    path: /me
+    middlewares: {}
+    bodySize: 1mb
+    name: me
+  resetPassword:
+    options:
+      method: post
+      path: /reset-password
+    method: post
+    path: /reset-password
+    middlewares: {}
+    bodySize: 1mb
+    name: resetPassword
+  setPassword:
+    options:
+      method: post
+      path: /set-password
+      validator:
+        _keys:
+          uuid: {}
+          password: {}
+    method: post
+    path: /set-password
+    validator:
+      _keys:
+        uuid: {}
+        password: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: setPassword
+  updatePassword:
+    options:
+      method: post
+      path: /me/update-password
+      validator:
+        _keys:
+          password: {}
+          newPassword: {}
+          confirmPassword: {}
+          uuid: {}
+    method: post
+    path: /me/update-password
+    validator:
+      _keys:
+        password: {}
+        newPassword: {}
+        confirmPassword: {}
+        uuid: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: updatePassword
+  update:
+    options:
+      method: post
+      path: /me/update
+      validator:
+        _keys:
+          email: {}
+          screenName: {}
+          uuid: {}
+    method: post
+    path: /me/update
+    validator:
+      _keys:
+        email: {}
+        screenName: {}
+        uuid: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
+_routes:
+  '0':
+    options:
+      method: post
+      path: /tokens
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: /tokens
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: createApiToken
+  '1':
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          name: {}
+          email: {}
+          password: {}
+          screenName: {}
+    method: post
+    path: /
+    validator:
+      _keys:
+        name: {}
+        email: {}
+        password: {}
+        screenName: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  '2':
+    options:
+      method: del
+      path: '/tokens/:uuid'
+    method: del
+    path: '/tokens/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: deleteApiToken
+  '3':
+    options:
+      method: del
+      path: /
+    method: del
+    path: /
+    middlewares: {}
+    bodySize: 1mb
+    name: deleteToken
+  '4':
+    options:
+      method: get
+      path: /tokens
+    method: get
+    path: /tokens
+    middlewares: {}
+    bodySize: 1mb
+    name: getApiTokens
+  '5':
+    options:
+      method: post
+      path: /login
+    method: post
+    path: /login
+    middlewares: {}
+    bodySize: 1mb
+    name: login
+  '6':
+    options:
+      method: get
+      path: /me
+    method: get
+    path: /me
+    middlewares: {}
+    bodySize: 1mb
+    name: me
+  '7':
+    options:
+      method: post
+      path: /reset-password
+    method: post
+    path: /reset-password
+    middlewares: {}
+    bodySize: 1mb
+    name: resetPassword
+  '8':
+    options:
+      method: post
+      path: /set-password
+      validator:
+        _keys:
+          uuid: {}
+          password: {}
+    method: post
+    path: /set-password
+    validator:
+      _keys:
+        uuid: {}
+        password: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: setPassword
+  '9':
+    options:
+      method: post
+      path: /me/update-password
+      validator:
+        _keys:
+          password: {}
+          newPassword: {}
+          confirmPassword: {}
+          uuid: {}
+    method: post
+    path: /me/update-password
+    validator:
+      _keys:
+        password: {}
+        newPassword: {}
+        confirmPassword: {}
+        uuid: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: updatePassword
+  '10':
+    options:
+      method: post
+      path: /me/update
+      validator:
+        _keys:
+          email: {}
+          screenName: {}
+          uuid: {}
+    method: post
+    path: /me/update
+    validator:
+      _keys:
+        email: {}
+        screenName: {}
+        uuid: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
+    path: '/organizations/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        '2':
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/organizations/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        '3':
+          options:
+            method: get
+            path: /
+          method: get
+          path: /organizations/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        '4':
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/organizations/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      name: organization
+    requestLogs:
+      options:
+        routes:
+          detail:
+            options:
+              method: get
+              path: '/:uuid'
+            method: get
+            path: '/request-logs/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: detail
+          export:
+            options:
+              method: get
+              path: '/export/:uuid'
+            method: get
+            path: '/request-logs/export/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: export
+          list:
+            options:
+              method: get
+              path: /
+            method: get
+            path: /request-logs/
+            middlewares: {}
+            bodySize: 1mb
+            name: list
+          metadata:
+            options:
+              method: get
+              path: /metadata
+            method: get
+            path: /request-logs/metadata
+            middlewares: {}
+            bodySize: 1mb
+            name: metadata
+          replay:
+            options:
+              method: post
+              path: '/:uuid/replay'
+            method: post
+            path: '/request-logs/:uuid/replay'
+            middlewares: {}
+            bodySize: 1mb
+            name: replay
+        prefix: /request-logs
+      prefix: /request-logs
+      routes:
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/request-logs/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        export:
+          options:
+            method: get
+            path: '/export/:uuid'
+          method: get
+          path: '/request-logs/export/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: export
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /request-logs/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        metadata:
+          options:
+            method: get
+            path: /metadata
+          method: get
+          path: /request-logs/metadata
+          middlewares: {}
+          bodySize: 1mb
+          name: metadata
+        replay:
+          options:
+            method: post
+            path: '/:uuid/replay'
+          method: post
+          path: '/request-logs/:uuid/replay'
+          middlewares: {}
+          bodySize: 1mb
+          name: replay
+      _routes:
+        '0':
+          options:
+            method: get
+            path: /metadata
+          method: get
+          path: /request-logs/metadata
+          middlewares: {}
+          bodySize: 1mb
+          name: metadata
+        '1':
+          options:
+            method: get
+            path: '/export/:uuid'
+          method: get
+          path: '/request-logs/export/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: export
+        '2':
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/request-logs/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        '3':
+          options:
+            method: get
+            path: /
+          method: get
+          path: /request-logs/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        '4':
+          options:
+            method: post
+            path: '/:uuid/replay'
+          method: post
+          path: '/request-logs/:uuid/replay'
+          middlewares: {}
+          bodySize: 1mb
+          name: replay
+      name: requestLogs
+    roles:
+      options:
+        routes:
+          create:
+            options:
+              method: post
+              path: /
+              validator:
+                _keys:
+                  name: {}
+            method: post
+            path: /roles/
+            validator:
+              _keys:
+                name: {}
+            middlewares: {}
+            bodySize: 1mb
+            name: create
+          delete:
+            options:
+              method: delete
+              path: '/:uuid'
+            method: delete
+            path: '/roles/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: delete
+          detail:
+            options:
+              method: get
+              path: '/:uuid'
+            method: get
+            path: '/roles/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: detail
+          list:
+            options:
+              method: get
+              path: /
+            method: get
+            path: /roles/
+            middlewares: {}
+            bodySize: 1mb
+            name: list
+          setDefault:
+            options:
+              method: post
+              path: '/:uuid/setDefault'
+            method: post
+            path: '/roles/:uuid/setDefault'
+            middlewares: {}
+            bodySize: 1mb
+            name: setDefault
+          update:
+            options:
+              method: post
+              path: '/:uuid'
+              validator:
+                _keys:
+                  name: {}
+            method: post
+            path: '/roles/:uuid'
+            validator:
+              _keys:
+                name: {}
+            middlewares: {}
+            bodySize: 1mb
+            name: update
+        prefix: /roles
+      prefix: /roles
+      routes:
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: /roles/
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /roles/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        setDefault:
+          options:
+            method: post
+            path: '/:uuid/setDefault'
+          method: post
+          path: '/roles/:uuid/setDefault'
+          middlewares: {}
+          bodySize: 1mb
+          name: setDefault
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/roles/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      _routes:
+        '0':
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: /roles/
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        '1':
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        '2':
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        '3':
+          options:
+            method: get
+            path: /
+          method: get
+          path: /roles/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        '4':
+          options:
+            method: post
+            path: '/:uuid/setDefault'
+          method: post
+          path: '/roles/:uuid/setDefault'
+          middlewares: {}
+          bodySize: 1mb
+          name: setDefault
+        '5':
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/roles/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      name: roles
+    user:
+      options:
+        routes:
+          addGroup:
+            options:
+              method: post
+              path: '/:uuid/add/group'
+            method: post
+            path: '/users/:uuid/add/group'
+            middlewares: {}
+            bodySize: 1mb
+            name: addGroup
+          addOrg:
+            options:
+              method: post
+              path: '/:uuid/add/organization'
+            method: post
+            path: '/users/:uuid/add/organization'
+            middlewares: {}
+            bodySize: 1mb
+            name: addOrg
+          create:
+            options:
+              method: post
+              path: /
+              validator:
+                _keys:
+                  email: {}
+                  screenName: {}
+            method: post
+            path: /users/
+            validator:
+              _keys:
+                email: {}
+                screenName: {}
+            middlewares: {}
+            bodySize: 1mb
+            name: create
+          delete:
+            options:
+              method: delete
+              path: '/:uuid'
+            method: delete
+            path: '/users/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: delete
+          detail:
+            options:
+              method: get
+              path: '/:uuid'
+            method: get
+            path: '/users/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: detail
+          import:
+            options:
+              method: post
+              path: /import
+            method: post
+            path: /users/import
+            middlewares: {}
+            bodySize: 1mb
+            name: import
+          list:
+            options:
+              method: get
+              path: /
+            method: get
+            path: /users/
+            middlewares: {}
+            bodySize: 1mb
+            name: list
+          removeGroup:
+            options:
+              method: post
+              path: '/:uuid/remove/group'
+            method: post
+            path: '/users/:uuid/remove/group'
+            middlewares: {}
+            bodySize: 1mb
+            name: removeGroup
+          removeOrg:
+            options:
+              method: post
+              path: '/:uuid/remove/organization'
+            method: post
+            path: '/users/:uuid/remove/organization'
+            middlewares: {}
+            bodySize: 1mb
+            name: removeOrg
+          restore:
+            options:
+              method: post
+              path: '/deleted/:uuid'
+            method: post
+            path: '/users/deleted/:uuid'
+            middlewares: {}
+            bodySize: 1mb
+            name: restore
+          update:
+            options:
+              method: post
+              path: '/:uuid'
+              validator:
+                _keys:
+                  name: {}
+                  email: {}
+            method: post
+            path: '/users/:uuid'
+            validator:
+              _keys:
+                name: {}
+                email: {}
+            middlewares: {}
+            bodySize: 1mb
+            name: update
+        prefix: /users
+      prefix: /users
+      routes:
+        addGroup:
+          options:
+            method: post
+            path: '/:uuid/add/group'
+          method: post
+          path: '/users/:uuid/add/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: addGroup
+        addOrg:
+          options:
+            method: post
+            path: '/:uuid/add/organization'
+          method: post
+          path: '/users/:uuid/add/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: addOrg
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                email: {}
+                screenName: {}
+          method: post
+          path: /users/
+          validator:
+            _keys:
+              email: {}
+              screenName: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        import:
+          options:
+            method: post
+            path: /import
+          method: post
+          path: /users/import
+          middlewares: {}
+          bodySize: 1mb
+          name: import
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /users/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        removeGroup:
+          options:
+            method: post
+            path: '/:uuid/remove/group'
+          method: post
+          path: '/users/:uuid/remove/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeGroup
+        removeOrg:
+          options:
+            method: post
+            path: '/:uuid/remove/organization'
+          method: post
+          path: '/users/:uuid/remove/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeOrg
+        restore:
+          options:
+            method: post
+            path: '/deleted/:uuid'
+          method: post
+          path: '/users/deleted/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: restore
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+                email: {}
+          method: post
+          path: '/users/:uuid'
+          validator:
+            _keys:
+              name: {}
+              email: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      _routes:
+        '0':
+          options:
+            method: post
+            path: '/:uuid/add/group'
+          method: post
+          path: '/users/:uuid/add/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: addGroup
+        '1':
+          options:
+            method: post
+            path: '/:uuid/add/organization'
+          method: post
+          path: '/users/:uuid/add/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: addOrg
+        '2':
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                email: {}
+                screenName: {}
+          method: post
+          path: /users/
+          validator:
+            _keys:
+              email: {}
+              screenName: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        '3':
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        '4':
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        '5':
+          options:
+            method: post
+            path: /import
+          method: post
+          path: /users/import
+          middlewares: {}
+          bodySize: 1mb
+          name: import
+        '6':
+          options:
+            method: get
+            path: /
+          method: get
+          path: /users/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        '7':
+          options:
+            method: post
+            path: '/:uuid/remove/group'
+          method: post
+          path: '/users/:uuid/remove/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeGroup
+        '8':
+          options:
+            method: post
+            path: '/:uuid/remove/organization'
+          method: post
+          path: '/users/:uuid/remove/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeOrg
+        '9':
+          options:
+            method: post
+            path: '/deleted/:uuid'
+          method: post
+          path: '/users/deleted/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: restore
+        '10':
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+                email: {}
+          method: post
+          path: '/users/:uuid'
+          validator:
+            _keys:
+              name: {}
+              email: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      name: user
+  prefix: /admin
+  middlewares: {}
+prefix: /admin
+routes:
+  dashboard:
+    options:
+      routes:
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /dashboard/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+      prefix: /dashboard
+    prefix: /dashboard
+    routes:
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /dashboard/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+    _routes:
+      '0':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /dashboard/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+    name: dashboard
+  group:
+    options:
+      routes:
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: /groups/
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/groups/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/groups/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /groups/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/groups/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      prefix: /groups
+    prefix: /groups
+    routes:
+      create:
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /groups/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      delete:
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/groups/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      detail:
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/groups/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /groups/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      update:
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/groups/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    _routes:
+      '0':
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /groups/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      '1':
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/groups/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      '2':
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/groups/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      '3':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /groups/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      '4':
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/groups/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    name: group
+  organization:
+    options:
+      routes:
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: /organizations/
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/organizations/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/organizations/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /organizations/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/organizations/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      prefix: /organizations
+    prefix: /organizations
+    routes:
+      create:
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /organizations/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      delete:
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/organizations/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      detail:
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/organizations/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /organizations/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      update:
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/organizations/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    _routes:
+      '0':
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /organizations/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      '1':
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/organizations/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      '2':
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/organizations/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      '3':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /organizations/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      '4':
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/organizations/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    name: organization
+  requestLogs:
+    options:
+      routes:
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/request-logs/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        export:
+          options:
+            method: get
+            path: '/export/:uuid'
+          method: get
+          path: '/request-logs/export/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: export
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /request-logs/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        metadata:
+          options:
+            method: get
+            path: /metadata
+          method: get
+          path: /request-logs/metadata
+          middlewares: {}
+          bodySize: 1mb
+          name: metadata
+        replay:
+          options:
+            method: post
+            path: '/:uuid/replay'
+          method: post
+          path: '/request-logs/:uuid/replay'
+          middlewares: {}
+          bodySize: 1mb
+          name: replay
+      prefix: /request-logs
+    prefix: /request-logs
+    routes:
+      detail:
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/request-logs/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      export:
+        options:
+          method: get
+          path: '/export/:uuid'
+        method: get
+        path: '/request-logs/export/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: export
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /request-logs/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      metadata:
+        options:
+          method: get
+          path: /metadata
+        method: get
+        path: /request-logs/metadata
+        middlewares: {}
+        bodySize: 1mb
+        name: metadata
+      replay:
+        options:
+          method: post
+          path: '/:uuid/replay'
+        method: post
+        path: '/request-logs/:uuid/replay'
+        middlewares: {}
+        bodySize: 1mb
+        name: replay
+    _routes:
+      '0':
+        options:
+          method: get
+          path: /metadata
+        method: get
+        path: /request-logs/metadata
+        middlewares: {}
+        bodySize: 1mb
+        name: metadata
+      '1':
+        options:
+          method: get
+          path: '/export/:uuid'
+        method: get
+        path: '/request-logs/export/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: export
+      '2':
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/request-logs/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      '3':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /request-logs/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      '4':
+        options:
+          method: post
+          path: '/:uuid/replay'
+        method: post
+        path: '/request-logs/:uuid/replay'
+        middlewares: {}
+        bodySize: 1mb
+        name: replay
+    name: requestLogs
+  roles:
+    options:
+      routes:
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: /roles/
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/roles/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /roles/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        setDefault:
+          options:
+            method: post
+            path: '/:uuid/setDefault'
+          method: post
+          path: '/roles/:uuid/setDefault'
+          middlewares: {}
+          bodySize: 1mb
+          name: setDefault
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+          method: post
+          path: '/roles/:uuid'
+          validator:
+            _keys:
+              name: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      prefix: /roles
+    prefix: /roles
+    routes:
+      create:
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /roles/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      delete:
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/roles/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      detail:
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/roles/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /roles/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      setDefault:
+        options:
+          method: post
+          path: '/:uuid/setDefault'
+        method: post
+        path: '/roles/:uuid/setDefault'
+        middlewares: {}
+        bodySize: 1mb
+        name: setDefault
+      update:
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/roles/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    _routes:
+      '0':
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: /roles/
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      '1':
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/roles/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      '2':
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/roles/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      '3':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /roles/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      '4':
+        options:
+          method: post
+          path: '/:uuid/setDefault'
+        method: post
+        path: '/roles/:uuid/setDefault'
+        middlewares: {}
+        bodySize: 1mb
+        name: setDefault
+      '5':
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+        method: post
+        path: '/roles/:uuid'
+        validator:
+          _keys:
+            name: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    name: roles
+  user:
+    options:
+      routes:
+        addGroup:
+          options:
+            method: post
+            path: '/:uuid/add/group'
+          method: post
+          path: '/users/:uuid/add/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: addGroup
+        addOrg:
+          options:
+            method: post
+            path: '/:uuid/add/organization'
+          method: post
+          path: '/users/:uuid/add/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: addOrg
+        create:
+          options:
+            method: post
+            path: /
+            validator:
+              _keys:
+                email: {}
+                screenName: {}
+          method: post
+          path: /users/
+          validator:
+            _keys:
+              email: {}
+              screenName: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: create
+        delete:
+          options:
+            method: delete
+            path: '/:uuid'
+          method: delete
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: delete
+        detail:
+          options:
+            method: get
+            path: '/:uuid'
+          method: get
+          path: '/users/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: detail
+        import:
+          options:
+            method: post
+            path: /import
+          method: post
+          path: /users/import
+          middlewares: {}
+          bodySize: 1mb
+          name: import
+        list:
+          options:
+            method: get
+            path: /
+          method: get
+          path: /users/
+          middlewares: {}
+          bodySize: 1mb
+          name: list
+        removeGroup:
+          options:
+            method: post
+            path: '/:uuid/remove/group'
+          method: post
+          path: '/users/:uuid/remove/group'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeGroup
+        removeOrg:
+          options:
+            method: post
+            path: '/:uuid/remove/organization'
+          method: post
+          path: '/users/:uuid/remove/organization'
+          middlewares: {}
+          bodySize: 1mb
+          name: removeOrg
+        restore:
+          options:
+            method: post
+            path: '/deleted/:uuid'
+          method: post
+          path: '/users/deleted/:uuid'
+          middlewares: {}
+          bodySize: 1mb
+          name: restore
+        update:
+          options:
+            method: post
+            path: '/:uuid'
+            validator:
+              _keys:
+                name: {}
+                email: {}
+          method: post
+          path: '/users/:uuid'
+          validator:
+            _keys:
+              name: {}
+              email: {}
+          middlewares: {}
+          bodySize: 1mb
+          name: update
+      prefix: /users
+    prefix: /users
+    routes:
+      addGroup:
+        options:
+          method: post
+          path: '/:uuid/add/group'
+        method: post
+        path: '/users/:uuid/add/group'
+        middlewares: {}
+        bodySize: 1mb
+        name: addGroup
+      addOrg:
+        options:
+          method: post
+          path: '/:uuid/add/organization'
+        method: post
+        path: '/users/:uuid/add/organization'
+        middlewares: {}
+        bodySize: 1mb
+        name: addOrg
+      create:
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              email: {}
+              screenName: {}
+        method: post
+        path: /users/
+        validator:
+          _keys:
+            email: {}
+            screenName: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      delete:
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/users/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      detail:
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/users/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      import:
+        options:
+          method: post
+          path: /import
+        method: post
+        path: /users/import
+        middlewares: {}
+        bodySize: 1mb
+        name: import
+      list:
+        options:
+          method: get
+          path: /
+        method: get
+        path: /users/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      removeGroup:
+        options:
+          method: post
+          path: '/:uuid/remove/group'
+        method: post
+        path: '/users/:uuid/remove/group'
+        middlewares: {}
+        bodySize: 1mb
+        name: removeGroup
+      removeOrg:
+        options:
+          method: post
+          path: '/:uuid/remove/organization'
+        method: post
+        path: '/users/:uuid/remove/organization'
+        middlewares: {}
+        bodySize: 1mb
+        name: removeOrg
+      restore:
+        options:
+          method: post
+          path: '/deleted/:uuid'
+        method: post
+        path: '/users/deleted/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: restore
+      update:
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+              email: {}
+        method: post
+        path: '/users/:uuid'
+        validator:
+          _keys:
+            name: {}
+            email: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    _routes:
+      '0':
+        options:
+          method: post
+          path: '/:uuid/add/group'
+        method: post
+        path: '/users/:uuid/add/group'
+        middlewares: {}
+        bodySize: 1mb
+        name: addGroup
+      '1':
+        options:
+          method: post
+          path: '/:uuid/add/organization'
+        method: post
+        path: '/users/:uuid/add/organization'
+        middlewares: {}
+        bodySize: 1mb
+        name: addOrg
+      '2':
+        options:
+          method: post
+          path: /
+          validator:
+            _keys:
+              email: {}
+              screenName: {}
+        method: post
+        path: /users/
+        validator:
+          _keys:
+            email: {}
+            screenName: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: create
+      '3':
+        options:
+          method: delete
+          path: '/:uuid'
+        method: delete
+        path: '/users/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: delete
+      '4':
+        options:
+          method: get
+          path: '/:uuid'
+        method: get
+        path: '/users/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: detail
+      '5':
+        options:
+          method: post
+          path: /import
+        method: post
+        path: /users/import
+        middlewares: {}
+        bodySize: 1mb
+        name: import
+      '6':
+        options:
+          method: get
+          path: /
+        method: get
+        path: /users/
+        middlewares: {}
+        bodySize: 1mb
+        name: list
+      '7':
+        options:
+          method: post
+          path: '/:uuid/remove/group'
+        method: post
+        path: '/users/:uuid/remove/group'
+        middlewares: {}
+        bodySize: 1mb
+        name: removeGroup
+      '8':
+        options:
+          method: post
+          path: '/:uuid/remove/organization'
+        method: post
+        path: '/users/:uuid/remove/organization'
+        middlewares: {}
+        bodySize: 1mb
+        name: removeOrg
+      '9':
+        options:
+          method: post
+          path: '/deleted/:uuid'
+        method: post
+        path: '/users/deleted/:uuid'
+        middlewares: {}
+        bodySize: 1mb
+        name: restore
+      '10':
+        options:
+          method: post
+          path: '/:uuid'
+          validator:
+            _keys:
+              name: {}
+              email: {}
+        method: post
+        path: '/users/:uuid'
+        validator:
+          _keys:
+            name: {}
+            email: {}
+        middlewares: {}
+        bodySize: 1mb
+        name: update
+    name: user
+middlewares: {}
+_routes:
+  '0':
+    options:
+      method: get
+      path: /metadata
+    method: get
+    path: /request-logs/metadata
+    middlewares: {}
+    bodySize: 1mb
+    name: metadata
+  '1':
+    options:
+      method: get
+      path: '/export/:uuid'
+    method: get
+    path: '/request-logs/export/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: export
+  '2':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /dashboard/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '3':
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: /groups/
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  '4':
+    options:
+      method: delete
+      path: '/:uuid'
+    method: delete
+    path: '/groups/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: delete
+  '5':
+    options:
+      method: get
+      path: '/:uuid'
+    method: get
+    path: '/groups/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: detail
+  '6':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /groups/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '7':
+    options:
+      method: post
+      path: '/:uuid'
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: '/groups/:uuid'
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
+  '8':
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: /organizations/
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  '9':
+    options:
+      method: delete
+      path: '/:uuid'
+    method: delete
+    path: '/organizations/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: delete
+  '10':
+    options:
+      method: get
+      path: '/:uuid'
+    method: get
+    path: '/organizations/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: detail
+  '11':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /organizations/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '12':
+    options:
+      method: post
+      path: '/:uuid'
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: '/organizations/:uuid'
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
+  '13':
+    options:
+      method: get
+      path: '/:uuid'
+    method: get
+    path: '/request-logs/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: detail
+  '14':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /request-logs/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '15':
+    options:
+      method: post
+      path: '/:uuid/replay'
+    method: post
+    path: '/request-logs/:uuid/replay'
+    middlewares: {}
+    bodySize: 1mb
+    name: replay
+  '16':
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: /roles/
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  '17':
+    options:
+      method: delete
+      path: '/:uuid'
+    method: delete
+    path: '/roles/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: delete
+  '18':
+    options:
+      method: get
+      path: '/:uuid'
+    method: get
+    path: '/roles/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: detail
+  '19':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /roles/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '20':
+    options:
+      method: post
+      path: '/:uuid/setDefault'
+    method: post
+    path: '/roles/:uuid/setDefault'
+    middlewares: {}
+    bodySize: 1mb
+    name: setDefault
+  '21':
+    options:
+      method: post
+      path: '/:uuid'
+      validator:
+        _keys:
+          name: {}
+    method: post
+    path: '/roles/:uuid'
+    validator:
+      _keys:
+        name: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
+  '22':
+    options:
+      method: post
+      path: '/:uuid/add/group'
+    method: post
+    path: '/users/:uuid/add/group'
+    middlewares: {}
+    bodySize: 1mb
+    name: addGroup
+  '23':
+    options:
+      method: post
+      path: '/:uuid/add/organization'
+    method: post
+    path: '/users/:uuid/add/organization'
+    middlewares: {}
+    bodySize: 1mb
+    name: addOrg
+  '24':
+    options:
+      method: post
+      path: /
+      validator:
+        _keys:
+          email: {}
+          screenName: {}
+    method: post
+    path: /users/
+    validator:
+      _keys:
+        email: {}
+        screenName: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: create
+  '25':
+    options:
+      method: delete
+      path: '/:uuid'
+    method: delete
+    path: '/users/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: delete
+  '26':
+    options:
+      method: get
+      path: '/:uuid'
+    method: get
+    path: '/users/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: detail
+  '27':
+    options:
+      method: post
+      path: /import
+    method: post
+    path: /users/import
+    middlewares: {}
+    bodySize: 1mb
+    name: import
+  '28':
+    options:
+      method: get
+      path: /
+    method: get
+    path: /users/
+    middlewares: {}
+    bodySize: 1mb
+    name: list
+  '29':
+    options:
+      method: post
+      path: '/:uuid/remove/group'
+    method: post
+    path: '/users/:uuid/remove/group'
+    middlewares: {}
+    bodySize: 1mb
+    name: removeGroup
+  '30':
+    options:
+      method: post
+      path: '/:uuid/remove/organization'
+    method: post
+    path: '/users/:uuid/remove/organization'
+    middlewares: {}
+    bodySize: 1mb
+    name: removeOrg
+  '31':
+    options:
+      method: post
+      path: '/deleted/:uuid'
+    method: post
+    path: '/users/deleted/:uuid'
+    middlewares: {}
+    bodySize: 1mb
+    name: restore
+  '32':
+    options:
+      method: post
+      path: '/:uuid'
+      validator:
+        _keys:
+          name: {}
+          email: {}
+    method: post
+    path: '/users/:uuid'
+    validator:
+      _keys:
+        name: {}
+        email: {}
+    middlewares: {}
+    bodySize: 1mb
+    name: update
