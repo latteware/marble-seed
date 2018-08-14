@@ -1,0 +1,287 @@
+.button{
+  margin: 15px;
+}
+.button-primary.is-warning{
+  color: #fff !important;
+}
+.button-primary.is-primary.is-active, .button-primary.is-primary:active{
+  background-color: $primary-active !important;
+}
+.button-primary.is-success.is-active, .button-primary.is-success:active{
+  background-color: $success-active !important;
+}
+.button-primary.is-warning.is-active, .button-primary.is-warning:active{
+  background-color: $warning-active !important;
+}
+.button-primary.is-danger.is-active, .button-primary.is-danger:active{
+  background-color: $danger-active !important;
+}
+.button-primary.is-link.is-active, .button-primary.is-link:active{
+  background-color: $link-active !important;
+}
+.button-primary.is-info.is-active, .button-primary.is-info:active{
+  background-color: $info-active !important;
+}
+
+.button-primary.is-primary.is-hovered, .button-primary.is-primary:hover{
+  background-color: $primary-hovered !important;
+}
+.button-primary.is-success.is-hovered, .button-primary.is-success:hover{
+  background-color: $success-hovered !important;
+}
+.button-primary.is-warning.is-hovered, .button-primary.is-warning:hover{
+  background-color: $warning-hovered !important;
+}
+.button-primary.is-danger.is-hovered, .button-primary.is-danger:hover{
+  background-color: $danger-hovered !important;
+}
+.button-primary.is-link.is-hovered, .is-link.is-hovered, .button-primary.is-info.is-hovered, .button-primary.is-link:hover, .is-link:hover, .button-primary.is-info:hover{
+  background-color: $link-hovered !important;
+}
+
+/*Colors for secondary and minimalist buttons*/
+.button-secondary.is-primary{
+  background-color: $bg-secondary !important;
+  color: $primary !important;
+}
+.button-minimalistic.is-primary{
+  background-color: transparent !important;
+  color: $primary !important;
+}
+.button-secondary.is-primary:hover, .button-secondary.is-primary.is-hovered, .button-minimalistic.is-primary:hover, .button-minimalistic.is-primary.is-hovered{
+  border: 1px solid $primary !important;
+}
+.button-secondary.is-primary.is-active, .button-secondary.is-primary:active, .button-minimalistic.is-primary.is-active, .button-minimalistic.is-primary:active{
+  border: 1px solid $primary-active !important;
+  color: $primary-active !important;
+}
+
+.button-secondary.is-success{
+  background-color: $bg-secondary !important;
+  color: $success !important;
+}
+.button-minimalistic.is-success{
+  background-color: transparent !important;
+  color: $success !important;
+}
+.button-secondary.is-success:hover, .button-secondary.is-success.is-hovered, .button-minimalistic.is-success:hover, .button-minimalistic.is-success.is-hovered{
+  border: 1px solid $success !important;
+}
+.button-secondary.is-success.is-active, .button-secondary.is-succes:active, .button-minimalistic.is-success.is-active, .button-minimalistic.is-succes:active{
+  border: 1px solid $success-active !important;
+  color: $success-active !important;
+}
+
+.button-secondary.is-warning{
+  background-color: $bg-secondary !important;
+  color: $warning !important;
+}
+.button-minimalistic.is-warning{
+  background-color: transparent !important;
+  color: $warning !important;
+}
+.button-secondary.is-warning:hover, .button-secondary.is-warning.is-hovered, .button-minimalistic.is-warning:hover, .button-minimalistic.is-warning.is-hovered{
+  border: 1px solid $warning !important;
+}
+.button-secondary.is-warning.is-active, .button-secondary.is-warning:active, .button-minimalistic.is-warning.is-active, .button-minimalistic.is-warning:active{
+  border: 1px solid $warning-active !important;
+  color: $warning-active !important;
+}
+
+.button-secondary.is-danger{
+  background-color: $bg-secondary !important;
+  color: $danger !important;
+}
+.button-minimalistic.is-danger{
+  background-color: transparent !important;
+  color: $danger !important;
+}
+.button-secondary.is-danger:hover, .button-secondary.is-danger.is-hovered, .button-minimalistic.is-danger:hover, .button-minimalistic.is-danger.is-hovered{
+  border: 1px solid $danger !important;
+}
+.button-secondary.is-danger.is-active, .button-secondary.is-danger:active, .button-minimalistic.is-danger.is-active, .button-minimalistic.is-danger:active{
+  border: 1px solid $danger-active !important;
+  color: $danger-active !important;
+}
+
+.button-secondary.is-link{
+  background-color: $bg-secondary !important;
+  color: $link !important;
+}
+.button-minimalistic.is-link{
+  background-color: transparent !important;
+  color: $link !important;
+}
+.button-secondary.is-link:hover, .button-secondary.is-link.is-hovered, .button-minimalistic.is-link:hover, .button-minimalistic.is-link.is-hovered{
+  border: 1px solid $link !important;
+}
+.button-secondary.is-link.is-active, .button-secondary.is-link:active, .button-minimalistic.is-link.is-active, .button-minimalistic.is-link:active{
+  border: 1px solid $link-active !important;
+  color: $link-active !important;
+}
+
+.button-secondary.is-info{
+  background-color: $bg-secondary !important;
+  color: $info !important;
+}
+.button-minimalistic.is-info{
+  background-color: transparent !important;
+  color: $info !important;
+}
+.button-secondary.is-info:hover, .button-secondary.is-info.is-hovered, .button-minimalistic.is-info:hover, .button-minimalistic.is-info.is-hovered{
+  border: 1px solid $info-hovered !important;
+}
+.button-secondary.is-info:active, .button-secondary.is-info.is-active, .button-minimalistic.is-info:active, .button-minimalistic.is-info.is-active{
+  border: 1px solid $info-active !important;
+}
+
+.button-secondary.is-warning{
+  background-color: $bg-secondary !important;
+  color: $warning !important;
+}
+.button-minimalistic.is-warning{
+  background-color: transparent !important;
+  color: $warning !important;
+}
+.button-secondary.is-warning:active, .button-secondary.is-warning.is-active, .button-minimalistic.is-warning:active, .button-minimalistic.is-warning.is-active{
+  border: 1px solid $warning-active !important;
+}
+.button-secondary.is-warning:hover, .button-secondary.is-warning.is-hovered, .button-minimalistic.is-warning:hover, .button-minimalistic.is-warning.is-hovered{
+  border: 1px solid $warning-hovered !important;
+}
+
+.button-secondary.is-danger{
+  background-color: $bg-secondary !important;
+  color: $danger !important;
+}
+
+.button-minimalistic.is-danger{
+  background-color: transparent !important;
+  color: $danger !important;
+}
+.button-secondary.is-danger:active, .button-secondary.is-danger.is-active, .button-minimalistic.is-danger:active, .button-minimalistic.is-danger.is-active{
+  border: 1px solid $danger-active !important;
+}
+.button-secondary.is-danger:hover, .button-secondary.is-danger.is-hovered, .button-minimalistic.is-danger:hover, .button-minimalistic.is-danger.is-hovered{
+  border: 1px solid $danger-hovered !important;
+}
+
+.button-secondary.is-link{
+  background-color: $bg-secondary !important;
+  color: $link !important;
+}
+
+.button-minimalistic.is-link{
+  background-color: transparent !important;
+  color: $link !important;
+}
+
+.button-secondary.is-link:active, .button-secondary.is-link.is-active, .button-minimalistic.is-link:active, .button-minimalistic.is-link.is-active{
+  border: 1px solid $link-active !important;
+}
+.button-secondary.is-link:hover, .button-secondary.is-link.is-hovered, .button-minimalistic.is-link:hover, .button-minimalistic.is-link.is-hovered{
+  border: 1px solid $link-hovered !important;
+}
+
+.button-secondary.is-info{
+  background-color: $bg-secondary !important;
+  color: $info !important;
+}
+.button-minimalistic.is-info{
+  background-color: transparent !important;
+  color: $info !important;
+}
+.button-secondary.is-info:active, .button-secondary.is-info.is-active, .button-minimalistic.is-info:active, .button-minimalistic.is-info.is-active{
+  border: 1px solid $info-active !important;
+}
+.button-secondary.is-info:hover, .button-secondary.is-info.is-hovered, .button-minimalistic.is-info:hover, .button-minimalistic.is-info.is-hovered{
+  border: 1px solid $info-hovered !important;
+}
+
+button.is-disabled, a.is-disabled{
+  cursor: not-allowed !important;
+  background-color: $bg-inactive !important;
+  border: 1px solid $bg-inactive;
+  color: #0C2938 !important;
+}
+
+button[disabled]:hover, a[disabled]:hover, .is-disabled:hover{
+  background-color: $bg-inactive !important;
+  border: 1px solid $bg-inactive;
+  color: #0C2938 !important;
+}
+
+.is-rounded, .is-squared{
+  font-size: 14px !important;
+}
+
+.is-rounded.is-small{
+  width: 35px;
+  height: 35px;
+  font-size: 14px !important;
+}
+
+.is-rounded.is-medium, .is-squared.is-medium{
+  font-size: 16px !important;
+  width: 43px;
+  height: 43px;
+}
+
+.is-rounded.is-large, .is-squared.is-large{
+  font-size: 18px !important;
+  width: 50px;
+  height: 50px;
+}
+
+.is-rounded.is-jumbo, .is-squared.is-jumbo{
+  font-size: 22px !important;
+  width: 60px;
+  height: 60px;
+}
+
+.is-squared, .is-rounded{
+  box-sizing: border-box;
+    color: rgb(51, 56, 64);
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(235, 239, 245);
+    cursor: pointer;
+    font-weight: 600;
+    vertical-align: middle;
+    outline: 0px;
+    border-color: rgb(200, 209, 224);
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.8125em !important;
+    text-decoration: none;
+}
+
+.is-rounded{
+  border-radius: 1.625em;
+}
+
+.is-small{
+  height: 35px !important;
+  font-size: 0.875rem !important;
+}
+
+.is-rounded.is-small{
+  border-radius: 50% !important;
+  width: 35px;
+  height: 35px; 
+}
+
+.is-medium{
+  height: 43px !important;
+  font-size: 0.875rem !important;
+}
+
+.is-large{
+  height: 50px !important;
+  font-size: 1rem !important;
+}
+
+.is-jumbo{
+  height: 60px !important;
+  font-size: 1.125rem !important;
+}
