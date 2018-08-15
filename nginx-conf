@@ -6,14 +6,19 @@ upstream appServer {
   server localhost:4000;
 }
 
+upstream adminServer {
+  server localhost:5000;
+}
+
+
 server {
   listen 80;
-  server_name easy.kamino.us;
+  server_name marbleseeds.io;
 
-  root /home/app/kamino-endpoints/;
+  root /home/app/marble-seed/;
 
-  access_log /var/log/nginx/easy.access.log;
-  error_log /var/log/nginx/easy.error.log;
+  access_log /var/log/nginx/marbleseeds.access.log;
+  error_log /var/log/nginx/marble-seed.error.log;
 
   client_max_body_size 0;
   try_files $uri @appServer;
@@ -29,6 +34,17 @@ server {
     $proxy_add_x_forwarded_for;
   }
 
+  location /admin {
+    client_max_body_size 0;
+    proxy_pass http://adminServer;
+    proxy_redirect off;
+    proxy_read_timeout 5m;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For
+    $proxy_add_x_forwarded_for;
+  }  
+
   location @appServer {
     client_max_body_size 0;
     proxy_pass http://appServer;
@@ -39,4 +55,9 @@ server {
     proxy_set_header X-Forwarded-For
     $proxy_add_x_forwarded_for;
   }
+}
+
+server {
+  server_name www.marbleseeds.io;
+  return 301 $scheme://marbleseeds.io$request_uri;
 }

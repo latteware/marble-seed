@@ -16,6 +16,7 @@ const baseSchema = {
     options: [
       'TextWidget',
       'TextareaWidget',
+      'PasswordWidget',
       'EmailWidget',
       'NumberWidget',
       'SelectWidget',
