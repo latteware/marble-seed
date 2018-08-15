@@ -83,11 +83,13 @@ class AdminLayout extends Component {
     }
 
     if (!isEmpty(this.state.user)) {
-      return (<div className='is-wrapper'>
-        <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
-        <div className='is-flex c-flex-1 columns is-gapless'>
+      return (<div className='columns wrap is-gapless c-flex-1 is-flex'>
+        <div className='is-flex is-flex-column'>
           <Sidebar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
-          <div className='column is-flex is-flex-column main-wrapper'>
+        </div>
+        <div className='column is-flex is-flex-column'>
+          <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
+          <div className='main-wrapper'>
             <section className='c-flex-1 is-flex'>
               {this.props.children}
             </section>

@@ -18,6 +18,9 @@ body {
     opacity: 1;
   }
 }
+p, span, li, h1, h2, h3, h4, h5, th, td {
+  font-family: 'Muli', sans-serif;
+}
 
 .label {
   color: #363636;
@@ -47,8 +50,12 @@ html, body {
   position: fixed;
 }
 
+.navbar {
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+}
+
 .navbar-menu {
-  background-color: black;
+  background-color: #fff;
 }
 
 .c-topbar {
@@ -84,6 +91,7 @@ html, body {
 
 .offcanvas {
   background-color: #5d5d5d;
+  height: 100%;;
 }
 
 .burger-desktop {
@@ -113,6 +121,10 @@ html, body {
   min-height: 100vh;
   flex-direction: column;
   flex: 1;
+}
+
+.wrap {
+  min-height: 100vh;
 }
 
 .is-flex-column {
@@ -181,7 +193,7 @@ html, body {
 }
 
 .navbar-item {
-  color: white;
+  color: #0C2938;
 
   .img-logo {
     max-height: none;
@@ -200,10 +212,7 @@ a.navbar-item:hover {
 }
 
 .navbar-logo {
-  a.navbar-item:hover {
-    background-color: black
-  }
-  background-color: black
+  background-color: transparent;
 }
 
 footer {
