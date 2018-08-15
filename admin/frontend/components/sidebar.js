@@ -12,6 +12,8 @@ import Groups from '../pages/groups/list'
 
 import RequestLogs from '../pages/request-logs/list'
 import Reports from '../pages/reports/users'
+import Image from '~base/components/image'
+import Link from '~base/router/link'
 
 class Sidebar extends Component {
   constructor (props) {
@@ -113,16 +115,26 @@ class Sidebar extends Component {
     const menuClass = classNames('menu', {
       'menu-collapsed': this.state.collapsed
     })
+    const imgClass = classNames('img-logo', {
+      'icon-img': this.state.collapsed,
+      'icon-img-text': !this.state.collapsed
+    })
+
     const collapseBtn = classNames('fa', {
       'fa-expand': this.state.collapsed,
       'fa-compress': !this.state.collapsed
     })
+    let fileImg = (this.state.collapsed) ? 'icono-white.svg' : 'horizontal-white.svg'
+
     if (!this.props.burgerState) {
       divClass = divClass + ' is-hidden-touch'
     }
 
     return (<div className={divClass}>
       <aside className={menuClass}>
+        <Link to='/' className='navbar-item c-flex-1 is-dark is-paddingless'>
+          <Image className={imgClass} src={'/public/img/' + fileImg} width='200' height='100' alt='Logotipo' />
+        </Link>
         <a onClick={() => this.handleCollapse()} className='button is-primary collapse-btn'>
           <span className='icon is-small'>
             <i className={collapseBtn} />
