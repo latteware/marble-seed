@@ -11,8 +11,9 @@ import Roles from '../pages/roles/list'
 import Groups from '../pages/groups/list'
 import Buttons from '../pages/ui-components/buttons'
 
-import RequestLogs from '../pages/request-logs/list'
+import RequestLogs from '../pages/developer-tools/request-logs'
 import AppConfig from '../pages/developer-tools/app-config'
+import FormBuilder from '../pages/developer-tools/form-builder'
 // #Import
 
 class Sidebar extends Component {
@@ -74,7 +75,8 @@ class Sidebar extends Component {
         open: false,
         dropdown: [
           RequestLogs.asSidebarItem(),
-          AppConfig.asSidebarItem()
+          AppConfig.asSidebarItem(),
+          FormBuilder.asSidebarItem()
         ]
       }, {
         title: 'Restore data',

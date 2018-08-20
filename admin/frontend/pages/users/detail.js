@@ -370,7 +370,7 @@ class UserDetail extends PageComponent {
                 <div className='card'>
                   <header className='card-header'>
                     <p className='card-header-title'>
-                      { user.displayName }
+                      { user.screenName }
                     </p>
                   </header>
                   <div className='card-content'>
@@ -385,7 +385,7 @@ class UserDetail extends PageComponent {
                         >
                           <div className='field is-grouped'>
                             <div className='control'>
-                              <button className='button is-primary'>Save</button>
+                              <button className='button is-primary'>Update</button>
                             </div>
                           </div>
                         </UserForm>

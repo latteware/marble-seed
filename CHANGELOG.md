@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.6.2] - 
 
+### Added
+- Added marble form component
+- Added form builder on developer tools
+
 ### Changed
 - Improve csv exports using `json2csv` with loader and optional filename
 
