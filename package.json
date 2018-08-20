@@ -83,7 +83,6 @@
     "superagent": "^3.5.2",
     "traverse": "^0.6.6",
     "uglifyjs-webpack-plugin": "^1.2.2",
-    "underscore": "^1.9.1",
     "underscore.string": "^3.3.4",
     "url-loader": "^0.5.9",
     "webpack": "^3.4.1",

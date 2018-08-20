@@ -1,5 +1,4 @@
 import React from 'react'
-import api from '~base/api'
 
 import PageComponent from '~base/page-component'
 import { loggedIn } from '~base/middlewares/'
@@ -8,40 +7,12 @@ class Buttons extends PageComponent {
   constructor (props) {
     super(props)
 
-    this.state = {
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden',
-      message: '',
-      formData: {
-        file: undefined
-      }
-    }
-  }
-
-  errorHandler (e) { }
-
-  changeHandler ({ formData }) {
-    this.setState({ formData, apiCallMessage: 'is-hidden', apiCallErrorMessage: 'is-hidden' })
-  }
-
-  async submitHandler ({ formData }) {
-    var data
-    try {
-      data = await api.post('/admin/users/import/', formData)
-      console.log(data)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
-      })
-    }
-
-    this.setState({ apiCallMessage: 'message is-success', message: data.message })
+    this.state = {}
   }
 
   render () {
     return (
-      <div className='columns c-flex-1 is-marginless'>
+      <div className='columns c-flex-1 is-marginless buttons-test'>
         <div className='column is-paddingless'>
           <div className='section is-paddingless-top'>
             <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Primary buttons</h1>
@@ -148,19 +119,19 @@ class Buttons extends PageComponent {
             <br />
             <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Icon buttons</h1>
             <p className='buttons'>
-              <a className='button is-medium is-link'>
+              <a className='button icon-button is-small is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Twitter</span>
               </a>
-              <a className='button is-medium is-link'>
+              <a className='button icon-button is-medium is-link'>
                 <span>Twitter</span>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button is-medium is-link'>
+              <a className='button icon-button is-medium is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
@@ -172,13 +143,13 @@ class Buttons extends PageComponent {
             </p>
             <br />
             <p className='buttons'>
-              <a className='button button-secondary is-medium is-link'>
+              <a className='button icon-button button-secondary is-medium is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Secondary</span>
               </a>
-              <a className='button button-minimalistic is-medium is-link'>
+              <a className='button icon-button button-minimalistic is-medium is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
@@ -192,37 +163,44 @@ class Buttons extends PageComponent {
               <a className='button is-link'>Normal</a>
               <a className='button is-link is-medium'>Medium</a>
               <a className='button is-link is-large'>Large</a>
+              <a className='button is-link is-large is-jumbo'>Large</a>
             </p>
             <br />
             <p className='buttons'>
-              <a className='button is-link is-small'>
+              <a className='button icon-button is-link is-small'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Small</span>
               </a>
-              <a className='button is-link'>
+              <a className='button icon-button is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Normal</span>
               </a>
-              <a className='button is-link is-medium'>
+              <a className='button icon-button is-link is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Medium</span>
               </a>
-              <a className='button is-link is-large'>
+              <a className='button icon-button is-link is-large'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
                 <span>Large</span>
               </a>
+              <a className='button icon-button is-link is-large is-jumbo'>
+                <span className='icon'>
+                  <i className='fa fa-cloud' />
+                </span>
+                <span>Jumbo</span>
+              </a>
             </p>
             <br />
             <p className='buttons'>
-              <a className='button is-link is-medium is-fullwidth'>
+              <a className='button icon-button is-link is-medium is-fullwidth'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
@@ -232,27 +210,32 @@ class Buttons extends PageComponent {
             <br />
             <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Squared buttons</h1>
             <p className='buttons'>
-              <a className='button is-link'>
+              <a className='button icon-button is-link'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button button-secondary is-link is-medium'>
+              <a className='button icon-button is-squared button-secondary is-link is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button button-minimalistic is-link is-medium'>
+              <a className='button icon-button is-squared button-minimalistic is-link is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button is-link is-medium'>
+              <a className='button icon-button is-squared is-link is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button is-link is-large'>
+              <a className='button icon-button is-squared is-link is-large'>
+                <span className='icon'>
+                  <i className='fa fa-cloud' />
+                </span>
+              </a>
+              <a className='button icon-button is-squared is-link is-jumbo'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
@@ -261,27 +244,32 @@ class Buttons extends PageComponent {
             <br />
             <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Rounded buttons</h1>
             <p className='buttons'>
-              <a className='button is-link is-rounded'>
+              <a className='button icon-button is-link is-rounded is-small'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button button-secondary is-link is-rounded is-medium'>
+              <a className='button icon-button button-secondary is-link is-rounded is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button button-minimalistic is-link is-rounded is-medium'>
+              <a className='button icon-button button-minimalistic is-link is-rounded is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button is-link is-rounded is-medium'>
+              <a className='button icon-button is-link is-rounded is-medium'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
               </a>
-              <a className='button is-link is-rounded is-large'>
+              <a className='button icon-button is-link is-rounded is-large'>
+                <span className='icon'>
+                  <i className='fa fa-cloud' />
+                </span>
+              </a>
+              <a className='button icon-button is-link is-rounded is-jumbo'>
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>

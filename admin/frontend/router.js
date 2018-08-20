@@ -24,11 +24,8 @@ import Groups from './pages/groups/list'
 import GroupDetail from './pages/groups/detail'
 import RequestLogs from './pages/developer-tools/request-logs'
 import AppConfig from './pages/developer-tools/app-config'
-<<<<<<< HEAD
 import Buttons from './pages/ui-components/buttons'
-=======
 import FormBuilder from './pages/developer-tools/form-builder'
->>>>>>> 896b7b3146b58d9572a33911d300e7073ef91a58
 // #Import
 
 const NoMatch = () => {
@@ -62,11 +59,8 @@ const AppRouter = () => {
 
           {RequestLogs.asRouterItem()}
           {AppConfig.asRouterItem()}
-<<<<<<< HEAD
           {Buttons.asRouterItem()}
-=======
           {FormBuilder.asRouterItem()}
->>>>>>> 896b7b3146b58d9572a33911d300e7073ef91a58
 
           <div id='route' />
           <Route component={NoMatch} />

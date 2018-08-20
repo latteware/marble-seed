@@ -1,7 +1,9 @@
 .button{
   margin: 15px;
 }
-
+.button-primary.is-warning{
+  color: #fff !important;
+}
 .button-primary.is-primary.is-active, .button-primary.is-primary:active{
   background-color: $primary-active !important;
 }
@@ -21,13 +23,6 @@
   background-color: $info-active !important;
 }
 
-/*.is-disabled, .is-primary[disabled], .is-success[disabled], .is-warning[disabled], .is-danger[disabled], .is-link[disabled], .is-info[disabled],
-.is-primary[disabled].is-hovered, .is-success[disabled].is-hovered, .is-warning[disabled].is-hovered, .is-danger[disabled].is-hovered, .is-link[disabled].is-hovered, .is-info[disabled].is-hovered  {
-  background-color: $bg-inactive !important;
-  border: 1px solid $bg-inactive;
-  color: #0C2938 !important;
-}*/
-
 .button-primary.is-primary.is-hovered, .button-primary.is-primary:hover{
   background-color: $primary-hovered !important;
 }
@@ -40,17 +35,17 @@
 .button-primary.is-danger.is-hovered, .button-primary.is-danger:hover{
   background-color: $danger-hovered !important;
 }
-.button-primary.is-link.is-hovered, .button-primary.is-info.is-hovered, .button-primary.is-link:hover, .button-primary.is-info:hover{
+.button-primary.is-link.is-hovered, .is-link.is-hovered, .button-primary.is-info.is-hovered, .button-primary.is-link:hover, .is-link:hover, .button-primary.is-info:hover{
   background-color: $link-hovered !important;
 }
 
-/*Colores para los botones secundarios y minimalistas*/
+/*Colors for secondary and minimalist buttons*/
 .button-secondary.is-primary{
   background-color: $bg-secondary !important;
   color: $primary !important;
 }
 .button-minimalistic.is-primary{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $primary !important;
 }
 .button-secondary.is-primary:hover, .button-secondary.is-primary.is-hovered, .button-minimalistic.is-primary:hover, .button-minimalistic.is-primary.is-hovered{
@@ -66,7 +61,7 @@
   color: $success !important;
 }
 .button-minimalistic.is-success{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $success !important;
 }
 .button-secondary.is-success:hover, .button-secondary.is-success.is-hovered, .button-minimalistic.is-success:hover, .button-minimalistic.is-success.is-hovered{
@@ -82,7 +77,7 @@
   color: $warning !important;
 }
 .button-minimalistic.is-warning{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $warning !important;
 }
 .button-secondary.is-warning:hover, .button-secondary.is-warning.is-hovered, .button-minimalistic.is-warning:hover, .button-minimalistic.is-warning.is-hovered{
@@ -98,7 +93,7 @@
   color: $danger !important;
 }
 .button-minimalistic.is-danger{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $danger !important;
 }
 .button-secondary.is-danger:hover, .button-secondary.is-danger.is-hovered, .button-minimalistic.is-danger:hover, .button-minimalistic.is-danger.is-hovered{
@@ -114,7 +109,7 @@
   color: $link !important;
 }
 .button-minimalistic.is-link{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $link !important;
 }
 .button-secondary.is-link:hover, .button-secondary.is-link.is-hovered, .button-minimalistic.is-link:hover, .button-minimalistic.is-link.is-hovered{
@@ -130,7 +125,7 @@
   color: $info !important;
 }
 .button-minimalistic.is-info{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $info !important;
 }
 .button-secondary.is-info:hover, .button-secondary.is-info.is-hovered, .button-minimalistic.is-info:hover, .button-minimalistic.is-info.is-hovered{
@@ -145,7 +140,7 @@
   color: $warning !important;
 }
 .button-minimalistic.is-warning{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $warning !important;
 }
 .button-secondary.is-warning:active, .button-secondary.is-warning.is-active, .button-minimalistic.is-warning:active, .button-minimalistic.is-warning.is-active{
@@ -161,7 +156,7 @@
 }
 
 .button-minimalistic.is-danger{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $danger !important;
 }
 .button-secondary.is-danger:active, .button-secondary.is-danger.is-active, .button-minimalistic.is-danger:active, .button-minimalistic.is-danger.is-active{
@@ -177,7 +172,7 @@
 }
 
 .button-minimalistic.is-link{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $link !important;
 }
 
@@ -193,7 +188,7 @@
   color: $info !important;
 }
 .button-minimalistic.is-info{
-  background-color: $bg-minimalistic !important;
+  background-color: transparent !important;
   color: $info !important;
 }
 .button-secondary.is-info:active, .button-secondary.is-info.is-active, .button-minimalistic.is-info:active, .button-minimalistic.is-info.is-active{
@@ -216,6 +211,77 @@ button[disabled]:hover, a[disabled]:hover, .is-disabled:hover{
   color: #0C2938 !important;
 }
 
-/*.button-secondary:has(span):hover{
-  border: unset !important;
-}*/
+.is-rounded, .is-squared{
+  font-size: 14px !important;
+}
+
+.is-rounded.is-small{
+  width: 35px;
+  height: 35px;
+  font-size: 14px !important;
+}
+
+.is-rounded.is-medium, .is-squared.is-medium{
+  font-size: 16px !important;
+  width: 43px;
+  height: 43px;
+}
+
+.is-rounded.is-large, .is-squared.is-large{
+  font-size: 18px !important;
+  width: 50px;
+  height: 50px;
+}
+
+.is-rounded.is-jumbo, .is-squared.is-jumbo{
+  font-size: 22px !important;
+  width: 60px;
+  height: 60px;
+}
+
+.is-squared, .is-rounded{
+  box-sizing: border-box;
+    color: rgb(51, 56, 64);
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(235, 239, 245);
+    cursor: pointer;
+    font-weight: 600;
+    vertical-align: middle;
+    outline: 0px;
+    border-color: rgb(200, 209, 224);
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.8125em !important;
+    text-decoration: none;
+}
+
+.is-rounded{
+  border-radius: 1.625em;
+}
+
+.is-small{
+  height: 35px !important;
+  font-size: 0.875rem !important;
+}
+
+.is-rounded.is-small{
+  border-radius: 50% !important;
+  width: 35px;
+  height: 35px; 
+}
+
+.is-medium{
+  height: 43px !important;
+  font-size: 0.875rem !important;
+}
+
+.is-large{
+  height: 50px !important;
+  font-size: 1rem !important;
+}
+
+.is-jumbo{
+  height: 60px !important;
+  font-size: 1.125rem !important;
+}

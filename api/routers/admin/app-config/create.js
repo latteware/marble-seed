@@ -1,6 +1,6 @@
 const Route = require('lib/router/route')
 const lov = require('lov')
-const _ = require('underscore')
+const _ = require('lodash')
 
 const {AppConfig} = require('models')
 
