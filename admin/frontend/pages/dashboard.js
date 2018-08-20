@@ -55,48 +55,34 @@ export default Page({
 
       return (<div className='section'>
         <div className='Dashboard'>
-          <div className='tile is-ancestor'>
-            <div className='tile is-vertical is-3'>
-              <div className='tile'>
-                <div className='tile is-parent'>
-                  <article className='tile is-child notification is-primary has-text-centered'>
-                    <p className='title'>{orgsCount}</p>
-                    <p className='subtitle'>Organizaciones</p>
-                  </article>
-                </div>
+          <h1 className='Dashboard-title'>Tu organizacion</h1>
+          <h2 className='Dashboard-subtitle'>Revisa el estatus de tu organizacion</h2>
+          <nav className='level Dashboard-info'>
+            <div className='level-item has-text-centered'>
+              <div>
+                <p className='title'>0</p>
+                <p className='heading'>Organizaciones</p>
               </div>
             </div>
-            <div className='tile is-vertical is-3'>
-              <div className='tile'>
-                <div className='tile is-parent'>
-                  <article className='tile is-child notification is-primary has-text-centered'>
-                    <p className='title'>{usersCount}</p>
-                    <p className='subtitle'>Usuarios</p>
-                  </article>
-                </div>
+            <div className='level-item has-text-centered'>
+              <div>
+                <p className='title'>4</p>
+                <p className='heading'>Usuarios</p>
               </div>
             </div>
-            <div className='tile is-vertical is-3'>
-              <div className='tile'>
-                <div className='tile is-parent'>
-                  <article className='tile is-child notification is-primary has-text-centered'>
-                    <p className='title'>{rolesCount}</p>
-                    <p className='subtitle'>Roles</p>
-                  </article>
-                </div>
+            <div className='level-item has-text-centered'>
+              <div>
+                <p className='title'>2</p>
+                <p className='heading'>Roles</p>
               </div>
             </div>
-            <div className='tile is-vertical is-3'>
-              <div className='tile'>
-                <div className='tile is-parent'>
-                  <article className='tile is-child notification is-primary has-text-centered'>
-                    <p className='title'>{groupsCount}</p>
-                    <p className='subtitle'>Grupos</p>
-                  </article>
-                </div>
+            <div className='level-item has-text-centered'>
+              <div>
+                <p className='title'>0</p>
+                <p className='heading'>Grupos</p>
               </div>
             </div>
-          </div>
+          </nav>
         </div>
       </div>)
     }
