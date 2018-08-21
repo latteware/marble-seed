@@ -15,6 +15,10 @@ import Reports from '../pages/reports/users'
 import Image from '~base/components/image'
 import Link from '~base/router/link'
 
+import RequestLogs from '../pages/developer-tools/request-logs'
+import AppConfig from '../pages/developer-tools/app-config'
+import FormBuilder from '../pages/developer-tools/form-builder'
+
 class Sidebar extends Component {
   constructor (props) {
     super(props)
@@ -53,12 +57,13 @@ class Sidebar extends Component {
         open: false,
         dropdown: [
           Users.asSidebarItem(),
-          DeletedUsers.asSidebarItem(),
           Organizations.asSidebarItem(),
           Roles.asSidebarItem(),
           Groups.asSidebarItem()
         ]
-      }, {
+      },
+      // #Modules
+      {
         title: 'Load Data',
         icon: 'file-o',
         to: '/import',
@@ -72,15 +77,17 @@ class Sidebar extends Component {
         to: '/devtools',
         open: false,
         dropdown: [
-          RequestLogs.asSidebarItem()
+          RequestLogs.asSidebarItem(),
+          AppConfig.asSidebarItem(),
+          FormBuilder.asSidebarItem()
         ]
       }, {
-        title: 'Reports',
-        icon: 'github-alt',
-        to: '/reports',
+        title: 'Restore data',
+        icon: 'trash-o',
+        to: '/restore',
         open: false,
         dropdown: [
-          Reports.asSidebarItem()
+          DeletedUsers.asSidebarItem()// #Restore
         ]
       }
     ]

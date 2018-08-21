@@ -46,7 +46,8 @@ module.exports = {
       'ENV': JSON.stringify(config.env),
       'PREFIX': JSON.stringify(''),
       'API_HOST': JSON.stringify(config.server.apiHost),
-      'EMAIL_SEND': JSON.stringify(config.mailer.active)
+      'EMAIL_SEND': JSON.stringify(config.mailer.active),
+      'BASE_TITLE': JSON.stringify(config.server.adminTitle)
     })
   ],
   resolve: {

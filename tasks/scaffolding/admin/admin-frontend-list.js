@@ -34,12 +34,15 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/list.js')
   const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
   const filePath = dirPath + 'list.js'
-  const fileList = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const routerPath = path.join('./admin/frontend/router.js')
-
   scaffolding.replaceInFile(routerPath, '// #Import', 'import ' + s.capitalize(modelSchema.name) + 's from \'./pages/' + modelSchema.name + 's/list\'\n// #Import')
   scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{' + s.capitalize(modelSchema.name) + 's.asRouterItem()}\n          <div id=\'route\' />')
+
+  const sidebarPath = path.join('./admin/frontend/components/sidebar.js')
+  scaffolding.replaceInFile(sidebarPath, '// #Import', 'import ' + s.capitalize(modelSchema.name) + 's from \'../pages/' + modelSchema.name + 's/list\'\n// #Import')
+  scaffolding.replaceInFile(sidebarPath, '// #Modules', s.capitalize(modelSchema.name) + 's.asSidebarItem(),\n      // #Modules')
 
   return true
 }, 500)

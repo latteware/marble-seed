@@ -2,17 +2,17 @@ const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 const { v4 } = require('uuid')
 const dataTables = require('mongoose-datatables')
-const moment = require('moment')
 
 const organizationSchema = new Schema({
   name: { type: String },
   description: { type: String },
   slug: { type: String },
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-
-  dateCreated: { type: Date, default: moment.utc },
   uuid: { type: String, default: v4 },
   isDeleted: { type: Boolean, default: false }
+}, {
+  timestamps: true,
+  usePushEach: true
 })
 
 organizationSchema.methods.toPublic = function () {

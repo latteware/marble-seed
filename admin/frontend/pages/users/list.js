@@ -65,6 +65,10 @@ class UserList extends ListPageComponent {
     return data
   }
 
+  exportFormatter (row) {
+    return {name: row.name, email: row.email}
+  }
+
   getColumns () {
     return [
       {

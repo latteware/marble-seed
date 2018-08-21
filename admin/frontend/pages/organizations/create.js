@@ -22,13 +22,10 @@ class CreateOrganization extends Component {
   }
 
   async load () {
-    const body = await api.get(
-      '/admin/organizations',
-      {
-        start: 0,
-        limit: this.cursor.get('pageLength') || 10
-      }
-    )
+    const body = await api.get('/admin/organizations', {
+      start: 0,
+      limit: this.cursor.get('pageLength') || 10
+    })
 
     this.cursor.set({
       page: 1,
@@ -36,6 +33,7 @@ class CreateOrganization extends Component {
       items: body.data,
       pageLength: this.cursor.get('pageLength') || 10
     })
+
     this.context.tree.commit()
   }
 

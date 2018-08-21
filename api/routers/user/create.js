@@ -7,20 +7,20 @@ module.exports = new Route({
   method: 'post',
   path: '/',
   validator: lov.object().keys({
+    name: lov.string(),
     email: lov.string().email().required(),
     password: lov.string().required(),
-    screenName: lov.string().required(),
-    displayName: lov.string()
+    screenName: lov.string().required()
   }),
   handler: async function (ctx) {
     let user
-    let error
-    const { screenName, displayName, email, password } = ctx.request.body
+
+    const { screenName, name, email, password } = ctx.request.body
 
     try {
       user = await User.register({
         screenName,
-        displayName,
+        name,
         email,
         password
       })
@@ -29,14 +29,6 @@ module.exports = new Route({
     }
 
     let defaultRole = await Role.findOne({isDefault: true})
-    if (!defaultRole) {
-      defaultRole = await Role.create({
-        name: 'Default',
-        slug: 'default',
-        description: 'Default role',
-        isDefault: true
-      })
-    }
 
     user.role = defaultRole
     user.save()

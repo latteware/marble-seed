@@ -20,7 +20,7 @@ const task = new Task(async function (argv) {
     {
       name: 'properties',
       type: 'checkbox',
-      message: 'Select properties to update:',
+      message: 'Select properties to api/update:',
       choices: scaffolding.getModelProperties(model)
     }
   ]
@@ -34,7 +34,7 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/api/admin/api-admin/update.js')
   const dirPath = path.join('./api/routers/admin/' + modelSchema.name + '/')
   const filePath = dirPath + 'update.js'
-  const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   return true
 }, 500)

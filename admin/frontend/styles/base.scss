@@ -10,6 +10,16 @@ body {
 
 p, span, li, h1, h2, h3, h4, h5, th, td {
   font-family: 'Muli', sans-serif;
+.is-transparent {
+  opacity: 0.6;
+}
+
+.is-active-btn {
+  border-bottom: 3px solid #9C27B0;
+  a {
+    opacity: 1;
+  }
+
 }
 
 .label {
@@ -294,6 +304,22 @@ pre.json {
   .message-body {
     background-color: white;
   }
+  
+  &.highlight {
+    border: 1px solid black;
+    
+    .message-header {
+      background-color: rgb(50, 115, 220);
+    }
+
+    .message-body {
+      border: 0;
+    }    
+  }
+
+  .controls {
+    padding: 5px 10px 0;
+  }  
 }
 .show-log { display: block; }
 .hide-log { display: none; }
@@ -356,12 +382,8 @@ pre.json {
   padding: 0 2px;
 }
 
-.postman-export {
-  margin-bottom: 0px !important;
-  margin-right: 0px;
-  padding-top: .5em;
-
-  .column {
-    padding-bottom: 0px;
-  }
+.list-item{
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E6EAEE;
 }

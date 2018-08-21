@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import { branch } from 'baobab-react/higher-order'
-import PropTypes from 'baobab-react/prop-types'
+import React from 'react'
 import Link from '~base/router/link'
 import api from '~base/api'
 
-import Page from '~base/page'
+import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 import Loader from '~base/components/spinner'
 import RoleForm from './form'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 
-class RoleDetail extends Component {
+class RoleDetail extends PageComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -20,19 +18,19 @@ class RoleDetail extends Component {
     }
   }
 
-  componentWillMount () {
-    this.load()
+  async onPageEnter () {
+    const role = await this.loadCurrentRole()
+
+    return {
+      role
+    }
   }
 
-  async load () {
+  async loadCurrentRole () {
     var url = '/admin/roles/' + this.props.match.params.uuid
     const body = await api.get(url)
 
-    this.setState({
-      loading: false,
-      loaded: true,
-      role: body.data
-    })
+    return body.data
   }
 
   getColumns () {
@@ -60,14 +58,14 @@ class RoleDetail extends Component {
 
   async deleteOnClick () {
     var url = '/admin/roles/' + this.props.match.params.uuid
-    const body = await api.del(url)
-    this.props.history.push('/admin/roles')
+    await api.del(url)
+    this.props.history.push('/admin/manage/roles')
   }
 
   async defaultOnClick () {
     var url = '/admin/roles/' + this.props.match.params.uuid + '/setDefault'
     await api.post(url)
-    this.load()
+    this.reload()
   }
 
   getDeleteButton () {
@@ -115,9 +113,9 @@ class RoleDetail extends Component {
   }
 
   render () {
-    const { role } = this.state
+    const {role, loaded} = this.state
 
-    if (!role.uuid) {
+    if (!loaded) {
       return <Loader />
     }
 
@@ -125,6 +123,9 @@ class RoleDetail extends Component {
       <div className='columns c-flex-1 is-marginless'>
         <div className='column is-paddingless'>
           <div className='section'>
+            <div className='columns'>
+              {this.getBreadcrumbs()}
+            </div>
             <div className='columns'>
               {this.getDefaultButton()}
               {this.getDeleteButton()}
@@ -143,8 +144,8 @@ class RoleDetail extends Component {
                         <RoleForm
                           baseUrl='/admin/roles'
                           url={'/admin/roles/' + this.props.match.params.uuid}
-                          initialState={this.state.role}
-                          load={this.load.bind(this)}
+                          initialState={role}
+                          load={() => this.reload()}
                         >
                           <div className='field is-grouped'>
                             <div className='control'>
@@ -188,16 +189,17 @@ class RoleDetail extends Component {
   }
 }
 
-RoleDetail.contextTypes = {
-  tree: PropTypes.baobab
-}
-
-const branchedRoleDetails = branch({roles: 'roles'}, RoleDetail)
-
-export default Page({
+RoleDetail.config({
+  name: 'roles-details',
   path: '/manage/roles/:uuid',
-  title: 'Roles details',
+  title: '<%= role.name %> | Roles details',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: 'Roles', path: '/manage/roles'},
+    {label: '<%= role.name %>'}
+  ],
   exact: true,
-  validate: loggedIn,
-  component: branchedRoleDetails
+  validate: loggedIn
 })
+
+export default RoleDetail

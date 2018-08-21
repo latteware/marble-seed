@@ -33,7 +33,10 @@ if (config.env === 'development') {
 }
 
 app.get('*', function (req, res) {
-  res.render('index', {env: config.env})
+  res.render('index', {
+    env: config.env,
+    title: config.server.appTitle
+  })
 })
 
 module.exports = app

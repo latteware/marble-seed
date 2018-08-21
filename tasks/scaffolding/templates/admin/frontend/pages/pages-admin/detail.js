@@ -1,95 +1,112 @@
-import React, { Component } from 'react'
-import { branch } from 'baobab-react/higher-order'
-import PropTypes from 'baobab-react/prop-types'
+import React from 'react'
+import Link from '~base/router/link'
 import api from '~base/api'
-
-import Page from '~base/page'
-import {loggedIn} from '~base/middlewares/'
 import Loader from '~base/components/spinner'
-import {{ name | capitalize }}Form from './create-form'
 
-class {{ name | capitalize }}Detail extends Component {
+import PageComponent from '~base/page-component'
+import {loggedIn} from '~base/middlewares/'
+import {{ name | capitalize }}Form from './components/form'
+
+class {{ name | capitalize }}Detail extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
       loading: true,
       loaded: false,
-      {{ name | lower }}: {}
+      {{ name }}: {}
     }
   }
 
-  componentWillMount () {
-    this.load()
+  async onPageEnter () {
+    const {{ name }} = await this.load()
+
+    return {
+      {{ name }}
+    }
   }
 
   async load () {
     var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
     const body = await api.get(url)
 
-    this.setState({
-      loading: false,
-      loaded: true,
-      {{ name | lower }}: body.data
-    })
+    return body.data
   }
 
   async deleteOnClick () {
     var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
-    const body = await api.del(url)
+    await api.del(url)
     this.props.history.push('/admin/{{ name | lower }}s')
   }
 
+  getColumns () {
+    return [
+      {%- for item in fields -%}
+      {
+        title: '{{ item.name | capitalize }}',
+        property: '{{ item.name | lower }}',
+        default: 'N/A'
+      },
+      {% endfor -%}
+      {
+        'title': 'Actions',
+        formatter: (row) => {
+          return <Link className='button' to={'/{{ name | lower }}s/' + row.uuid}>
+            Detalle
+          </Link>
+        }
+      }
+    ]
+  }
 
   render () {
-    const { {{ name | lower }} } = this.state
+    const { {{ name | lower }}, loaded } = this.state
 
-    if (!this.state.loaded) {
+    if (!loaded) {
       return <Loader />
     }
 
-    return (
-      <div className='columns c-flex-1 is-marginless'>
-        <div className='column is-paddingless'>
-          <div className='section'>
-            <div className='columns'>
-              <div className='column has-text-right'>
-                <div className='field is-grouped is-grouped-right'>
-                  <div className='control'>
-                    <button
-                      className='button is-danger'
-                      type='button'
-                      onClick={() => this.deleteOnClick()}
-                        >
-                          Delete
-                        </button>
-                  </div>
+    return (<div className='columns c-flex-1 is-marginless'>
+      <div className='column is-paddingless'>
+        <div className='section'>
+          <div className='columns'>
+            {this.getBreadcrumbs()}
+            <div className='column has-text-right'>
+              <div className='field is-grouped is-grouped-right'>
+                <div className='control'>
+                  <button
+                    className='button is-danger'
+                    type='button'
+                    onClick={() => this.deleteOnClick()}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
-            <div className='columns'>
-              <div className='column'>
-                <div className='card'>
-                  <header className='card-header'>
-                    <p className='card-header-title'>
-                      {{ name | capitalize }}
-                    </p>
-                  </header>
-                  <div className='card-content'>
-                    <div className='columns'>
-                      <div className='column'>
-                        <{{ name | capitalize }}Form
-                          baseUrl='/admin/{{ name | lower }}s'
-                          url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
-                          initialState={ {{ name | lower }} }
-                          load={this.load.bind(this)}
-                        >
-                          <div className='field is-grouped'>
-                            <div className='control'>
-                              <button className='button is-primary'>Save</button>
-                            </div>
+          </div>
+          <div className='columns'>
+            <div className='column'>
+              <div className='card'>
+                <header className='card-header'>
+                  <p className='card-header-title'>
+                    {{ name | capitalize }}
+                  </p>
+                </header>
+                <div className='card-content'>
+                  <div className='columns'>
+                    <div className='column'>
+                      <{{ name | capitalize }}Form
+                        url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
+                        initialState={ {{ name | lower }} }
+                        load={() => this.reload()}
+                      >
+                        <div className='field is-grouped'>
+                          <div className='control'>
+                            <button className='button is-primary'>Save</button>
                           </div>
-                        </{{ name | capitalize }}Form>
-                      </div>
+                        </div>
+                      </{{ name | capitalize }}Form>
                     </div>
                   </div>
                 </div>
@@ -98,20 +115,21 @@ class {{ name | capitalize }}Detail extends Component {
           </div>
         </div>
       </div>
-    )
+    </div>)
   }
 }
 
-{{ name | capitalize }}Detail.contextTypes = {
-  tree: PropTypes.baobab
-}
-
-const branched{{ name | capitalize }}Details = branch({ {{ name | lower }}s: '{{ name | lower }}s'}, {{ name | capitalize }}Detail)
-
-export default Page({
+{{ name | capitalize }}Detail.config({
+  name: '{{ name | lower }}-details',
   path: '/{{ name | lower }}s/:uuid',
-  title: '{{ name | capitalize }} details',
+  title: '<%= {{ name }}.name %> | {{ name | capitalize }} details',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: '{{ name | capitalize }}s', path: '/{{ name | lower }}s'},
+    {label: '<%= {{ name | lower }}.name %>'}
+  ],
   exact: true,
-  validate: loggedIn,
-  component: branched{{ name | capitalize }}Details
+  validate: loggedIn
 })
+
+export default {{ name | capitalize }}Detail

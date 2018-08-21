@@ -2,23 +2,21 @@ import React from 'react'
 import Link from '~base/router/link'
 import moment from 'moment'
 
-import ListPage from '~base/list-page'
+import env from '~base/env-variables'
+import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
 import CreateRole from './create'
 
-export default ListPage({
-  path: '/manage/roles',
-  title: 'Roles',
-  icon: 'address-book',
-  exact: true,
-  validate: loggedIn,
-  titleSingular: 'Role',
-  create: true,
-  createComponent: CreateRole,
-  baseUrl: '/admin/roles',
-  branchName: 'roles',
-  detailUrl: '/admin/manage/roles/',
-  getColumns: () => {
+class RoleList extends ListPageComponent {
+  finishUp (data) {
+    this.setState({
+      className: ''
+    })
+
+    this.props.history.push(env.PREFIX + '/manage/roles/' + data.uuid)
+  }
+
+  getColumns () {
     return [
       {
         'title': 'Name',
@@ -63,4 +61,42 @@ export default ListPage({
       }
     ]
   }
+
+  getFilters () {
+    const data = {
+      schema: {
+        type: 'object',
+        required: [],
+        properties: {
+          name: {type: 'text', title: 'Por nombre'}
+        }
+      },
+      uiSchema: {
+        name: {'ui:widget': 'SearchFilter'}
+      }
+    }
+
+    return data
+  }
+
+  exportFormatter (row) {
+    return {name: row.name}
+  }
+}
+
+RoleList.config({
+  name: 'role-list',
+  path: '/manage/roles',
+  title: 'Roles',
+  icon: 'address-book',
+  exact: true,
+  validate: loggedIn,
+
+  headerLayout: 'create',
+  createComponent: CreateRole,
+  createComponentLabel: 'New Role',
+
+  apiUrl: '/admin/roles'
 })
+
+export default RoleList

@@ -34,12 +34,15 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/deleted-list.js')
   const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
   const filePath = dirPath + 'deleted-list.js'
-  const fileList = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const routerPath = path.join('./admin/frontend/router.js')
-
   scaffolding.replaceInFile(routerPath, '// #Import', 'import Deleted' + s.capitalize(modelSchema.name) + 's from \'./pages/' + modelSchema.name + 's/deleted-list\'\n// #Import')
   scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{Deleted' + s.capitalize(modelSchema.name) + 's.asRouterItem()}\n          <div id=\'route\' />')
+
+  const sidebarPath = path.join('./admin/frontend/components/sidebar.js')
+  scaffolding.replaceInFile(sidebarPath, '// #Import', 'import Deleted' + s.capitalize(modelSchema.name) + 's from \'../pages/' + modelSchema.name + 's/deleted-list\'\n// #Import')
+  scaffolding.replaceInFile(sidebarPath, '// #Restore', ',\nDeleted' + s.capitalize(modelSchema.name) + 's.asSidebarItem()// #Restore')
 
   return true
 }, 500)

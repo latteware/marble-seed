@@ -16,6 +16,8 @@ const userTokenSchema = new Schema({
   lastUse: { type: Date },
   isDeleted: { type: Boolean },
   dateCreated: { type: Date, default: moment.utc }
+}, {
+  usePushEach: true
 })
 
 userTokenSchema.methods.getJwt = function () {

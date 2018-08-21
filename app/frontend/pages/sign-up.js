@@ -8,20 +8,20 @@ import {BaseForm, PasswordWidget, EmailWidget, TextWidget} from '~components/bas
 
 const schema = {
   type: 'object',
-  required: ['email', 'password', 'screenName', 'displayName'],
+  required: ['email', 'password', 'screenName', 'name'],
   properties: {
-    email: {type: 'string', title: 'Email'},
-    password: {type: 'string', title: 'Password'},
+    name: {type: 'string', title: 'Name'},
     screenName: {type: 'string', title: 'ScreenName'},
-    displayName: {type: 'string', title: 'DisplayName'}
+    email: {type: 'string', title: 'Email'},
+    password: {type: 'string', title: 'Password'}
   }
 }
 
 const uiSchema = {
-  password: { 'ui:widget': PasswordWidget },
-  email: { 'ui:widget': EmailWidget },
+  name: { 'ui:widget': TextWidget },
   screenName: { 'ui:widget': TextWidget },
-  displayName: { 'ui:widget': TextWidget }
+  email: { 'ui:widget': EmailWidget },
+  password: { 'ui:widget': PasswordWidget }
 }
 
 class SignUp extends Component {
@@ -29,10 +29,10 @@ class SignUp extends Component {
     super(props)
     this.state = {
       formData: {
-        password: '',
-        email: '',
+        name: '',
         screenName: '',
-        displayName: ''
+        email: '',
+        password: ''
       },
       apiCallErrorMessage: 'is-hidden',
       error: ''

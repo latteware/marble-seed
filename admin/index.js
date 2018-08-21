@@ -14,7 +14,6 @@ expressNunjucks(app, {
   noCache: false
 })
 
-
 if (config.env === 'development') {
   console.log('Starting server in development with webpack hot reload')
   if (config.server.adminPrefix) {
@@ -54,6 +53,7 @@ if (config.server.adminPrefix) {
 app.get('*', function (req, res) {
   res.render('index', {
     env: config.env,
+    title: config.server.adminTitle,
     prefix: config.server.adminPrefix
   })
 })

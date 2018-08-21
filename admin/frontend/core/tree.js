@@ -1,7 +1,8 @@
 import Baobab from 'baobab'
 
 const initialState = {
-  jwt: window.localStorage.getItem('jwt')
+  jwt: window.localStorage.getItem('jwt'),
+  config: {}
 }
 
 const tree = new Baobab(initialState, {

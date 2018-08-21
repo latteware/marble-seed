@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
-import { branch } from 'baobab-react/higher-order'
-import PropTypes from 'baobab-react/prop-types'
+import React from 'react'
 import Link from '~base/router/link'
 import api from '~base/api'
 import Loader from '~base/components/spinner'
 
-import Page from '~base/page'
+import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import OrganizationForm from './form'
 
-class OrganizationDetail extends Component {
+class OrganizationDetail extends PageComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -20,18 +18,15 @@ class OrganizationDetail extends Component {
     }
   }
 
-  componentWillMount () {
-    this.context.tree.set('organizations', {
-      page: 1,
-      totalItems: 0,
-      items: [],
-      pageLength: 10
-    })
-    this.context.tree.commit()
-    this.load()
+  async onPageEnter () {
+    const organizations = await this.loadCurrentOrganization()
+
+    return {
+      organizations
+    }
   }
 
-  async load () {
+  async loadCurrentOrganization () {
     var url = '/admin/organizations/' + this.props.match.params.uuid
     const body = await api.get(url)
 
@@ -40,6 +35,12 @@ class OrganizationDetail extends Component {
       loaded: true,
       organization: body.data
     })
+  }
+
+  async deleteOnClick () {
+    var url = '/admin/organizations/' + this.props.match.params.uuid
+    await api.del(url)
+    this.props.history.push('/admin/manage/organizations')
   }
 
   getColumns () {
@@ -65,16 +66,10 @@ class OrganizationDetail extends Component {
     ]
   }
 
-  async deleteOnClick () {
-    var url = '/admin/organizations/' + this.props.match.params.uuid
-    const body = await api.del(url)
-    this.props.history.push('/admin/organizations')
-  }
-
   render () {
-    const { organization } = this.state
+    const {organization, loaded} = this.state
 
-    if (!organization.uuid) {
+    if (!loaded) {
       return <Loader />
     }
 
@@ -83,6 +78,7 @@ class OrganizationDetail extends Component {
         <div className='column is-paddingless'>
           <div className='section'>
             <div className='columns'>
+              {this.getBreadcrumbs()}
               <div className='column has-text-right'>
                 <div className='field is-grouped is-grouped-right'>
                   <div className='control'>
@@ -111,8 +107,8 @@ class OrganizationDetail extends Component {
                         <OrganizationForm
                           baseUrl='/admin/organizations'
                           url={'/admin/organizations/' + this.props.match.params.uuid}
-                          initialState={this.state.organization}
-                          load={this.load.bind(this)}
+                          initialState={organization}
+                          load={() => this.reload()}
                         >
                           <div className='field is-grouped'>
                             <div className='control'>
@@ -154,16 +150,17 @@ class OrganizationDetail extends Component {
   }
 }
 
-OrganizationDetail.contextTypes = {
-  tree: PropTypes.baobab
-}
-
-const branchedOrganizationDetail = branch({organizations: 'organizations'}, OrganizationDetail)
-
-export default Page({
+OrganizationDetail.config({
+  name: 'organization-details',
   path: '/manage/organizations/:uuid',
-  title: 'User details',
+  title: '<%= organization.name %> | Group details',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: 'Organizations', path: '/manage/organizations'},
+    {label: '<%= organization.name %>'}
+  ],
   exact: true,
-  validate: loggedIn,
-  component: branchedOrganizationDetail
+  validate: loggedIn
 })
+
+export default OrganizationDetail

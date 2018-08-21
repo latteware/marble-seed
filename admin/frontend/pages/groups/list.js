@@ -2,23 +2,21 @@ import React from 'react'
 import Link from '~base/router/link'
 import moment from 'moment'
 
-import ListPage from '~base/list-page'
+import env from '~base/env-variables'
+import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
 import CreateGroup from './create'
 
-export default ListPage({
-  path: '/manage/groups',
-  title: 'Groups',
-  icon: 'users',
-  exact: true,
-  validate: loggedIn,
-  titleSingular: 'Group',
-  create: true,
-  createComponent: CreateGroup,
-  baseUrl: '/admin/groups',
-  branchName: 'groups',
-  detailUrl: '/admin/manage/groups/',
-  getColumns: () => {
+class GroupsList extends ListPageComponent {
+  finishUp (data) {
+    this.setState({
+      className: ''
+    })
+
+    this.props.history.push(env.PREFIX + '/manage/groups/' + data.uuid)
+  }
+
+  getColumns () {
     return [
       {
         'title': 'Name',
@@ -55,4 +53,42 @@ export default ListPage({
       }
     ]
   }
+
+  getFilters () {
+    const data = {
+      schema: {
+        type: 'object',
+        required: [],
+        properties: {
+          name: {type: 'text', title: 'Por nombre'}
+        }
+      },
+      uiSchema: {
+        name: {'ui:widget': 'SearchFilter'}
+      }
+    }
+
+    return data
+  }
+
+  exportFormatter (row) {
+    return {name: row.name}
+  }
+}
+
+GroupsList.config({
+  name: 'groups-list',
+  path: '/manage/groups',
+  title: 'Groups',
+  icon: 'users',
+  exact: true,
+  validate: loggedIn,
+
+  headerLayout: 'create',
+  createComponent: CreateGroup,
+  createComponentLabel: 'New Group',
+
+  apiUrl: '/admin/groups'
 })
+
+export default GroupsList

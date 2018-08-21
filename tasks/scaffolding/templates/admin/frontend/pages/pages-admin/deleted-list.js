@@ -1,49 +1,88 @@
-import React, { Component } from 'react'
-import { branch } from 'baobab-react/higher-order'
-import PropTypes from 'baobab-react/prop-types'
-import moment from 'moment'
+import React, {Component} from 'react'
+
+import env from '~base/env-variables'
 import api from '~base/api'
-
-import Page from '~base/page'
+import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
-import { BranchedPaginatedTable } from '~base/components/base-paginatedTable'
 
-class Deleted{{ name | capitalize }}s extends Component {
+class Header extends Component {
   constructor (props) {
     super(props)
+
+    this.state = {
+      loaded: false,
+      currentCustomersHappiness: ''
+    }
   }
 
-  componentWillMount () {
-    this.context.tree.set('deleted{{ name | capitalize }}s', {
-      page: 1,
-      totalItems: 0,
-      items: [],
-      pageLength: 10
-    })
-    this.context.tree.commit()
+  async restoreMultiple () {
+    const { selectedRows } = this.props
+
+    for (const row of selectedRows) {
+      const url = `/admin/{{ name | lower }}s/${row.uuid}/restore`
+      await api.post(url)
+    }
+
+    this.props.reload()
+  }
+
+  render () {
+    const { selectedRows } = this.props
+
+    return <header className='card-header'>
+      <p className='card-header-title'>
+        Restore {{ name | lower }}s
+      </p>
+      <div className='card-header-select'>
+        <button
+          className='button is-primary'
+          onClick={() => this.restoreMultiple()}
+          disabled={selectedRows.length === 0}
+          >
+          Restore multiple {{ name | lower }}s
+        </button>
+      </div>
+    </header>
+  }
+}
+
+class {{ name | capitalize }}sDeletedList extends ListPageComponent {
+  async restoreOnClick (uuid) {
+    const url = `/admin/{{ name | lower }}s/${uuid}/restore`
+    await api.post(url)
+    this.props.history.push(env.PREFIX + '/{{ name | lower }}s/' + uuid)
+  }
+
+  getFilters () {
+    const data = {
+      schema: {
+        type: 'object',
+        required: [],
+        properties: {
+          {% for item in fields -%}
+            {{ item.name | lower }}: {type: 'text', title: '{{ item.name | capitalize }}'},
+          {% endfor -%}
+        }
+      },
+      uiSchema: {
+        {% for item in fields -%}
+          {{ item.name | lower }}: {'ui:widget': 'SearchFilter'},
+        {% endfor -%}
+      }
+    }
+
+    return data
   }
 
   getColumns () {
     return [
-      {% for item in fields %}
-      {
-        'title': '{{ item.name | capitalize }}',
-        'property': '{{ item.name }}',
-        'default': 'N/A',
-        'sortable': true
-      },
-      {% endfor %}
-      {
-        'title': 'Created',
-        'property': 'dateCreated',
-        'default': 'N/A',
-        'sortable': true,
-        formatter: (row) => {
-          return (
-            moment.utc(row.dateCreated).local().format('DD/MM/YYYY hh:mm a')
-          )
-        }
-      },
+      {% for item in fields -%}
+        {
+          title: '{{ item.name | capitalize }}',
+          property: '{{ item.name | lower }}',
+          default: 'N/A'
+        },
+      {% endfor -%}
       {
         'title': 'Actions',
         formatter: (row) => {
@@ -56,51 +95,29 @@ class Deleted{{ name | capitalize }}s extends Component {
       }
     ]
   }
-
-  async restoreOnClick (uuid) {
-    var url = '/admin/{{ name | lower }}s/restore/' + uuid
-    const {{ name | lower }} = await api.post(url)
-
-    this.props.history.push('/admin/{{ name | lower }}s/detail/' + uuid)
-  }
-
-  render () {
-    return (
-      <div className='columns c-flex-1 is-marginless'>
-        <div className='column is-paddingless'>
-          <div className='section is-paddingless-top'>
-            <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>{{ name | capitalize }}s</h1>
-            <div className='card'>
-              <div className='card-content'>
-                <div className='columns'>
-                  <div className='column'>
-                    <BranchedPaginatedTable
-                      branchName='deleted{{ name | lower }}s'
-                      baseUrl='/admin/{{ name | lower }}s/deleted'
-                      columns={this.getColumns()}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 }
 
-Deleted{{ name | capitalize }}s.contextTypes = {
-  tree: PropTypes.baobab
-}
-
-const branchedDeleted{{ name | capitalize }}s = branch({deleted{{ name | lower }}s: 'deleted{{ name | lower }}s'}, Deleted{{ name | capitalize }}s)
-
-export default Page({
+{{ name | capitalize }}sDeletedList.config({
+  // Basic values
+  name: '{{ name | lower }}-deleted-list',
   path: '/{{ name | lower }}s/deleted',
-  title: 'Deleted {{ name | lower }}s',
-  icon: 'trash',
+  title: 'Deactivated {{ name | lower }}s',
+  icon: 'clipboard',
   exact: true,
   validate: loggedIn,
-  component: branchedDeleted{{ name | capitalize }}s
+
+  // Selectable and custom header
+  selectable: true,
+  headerLayout: 'custom',
+  headerComponent: Header,
+
+  // default filters
+  defaultFilters: {
+    isDeleted: true
+  },
+
+  // Api url to fetch from
+  apiUrl: '/admin/{{ name | lower }}s'
 })
+
+export default {{ name | capitalize }}sDeletedList

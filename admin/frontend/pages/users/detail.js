@@ -1,8 +1,8 @@
 import React from 'react'
+import moment from 'moment'
 
 import PageComponent from '~base/page-component'
 import api from '~base/api'
-import moment from 'moment'
 import env from '~base/env-variables'
 import FontAwesome from 'react-fontawesome'
 
@@ -341,37 +341,36 @@ class UserDetail extends PageComponent {
 
     var resetButton
     if (env.EMAIL_SEND) {
-      resetButton = (
-        <div className='columns'>
-          <div className='column has-text-right'>
-            <div className='field is-grouped is-grouped-right'>
-              <div className='control'>
-                <button
-                  className={this.state.resetClass}
-                  type='button'
-                  onClick={() => this.resetOnClick()}
-                  disabled={!!this.state.resetLoading}
-                  >
-                  {this.state.resetText}
-                </button>
-              </div>
-            </div>
+      resetButton = (<div className='column has-text-right'>
+        <div className='field is-grouped is-grouped-right'>
+          <div className='control'>
+            <button
+              className={this.state.resetClass}
+              type='button'
+              onClick={() => this.resetOnClick()}
+              disabled={!!this.state.resetLoading}
+              >
+              {this.state.resetText}
+            </button>
           </div>
         </div>
-      )
+      </div>)
     }
 
     return (
       <div className='columns c-flex-1 is-marginless'>
         <div className='column is-paddingless'>
           <div className='section'>
-            {resetButton}
+            <div className='columns'>
+              {this.getBreadcrumbs()}
+              {resetButton}
+            </div>
             <div className='columns is-mobile'>
               <div className='column'>
                 <div className='card'>
                   <header className='card-header'>
                     <p className='card-header-title'>
-                      { user.displayName }
+                      { user.screenName }
                     </p>
                   </header>
                   <div className='card-content'>
@@ -386,7 +385,7 @@ class UserDetail extends PageComponent {
                         >
                           <div className='field is-grouped'>
                             <div className='control'>
-                              <button className='button is-primary'>Save</button>
+                              <button className='button is-primary'>Update</button>
                             </div>
                           </div>
                         </UserForm>
@@ -454,7 +453,12 @@ class UserDetail extends PageComponent {
 UserDetail.config({
   name: 'user-details',
   path: '/manage/users/:uuid',
-  title: 'User details',
+  title: '<%= user.name %> | User details',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: 'Users', path: '/manage/users'},
+    {label: '<%= user.name %>'}
+  ],
   exact: true,
   validate: loggedIn
 })

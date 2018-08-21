@@ -1,4 +1,4 @@
-// node tasks/scaffolding/admin-frontend-create --model foo
+// node tasks/scaffolding/admin/admin-frontend-create --model foo
 require('../../../config')
 require('lib/databases/mongo')
 
@@ -7,7 +7,7 @@ const scaffolding = require('lib/scaffolding')
 const path = require('path')
 
 const task = new Task(async function (argv) {
-  if (!argv.model) {
+  if (!argv.model || typeof argv.model !== 'string') {
     throw new Error('Model name is required')
   }
 
@@ -20,7 +20,7 @@ const task = new Task(async function (argv) {
     {
       name: 'properties',
       type: 'checkbox',
-      message: 'Select properties to use in list:',
+      message: 'Select properties to use in create form:',
       choices: scaffolding.getModelProperties(model)
     }
   ]
@@ -31,15 +31,15 @@ const task = new Task(async function (argv) {
 
   const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
-  const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/create.js')
-  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
-  const filePath = dirPath + 'create.js'
-  const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/components/create-button.js')
+  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/components/')
+  const filePath = dirPath + 'create-button.js'
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
-  const templatePath2 = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/create-form.js')
-  const dirPath2 = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
-  const filePath2 = dirPath + 'create-form.js'
-  const fileApi2 = await scaffolding.createFileFromTemplate(dirPath2, filePath2, templatePath2, modelSchema)
+  const templatePath2 = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/components/form.js')
+  const dirPath2 = path.join('./admin/frontend/pages/' + modelSchema.name + 's/components/')
+  const filePath2 = dirPath + 'form.js'
+  await scaffolding.createFileFromTemplate(dirPath2, filePath2, templatePath2, modelSchema)
 
   return true
 }, 500)

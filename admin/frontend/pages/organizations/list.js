@@ -1,24 +1,22 @@
 import React from 'react'
 import Link from '~base/router/link'
 import moment from 'moment'
+import env from '~base/env-variables'
 
-import ListPage from '~base/list-page'
+import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
 import CreateOrganization from './create'
 
-export default ListPage({
-  path: '/manage/organizations',
-  title: 'Organizations',
-  titleSingular: 'Organization',
-  icon: 'users',
-  exact: true,
-  validate: loggedIn,
-  create: true,
-  createComponent: CreateOrganization,
-  baseUrl: '/admin/organizations',
-  branchName: 'organizations',
-  detailUrl: '/admin/manage/organizations/',
-  getColumns: () => {
+class OrganizationList extends ListPageComponent {
+  finishUp (data) {
+    this.setState({
+      className: ''
+    })
+
+    this.props.history.push(env.PREFIX + '/manage/organizations/' + data.uuid)
+  }
+
+  getColumns () {
     return [
       {
         'title': 'Name',
@@ -54,4 +52,42 @@ export default ListPage({
       }
     ]
   }
+
+  getFilters () {
+    const data = {
+      schema: {
+        type: 'object',
+        required: [],
+        properties: {
+          name: {type: 'text', title: 'Por nombre'}
+        }
+      },
+      uiSchema: {
+        name: {'ui:widget': 'SearchFilter'}
+      }
+    }
+
+    return data
+  }
+
+  exportFormatter (row) {
+    return {name: row.name}
+  }
+}
+
+OrganizationList.config({
+  name: 'organization-list',
+  path: '/manage/organizations',
+  title: 'Organizations',
+  icon: 'users',
+  exact: true,
+  validate: loggedIn,
+
+  headerLayout: 'create',
+  createComponent: CreateOrganization,
+  createComponentLabel: 'New Organization',
+
+  apiUrl: '/admin/organizations'
 })
+
+export default OrganizationList

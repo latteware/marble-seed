@@ -93,13 +93,13 @@ class EmailInviteLanding extends Component {
 
     this.setState({
       ...this.state,
-      // apiCallMessage: 'is-hidden',
+      token: tokenData.token,
       user: data.user
     })
   }
 
   async submitHandler ({formData}) {
-    formData.uuid = this.state.user.uuid
+    formData.uuid = this.state.token
     formData.password = formData.password_1
 
     var data

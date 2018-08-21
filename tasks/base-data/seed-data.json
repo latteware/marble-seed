@@ -1,0 +1,19 @@
+{
+  "User": [
+    {
+      "name": "Admin McAdmin",
+      "email": "admin@app.com",
+      "screenName": "Admin",
+      "password": "foobar",
+      "isAdmin": true
+    }
+  ],
+  "Role": [
+    {
+      "name": "Default",
+      "slug": "default",
+      "description": "Default role",
+      "isDefault": true
+    }
+  ]
+}

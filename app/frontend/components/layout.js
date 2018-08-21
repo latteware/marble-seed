@@ -40,8 +40,14 @@ class Layout extends Component {
 
       tree.set('user', me.user)
       tree.set('loggedIn', me.loggedIn)
+
       tree.commit()
     }
+
+    const config = await api.get('/app-config')
+    tree.set('config', config)
+
+    tree.commit()
 
     this.setState({loaded: true})
   }

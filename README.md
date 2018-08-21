@@ -46,6 +46,12 @@ The easiest way to create your first user in the database is:
 node tasks/create-admin --email admin@app.com --password foobar --screenName admin
 ```
 
+Or create and load seed data from `tasks/base/seed-data.json` with:
+
+```bash
+node tasks/seed-data.js --file tasks/base-data/seed-data.json
+```
+
 Now, you can go point your browser to http://localhost:5000/admin/ and log in with that user, and start using the admin application.
 
 By default, Marble Seeds have 3 different and powerfull tools to augment the user objects:
