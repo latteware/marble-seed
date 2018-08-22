@@ -85,11 +85,10 @@ class UserForm extends Component {
         <MarbleForm
           schema={schema}
           formData={this.state.formData}
+          buttonLabel='Update'
           onSubmit={async (data) => { await this.submitHandler(data) }}
           defaultSuccessMessage={'User was updated correctly'}
-        >
-          {this.props.children}
-        </MarbleForm>
+        />
       </div>
     )
   }

@@ -102,3 +102,16 @@ body {
 .active{
   font-weight: bold;
 }
+
+.Select--multi.is-danger .Select-control{
+  border-color: red
+}
+
+.marble-form .column{
+  margin-bottom: 0px;
+}
+
+.marble-form .column.hidden{
+  margin-bottom: 0px;
+  padding: 0px;
+}

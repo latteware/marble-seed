@@ -382,13 +382,7 @@ class UserDetail extends PageComponent {
                           initialState={this.state.user}
                           load={() => this.reload()}
                           roles={this.state.roles || []}
-                        >
-                          <div className='field is-grouped'>
-                            <div className='control'>
-                              <button className='button is-primary'>Update</button>
-                            </div>
-                          </div>
-                        </UserForm>
+                        />
                       </div>
                     </div>
                   </div>
