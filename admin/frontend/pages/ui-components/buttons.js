@@ -12,7 +12,7 @@ class Buttons extends PageComponent {
 
   render () {
     return (
-      <div className='columns c-flex-1 is-marginless buttons-test'>
+      <div className='button-page columns c-flex-1 is-marginless buttons-test'>
         <div className='column is-paddingless'>
           <div className='section is-paddingless-top'>
             <h1 className='is-size-3 is-padding-top-small is-padding-bottom-small'>Primary buttons</h1>
@@ -204,7 +204,7 @@ class Buttons extends PageComponent {
                 <span className='icon'>
                   <i className='fa fa-cloud' />
                 </span>
-                <span>Mediano fullwidth</span>
+                <span>Medium fullwidth</span>
               </a>
             </p>
             <br />
