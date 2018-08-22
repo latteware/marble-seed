@@ -9,6 +9,7 @@ import UsersImport from '../pages/users/import'
 import Organizations from '../pages/organizations/list'
 import Roles from '../pages/roles/list'
 import Groups from '../pages/groups/list'
+import Buttons from '../pages/ui-components/buttons'
 
 import RequestLogs from '../pages/request-logs/list'
 import Reports from '../pages/reports/users'
@@ -65,7 +66,7 @@ class Sidebar extends Component {
       // #Modules
       {
         title: 'Load Data',
-        icon: 'file-o',
+        icon: 'github',
         to: '/import',
         open: false,
         dropdown: [
@@ -73,7 +74,7 @@ class Sidebar extends Component {
         ]
       }, {
         title: 'Developer Tools',
-        icon: 'github-alt',
+        icon: 'github',
         to: '/devtools',
         open: false,
         dropdown: [
@@ -83,11 +84,20 @@ class Sidebar extends Component {
         ]
       }, {
         title: 'Restore data',
-        icon: 'trash-o',
+        icon: 'github',
         to: '/restore',
         open: false,
         dropdown: [
           DeletedUsers.asSidebarItem()// #Restore
+        ]
+      },
+      {
+        title: 'UI Componets',
+        icon: 'object-group',
+        to: '/ui-components',
+        open: false,
+        dropdown: [
+          Buttons.asSidebarItem()
         ]
       }
     ]
