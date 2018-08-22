@@ -29,6 +29,11 @@
     .menu-list {
       li {
         font-size: 1rem;
+        span {
+          &.icon {
+            font-size: 1.2rem;
+          }
+        }
       }
       
       a{
@@ -76,14 +81,14 @@
           }
           span {
             &.icon {
-              font-size: 1rem;
+              font-size: 1.2rem;
             }
           }
         }
         & > a {
           span {
             &.icon {
-              font-size: 1rem;
+              font-size: 1.2rem;
             }
           }
           & > span {

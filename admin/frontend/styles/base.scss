@@ -7,7 +7,9 @@ body {
   margin: 0;
   height: 100%;
 }
-
+.main-wrapper{
+  background-color: #FAFAFA;
+}
 .is-transparent {
   opacity: 0.6;
 }
@@ -17,6 +19,7 @@ body {
   a {
     opacity: 1;
   }
+
 }
 p, span, li, h1, h2, h3, h4, h5, th, td {
   font-family: 'Muli', sans-serif;

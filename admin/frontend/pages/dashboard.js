@@ -63,8 +63,8 @@ export default Page({
               <h2 className='Dashboard-subtitle'>Revisa el estatus de tu organización</h2>
             </div>
             <div className='column Dashboard-welcome'>
-              <p className='has-text-right'>¡Bienvenido!</p>
-              <p className='has-text-right'>{todayIs}</p>
+              <p>¡Bienvenido!</p>
+              <p>{todayIs}</p>
             </div>
           </div>
           <div className='tile is-ancestor'>
