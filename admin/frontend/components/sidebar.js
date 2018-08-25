@@ -156,23 +156,25 @@ class Sidebar extends Component {
             <i className={collapseBtn} />
           </span>
         </a>
-        <ul className='menu-list'>
-          {this.state.menuItems.map((item, index) => {
-            if (!item) { return }
-            return <SidebarItem
-              title={item.title}
-              index={index}
-              status={item.open}
-              collapsed={this.state.collapsed}
-              icon={item.icon}
-              to={item.to}
-              dropdown={item.dropdown}
-              onClick={this.handleActiveLink}
-              dropdownOnClick={(i) => this.handleToggle(i)}
-              activeItem={this.state.active}
-              key={item.title.toLowerCase().replace(/\s/g, '')} />
-          })}
-        </ul>
+        <div className='menu-container'>
+          <ul className='menu-list'>
+            {this.state.menuItems.map((item, index) => {
+              if (!item) { return }
+              return <SidebarItem
+                title={item.title}
+                index={index}
+                status={item.open}
+                collapsed={this.state.collapsed}
+                icon={item.icon}
+                to={item.to}
+                dropdown={item.dropdown}
+                onClick={this.handleActiveLink}
+                dropdownOnClick={(i) => this.handleToggle(i)}
+                activeItem={this.state.active}
+                key={item.title.toLowerCase().replace(/\s/g, '')} />
+            })}
+          </ul>
+        </div>
       </aside>
     </div></div>)
   }

@@ -31,9 +31,11 @@
         text-align: center;
       }
     }
+    .menu-container{
+      height: 80vh;
+      overflow-y: auto;
+    }
     .menu-list {
-      overflow-y: scroll;
-
       li {
         font-size: 1rem;
         span {
