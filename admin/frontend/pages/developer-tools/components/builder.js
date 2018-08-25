@@ -16,8 +16,10 @@ const baseSchema = {
     options: [
       'TextWidget',
       'TextareaWidget',
+      'PasswordWidget',
       'EmailWidget',
       'NumberWidget',
+      'HiddenWidget',
       'SelectWidget',
       'MultipleSelectWidget',
       'DateWidget',
@@ -38,7 +40,7 @@ const baseSchema = {
   label: {
     label: 'label',
     type: 'string',
-    placeholder: 'Add name',
+    placeholder: 'Add label',
     widget: 'TextWidget',
     required: true
   },
@@ -46,6 +48,10 @@ const baseSchema = {
     label: 'Placeholder',
     type: 'string',
     widget: 'TextWidget'
+  },
+  className: {
+    label: 'Class name',
+    type: 'string'
   },
   default: {
     label: 'default',
@@ -76,6 +82,28 @@ const WidgetSchemas = {
       label: 'default',
       type: 'string',
       widget: 'EmailWidget'
+    }
+  },
+  HiddenWidget: {
+    label: {
+      widget: 'HiddenWidget'
+    },
+    placeholder: {
+      widget: 'HiddenWidget'
+    },
+    className: {
+      widget: 'HiddenWidget'
+    },
+    default: {
+      label: 'default',
+      type: 'string',
+      required: true
+    },
+    required: {
+      widget: 'HiddenWidget'
+    },
+    disabled: {
+      widget: 'HiddenWidget'
     }
   },
   NumberWidget: {

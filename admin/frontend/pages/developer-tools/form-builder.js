@@ -12,35 +12,7 @@ class FormBuilderContainer extends Component {
   constructor () {
     super(...arguments)
     this.state = {
-      schema: {
-        'name': {
-          'label': 'Name',
-          'default': 'rr'
-        },
-        'number': {
-          'widget': 'NumberWidget',
-          'minimum': 0,
-          'maximum': 10,
-          'default': 5,
-          'name': 'number',
-          'label': 'Number',
-          'type': 'number'
-        },
-        'second': {
-          'widget': 'NumberWidget',
-          'minimum': 0,
-          'maximum': 10,
-          'step': 0.5,
-          'name': 'second',
-          'label': 'Second',
-          'type': 'number'
-        },
-        'lol': {
-          'widget': 'DateWidget',
-          'name': 'lol',
-          'label': 'lol'
-        }        
-      },
+      schema: {},
       result: null,
       currentDisplay: 'form'
     }
@@ -62,7 +34,11 @@ class FormBuilderContainer extends Component {
     const { schema, currentDisplay, result } = this.state
 
     const formEl = <div>
-      <MarbleForm schema={schema} initialData={{}} onSubmit={(data) => this.setResult(data)} />
+      <MarbleForm
+        schema={schema}
+        initialData={{}}
+        onSubmit={(data) => this.setResult(data)}
+      />
       {result && <pre style={{marginTop: 20}}>{JSON.stringify(result, null, 2)}</pre>}
     </div>
 

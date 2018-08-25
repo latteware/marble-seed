@@ -7,20 +7,21 @@ import tree from '~core/tree'
 import Link from '~base/router/link'
 import {forcePublic} from '~base/middlewares/'
 
-import {BaseForm, PasswordWidget, EmailWidget} from '~components/base-form'
+import MarbleForm from '~base/components/marble-form'
 
 const schema = {
-  type: 'object',
-  required: ['email', 'password'],
-  properties: {
-    email: {type: 'string', title: 'Email'},
-    password: {type: 'string', title: 'Password'}
+  'email': {
+    'widget': 'EmailWidget',
+    'name': 'email',
+    'label': 'Email',
+    'required': true
+  },
+  'password': {
+    'widget': 'PasswordWidget',
+    'name': 'password',
+    'required': true,
+    'label': 'Password'
   }
-}
-
-const uiSchema = {
-  password: {'ui:widget': PasswordWidget},
-  email: {'ui:widget': EmailWidget}
 }
 
 class LogIn extends Component {
@@ -40,26 +41,17 @@ class LogIn extends Component {
   changeHandler ({formData}) {
     this.setState({
       formData,
-      apiCallErrorMessage: 'is-hidden',
       error: ''
     })
   }
 
-  clearState () {
-    this.setState({
-      apiCallErrorMessage: 'is-hidden',
-      formData: this.props.initialState
-    })
-  }
-
-  async submitHandler ({formData}) {
+  async submitHandler (formData) {
     var data
     try {
       data = await api.post('/user/login', formData)
     } catch (e) {
       return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
+        error: e.message
       })
     }
 
@@ -74,7 +66,6 @@ class LogIn extends Component {
     } else {
       this.setState({
         error: 'Invalid user',
-        apiCallErrorMessage: 'message is-danger',
         formData: {
           email: '',
           password: ''
@@ -84,12 +75,7 @@ class LogIn extends Component {
   }
 
   render () {
-    var error
-    if (this.state.error) {
-      error = <div>
-        Error: {this.state.error}
-      </div>
-    }
+    const {error} = this.state
 
     var resetLink
     if (env.EMAIL_SEND) {
@@ -119,28 +105,21 @@ class LogIn extends Component {
             <div className='content'>
               <div className='columns'>
                 <div className='column'>
-                  <BaseForm schema={schema}
-                    uiSchema={uiSchema}
-                    formData={this.state.formData}
-                    onChange={(e) => { this.changeHandler(e) }}
-                    onSubmit={(e) => { this.submitHandler(e) }}
-                    onError={(e) => { this.errorHandler(e) }}
+                  <MarbleForm
+                    schema={schema}
+                    onSubmit={async (data) => { await this.submitHandler(data) }}
+                    onChange={(data) => { this.changeHandler(data) }}
+                    handleMessages={false}
+                    errorMessage={this.state.error}
                   >
-                    <div className={this.state.apiCallErrorMessage}>
-                      <div className='message-body is-size-7 has-text-centered'>
-                        {error}
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        className='button is-primary is-fullwidth'
-                        type='submit'
-                        disabled={!!error}
-                      >
-                        Log in
-                      </button>
-                    </div>
-                  </BaseForm>
+                    <button
+                      className='button is-primary is-fullwidth'
+                      type='submit'
+                      disabled={!!error}
+                    >
+                      Log in
+                    </button>
+                  </MarbleForm>
                 </div>
               </div>
               {resetLink}
