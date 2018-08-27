@@ -62,7 +62,7 @@ class Sidebar extends Component {
       // #Modules
       {
         title: 'Load Data',
-        icon: 'github',
+        icon: 'cloud-upload',
         to: '/import',
         open: false,
         dropdown: [
@@ -79,7 +79,7 @@ class Sidebar extends Component {
         ]
       }, {
         title: 'Restore data',
-        icon: 'github',
+        icon: 'trash-o',
         to: '/restore',
         open: false,
         dropdown: [
@@ -87,7 +87,7 @@ class Sidebar extends Component {
         ]
       },
       {
-        title: 'UI Componets',
+        title: 'UI Components',
         icon: 'object-group',
         to: '/ui-components',
         open: false,

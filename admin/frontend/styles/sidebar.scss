@@ -3,14 +3,14 @@
   .collapse-btn {
     position: absolute;
     z-index: 99;
-    right: -43px;
+    right: -25px;
     background-color: #066391;
     color: white;
     cursor: pointer;
     border-radius: 0px 3px 3px 0px;
     font-size: 12px;
-    width: 43px;
-    height: 43px;
+    width: 25px;
+    height: 25px;
     top: 0;
 
     &:hover{
@@ -18,7 +18,7 @@
     }
   }
   .menu {
-    width: 300px;
+    width: 270px;
     height: 100%;
     position: relative;
     &.menu-collapsed{

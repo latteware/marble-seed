@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import moment from 'moment'
+
 import Page from '~base/page'
 import api from '~base/api'
 import { Redirect } from 'react-router-dom'
 import Loader from '~base/components/spinner'
+import Link from '~base/router/link'
 
 import {loggedIn} from '~base/middlewares/'
 
@@ -10,7 +13,7 @@ export default Page({
   path: '/',
   exact: true,
   title: 'Dashboard',
-  icon: 'github',
+  icon: 'dashboard',
   validate: loggedIn,
   component: class extends Component {
     constructor (props) {
@@ -31,8 +34,7 @@ export default Page({
     async load () {
       var url = '/admin/dashboard/'
       const body = await api.get(url)
-      let today = new Date()
-      let month = today.toLocaleString('es-ES', { month: 'long' })
+
       this.setState({
         ...this.state,
         orgsCount: body.orgsCount,
@@ -40,7 +42,7 @@ export default Page({
         rolesCount: body.rolesCount,
         groupsCount: body.groupsCount,
         loading: false,
-        todayIs: today.getDay() + ' - ' + month + ' - ' + today.getFullYear()
+        todayIs: moment().format('DD - MMMM YYYY')
       })
     }
 
@@ -59,11 +61,11 @@ export default Page({
         <div className='Dashboard'>
           <div className='columns'>
             <div className='column'>
-              <h1 className='Dashboard-title'>Tu organización</h1>
-              <h2 className='Dashboard-subtitle'>Revisa el estatus de tu organización</h2>
+              <h1 className='Dashboard-title'>Your organization</h1>
+              <h2 className='Dashboard-subtitle'>Review the state of your organization</h2>
             </div>
             <div className='column Dashboard-welcome'>
-              <p>¡Bienvenido!</p>
+              <p>Welcome!</p>
               <p>{todayIs}</p>
             </div>
           </div>
@@ -73,7 +75,7 @@ export default Page({
                 <div className='tile is-parent'>
                   <article className='tile is-child has-text-centered'>
                     <p className='title'>{orgsCount}</p>
-                    <p className='subtitle'>Organizaciones</p>
+                    <p className='subtitle'>Organizations</p>
                   </article>
                 </div>
               </div>
@@ -83,7 +85,7 @@ export default Page({
                 <div className='tile is-parent'>
                   <article className='tile is-child has-text-centered'>
                     <p className='title'>{usersCount}</p>
-                    <p className='subtitle'>Usuarios</p>
+                    <p className='subtitle'>Users</p>
                   </article>
                 </div>
               </div>
@@ -103,21 +105,21 @@ export default Page({
                 <div className='tile is-parent'>
                   <article className='tile is-child has-text-centered'>
                     <p className='title'>{groupsCount}</p>
-                    <p className='subtitle'>Grupos</p>
+                    <p className='subtitle'>Groups</p>
                   </article>
                 </div>
               </div>
             </div>
           </div>
           <div className='columns'>
-            <div className='column'>
+            <div className='column is-two-fifths'>
               <div className='quickActions'>
                 <table className='table is-fullwidth'>
                   <thead>
                     <tr>
-                      <th>Acciones rápidas</th>
+                      <th>Quick actions</th>
                       <th>
-                        <span>Agrega, edita o visualiza</span>
+                        <span>View</span>
                       </th>
                     </tr>
                   </thead>
@@ -126,15 +128,13 @@ export default Page({
                       <td>
                         <div className='icon-list'>
                           <a className='button icon-button is-link is-rounded is-small'><i className='fa fa-sitemap' /></a>
-                          <span className='icon-list-right'>Organización</span>
+                          <span className='icon-list-right'>Organizations</span>
                         </div>
                       </td>
                       <td className='quickActions-list'>
                         <div>
                           <div className='icon-list-items'>
-                            <i className='fa fa-plus' />
-                            <i className='fa fa-edit' />
-                            <i className='fa fa-eye' />
+                            <Link to='/manage/organizations'><i className='fa fa-eye' /></Link>
                           </div>
                         </div>
                       </td>
@@ -143,15 +143,13 @@ export default Page({
                       <td>
                         <div className='icon-list'>
                           <a className='button icon-button is-link is-rounded is-small'><i className='fa fa-user' /></a>
-                          <span className='icon-list-right'>Usuarios</span>
+                          <span className='icon-list-right'>Users</span>
                         </div>
                       </td>
                       <td className='quickActions-list'>
                         <div>
                           <div className='icon-list-items'>
-                            <i className='fa fa-plus' />
-                            <i className='fa fa-edit' />
-                            <i className='fa fa-eye' />
+                            <Link to='/manage/users'><i className='fa fa-eye' /></Link>
                           </div>
                         </div>
                       </td>
@@ -166,9 +164,7 @@ export default Page({
                       <td className='quickActions-list'>
                         <div>
                           <div className='icon-list-items'>
-                            <i className='fa fa-plus' />
-                            <i className='fa fa-edit' />
-                            <i className='fa fa-eye' />
+                            <Link to='/manage/roles'><i className='fa fa-eye' /></Link>
                           </div>
                         </div>
                       </td>
@@ -177,15 +173,13 @@ export default Page({
                       <td>
                         <div className='icon-list'>
                           <a className='button icon-button is-link is-rounded is-small'><i className='fa fa-users' /></a>
-                          <span className='icon-list-right'>Grupos</span>
+                          <span className='icon-list-right'>Groups</span>
                         </div>
                       </td>
                       <td className='quickActions-list'>
                         <div className='icon-list'>
                           <div className='icon-list-items'>
-                            <i className='fa fa-plus' />
-                            <i className='fa fa-edit' />
-                            <i className='fa fa-eye' />
+                            <Link to='/manage/groups'><i className='fa fa-eye' /></Link>
                           </div>
                         </div>
                       </td>

@@ -6,8 +6,8 @@ class Footer extends Component {
       <div>
         <div className='has-text-centered'>
           <p>
-            <strong>Common Sense</strong> by <a href='#'>Latteware</a>.
-            The source code is licensed <a href='http://opensource.org/licenses/mit-license.php'>MIT</a>.
+            <strong>Marble seeds</strong> by <a href='https://commonsense.io'>Common Sense People</a>.
+            The source code is licensed <a href='https://github.com/latteware/marble-seed/blob/master/LICENSE'>MIT</a>.
             The website content is licensed <a href='#'>CC ANS 4.0</a>.
           </p>
         </div>

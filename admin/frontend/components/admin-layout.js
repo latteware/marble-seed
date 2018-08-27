@@ -89,8 +89,8 @@ class AdminLayout extends Component {
         </div>
         <div className='column is-flex is-flex-column'>
           <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
-          <div className='main-wrapper'>
-            <section className='c-flex-1 is-flex'>
+          <div className='column is-flex-column is-paddingless main-wrapper'>
+            <section className='c-flex-1 is-flex main-section'>
               {this.props.children}
             </section>
             <Footer />

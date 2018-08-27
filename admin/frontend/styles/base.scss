@@ -7,9 +7,19 @@ body {
   margin: 0;
   height: 100%;
 }
+
 .main-wrapper{
   background-color: #FAFAFA;
 }
+
+.main-section{
+  min-height: calc(100vh - 130px);
+}
+
+.section {
+  padding: 2.6875rem 1.5rem;
+}
+
 .is-transparent {
   opacity: 0.6;
 }
@@ -95,6 +105,10 @@ html, body {
 .offcanvas {
   background-color: #5d5d5d;
   height: 100%;;
+}
+
+.modal {
+  z-index: 100;
 }
 
 .burger-desktop {
