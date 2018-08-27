@@ -17,6 +17,11 @@
       background-color: #066391;
     }
   }
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    .collapse-btn{
+      display: none;
+    }
+  }
   .menu {
     width: 270px;
     height: 100%;

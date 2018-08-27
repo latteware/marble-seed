@@ -106,17 +106,14 @@ class ImportUsers extends Component {
                       </div>
                     </BaseForm>
                   </div>
-                  <div className='column'>
-                    <h4>
-                      The <strong>.csv</strong> file should have the same format
-                      as the example below:
-                    </h4>
-                    <pre style={{marginTop: '1em'}}>
-                      "name","screenName","email","password"<br />
-                      "Juan Perez","Juan","juan@coporation.com","password"
-                    </pre>
-                  </div>
                 </div>
+                <h4>The <strong>.csv</strong> file should have the same format
+                  as the example below:
+                </h4>
+                <pre style={{ marginTore: '1em' }}>
+                  "name","screenName","email","password"<br />
+                  "Juan Perez","Juan","juan@coporation.com","password"
+                </pre>
               </div>
             </div>
           </div>

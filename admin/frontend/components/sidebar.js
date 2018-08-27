@@ -132,6 +132,10 @@ class Sidebar extends Component {
       'icon-img-text': !this.state.collapsed
     })
 
+    const sidebarClass = classNames('is-flex is-flex-column', {
+      'sidebar-container': !this.state.collapsed
+    })
+
     const collapseBtn = classNames('fa', {
       'fa-expand': this.state.collapsed,
       'fa-compress': !this.state.collapsed
@@ -142,7 +146,7 @@ class Sidebar extends Component {
       divClass = divClass + ' is-hidden-touch'
     }
 
-    return (<div className={divClass}>
+    return (<div className={sidebarClass}><div className={divClass}>
       <aside className={menuClass}>
         <Link to='/' className='navbar-item c-flex-1 is-dark is-paddingless'>
           <Image className={imgClass} src={'/public/img/' + fileImg} width='200' height='100' alt='Logotipo' />
@@ -170,7 +174,7 @@ class Sidebar extends Component {
           })}
         </ul>
       </aside>
-    </div>)
+    </div></div>)
   }
 }
 

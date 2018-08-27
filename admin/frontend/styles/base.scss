@@ -8,8 +8,19 @@ body {
   height: 100%;
 }
 
+@media only screen and (max-width: 450px) and (orientation: portrait) {
+  pre {
+    max-width: 75vw;
+    overflow-x: auto;
+  }
+}
+
 .main-wrapper{
   background-color: #FAFAFA;
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    width: 100vw;
+    overflow-y: scroll;
+  }
 }
 
 .main-section{
@@ -69,6 +80,17 @@ html, body {
 
 .navbar-menu {
   background-color: #fff;
+}
+
+.menu {
+  overflow-y: scroll;
+}
+
+.overflow-table{
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    max-width: 75vw;
+    overflow-x: scroll;
+  }
 }
 
 .c-topbar {
@@ -142,6 +164,13 @@ html, body {
 
 .wrap {
   min-height: 100vh;
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    & .sidebar-container {
+      position: fixed;
+      z-index: 999;
+      height: 100vh;
+    }
+  }
 }
 
 .is-flex-column {
@@ -224,7 +253,6 @@ html, body {
 }
 
 a.navbar-item:hover {
-  color: #00d1b2;
   background-color: transparent;
 }
 
