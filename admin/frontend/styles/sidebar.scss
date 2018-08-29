@@ -32,6 +32,8 @@
       }
     }
     .menu-list {
+      overflow-y: scroll;
+
       li {
         font-size: 1rem;
         span {
