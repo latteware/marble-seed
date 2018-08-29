@@ -1,25 +1,57 @@
 .offcanvas {
-  background-color: $gray-blue-900;
+  background-color: #093952;
   .collapse-btn {
     position: absolute;
     z-index: 99;
-    right: -27px;
-    background-color: black;
+    right: -25px;
+    background-color: #066391;
     color: white;
     cursor: pointer;
     border-radius: 0px 3px 3px 0px;
     font-size: 12px;
+    width: 25px;
+    height: 25px;
+    top: 0;
+
+    &:hover{
+      background-color: #066391;
+    }
+  }
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    .collapse-btn{
+      display: none;
+    }
   }
   .menu {
-    width: 250px;
+    width: 270px;
     height: 100%;
     position: relative;
+    &.menu-collapsed{
+      .menu-list > li a, .dropdown {
+        text-align: center;
+      }
+    }
     .menu-list {
+      overflow-y: scroll;
+
+      li {
+        font-size: 1rem;
+        span {
+          &.icon {
+            font-size: 1.2rem;
+          }
+        }
+      }
+      
       a{
+        border-left: 1px solid transparent;
         &:hover {
-          background-color: $gray-blue-700;
+          background-color: #064D70;
+          border-left: 1px solid #fff;
         }
         &.is-active {
+          background-color: #064D70;
+          border-left: 1px solid #fff;
           .item-link-title {
             color: white;
           }
@@ -27,7 +59,7 @@
       }
     }
     &.menu-collapsed {
-      width: 50px;
+      width: 85px;
       & > ul.menu-list > li {
         .dropdown {
           border-radius: 2px;
@@ -36,7 +68,7 @@
           padding: 0.5em 0.75em;
           position: relative;
           &.is-active {
-            background-color: $primary;
+            background-color: #066391;
           }
           & > ul {
             margin: 0;
@@ -45,22 +77,25 @@
             top: 0;
             width: 250px;
             z-index: 999;
-            left: 50px;
+            left: 85px;
             li {
               margin: 0;
               padding: 0;
             }
+            a {
+              text-align: left;
+            }
           }
           span {
             &.icon {
-              font-size: 1.5em;
+              font-size: 1.2rem;
             }
           }
         }
         & > a {
           span {
             &.icon {
-              font-size: 1.5em;
+              font-size: 1.2rem;
             }
           }
           & > span {
@@ -72,7 +107,7 @@
       }
     }
     li {
-      background-color: $gray-blue-500;
+      background-color: #093952;
       position: relative;
       .item-link-title {
         color: #b4becc;
@@ -80,21 +115,33 @@
     } 
   }
 
+  .menu .navbar-item:hover  {
+    background-color: unset;
+  }
   .menu ul li ul {
     margin: 0px;
     padding: 0px;
-    border-left: 1px solid $primary;
+    border-left: 1px solid #064D70;
     li {
-      background-color: $gray-blue-300;
+      background-color:#093952;
       a {
         padding-left: 1.8em;
         &.is-active {
-          background-color: #435265;
+          background-color: #064D70;
           span {
-            color: $primary !important;
+            color: #fff !important;
           }
         }
       }
     }
+  }
+
+  .icon-img {
+    height: 80px;
+    margin: 0 auto;
+  }
+  .icon-img-text {
+    height: 80px;
+    margin-left: 0;
   }
 }

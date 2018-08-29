@@ -284,3 +284,14 @@ button[disabled]:hover, a[disabled]:hover, .is-disabled:hover{
   height: 60px !important;
   font-size: 1.125rem !important;
 }
+
+.icon-button.is-link.button-minimalistic i, 
+.icon-button.is-link.button-secondary i{
+  color: #229AD6 !important;
+}
+.icon-button.is-link:not(.button-minimalistic) i, 
+.icon-button.is-link:not(.button-minimalistic) .fa, 
+.icon-button.is-link:not(.button-secondary) i, 
+.icon-button.is-link:not(.button-secondary) .fa{
+  color: #fff;
+}

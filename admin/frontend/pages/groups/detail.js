@@ -130,7 +130,7 @@ class GroupDetail extends PageComponent {
                         baseUrl='/admin/users'
                         columns={this.getColumns()}
                         filters={{group: this.props.match.params.uuid}}
-                        />
+                      />
                     </div>
                   </div>
                 </div>

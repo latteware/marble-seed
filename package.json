@@ -29,7 +29,7 @@
     "baobab-react": "^2.1.2",
     "bcrypt": "^1.0.2",
     "bull": "^3.3.7",
-    "bulma": "^0.5.1",
+    "bulma": "^0.6.1",
     "compression-webpack-plugin": "^1.1.10",
     "css-loader": "^0.28.5",
     "csv-parse": "^2.0.0",

@@ -349,7 +349,7 @@ class UserDetail extends PageComponent {
               type='button'
               onClick={() => this.resetOnClick()}
               disabled={!!this.state.resetLoading}
-              >
+            >
               {this.state.resetText}
             </button>
           </div>
