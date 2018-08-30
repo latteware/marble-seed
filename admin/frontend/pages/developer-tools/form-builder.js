@@ -36,7 +36,6 @@ class FormBuilderContainer extends Component {
     const formEl = <div>
       <MarbleForm
         schema={schema}
-        initialData={{}}
         onSubmit={(data) => this.setResult(data)}
       />
       {result && <pre style={{marginTop: 20}}>{JSON.stringify(result, null, 2)}</pre>}

@@ -5,16 +5,7 @@ import PropTypes from 'baobab-react/prop-types'
 import env from '~base/env-variables'
 import api from '~base/api'
 import BaseModal from '~base/components/base-modal'
-import PasswordUserForm from './password-form'
-import InviteUserForm from './send-invite-form'
-
-var initialState = {
-  name: '',
-  email: '',
-  password_1: '',
-  password_2: '',
-  screenName: ''
-}
+import UserForm from './form'
 
 class CreateUser extends Component {
   constructor (props) {
@@ -60,59 +51,23 @@ class CreateUser extends Component {
     })
   }
 
-  getPasswordForm () {
-    return (
-      <PasswordUserForm
-        baseUrl='/admin/users'
-        url={this.props.url}
-        initialState={initialState}
-        finishUp={(data) => this.props.finishUp(data)}
-        load={this.load.bind(this)}
-        roles={this.state.roles || []}
-      >
-        <div className='field is-grouped'>
-          <div className='control'>
-            <button className='button is-primary'>Create</button>
-          </div>
-          <div className='control'>
-            <button className='button' onClick={this.hideModal}>Cancel</button>
-          </div>
-        </div>
-      </PasswordUserForm>
-    )
-  }
-
-  getSendInviteForm () {
-    return (
-      <InviteUserForm
-        baseUrl='/admin/users'
-        url={this.props.url}
-        initialState={initialState}
-        finishUp={this.props.finishUp}
-        load={this.load.bind(this)}
-        roles={this.state.roles || []}
-      >
-        <div className='field is-grouped'>
-          <div className='control'>
-            <button className='button is-primary'>Invite</button>
-          </div>
-          <div className='control'>
-            <button className='button' onClick={this.hideModal}>Cancel</button>
-          </div>
-        </div>
-      </InviteUserForm>
-    )
-  }
-
   render () {
-    var modalContent
-    var title = 'Create user'
+    let mode, title
     if (env.EMAIL_SEND) {
-      modalContent = this.getSendInviteForm()
       title = 'Invite user'
+      mode = 'invite'
     } else {
-      modalContent = this.getPasswordForm()
+      mode = 'password'
+      title = 'Create user'
     }
+
+    let modalContent = <UserForm
+      baseUrl='/admin/users'
+      url={'/admin/users/'}
+      mode={mode}
+      finishUp={(data) => this.props.finishUp(data)}
+      roles={this.state.roles || []}
+    />
 
     return (
       <BaseModal

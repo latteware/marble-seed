@@ -377,6 +377,7 @@ class UserDetail extends PageComponent {
                     <div className='columns'>
                       <div className='column'>
                         <UserForm
+                          mode='update'
                           baseUrl='/admin/users'
                           url={'/admin/users/' + this.props.match.params.uuid}
                           initialState={this.state.user}

@@ -33,10 +33,6 @@ class UserList extends ListPageComponent {
   }
 
   finishUp (data) {
-    this.setState({
-      className: ''
-    })
-
     this.props.history.push(env.PREFIX + '/manage/users/' + data.uuid)
   }
 
