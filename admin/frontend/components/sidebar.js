@@ -14,6 +14,7 @@ import Image from '~base/components/image'
 import Link from '~base/router/link'
 
 import AppConfig from '../pages/developer-tools/app-config'
+import RequestLogs from '../pages/developer-tools/request-logs'
 import FormBuilder from '../pages/developer-tools/form-builder'
 
 class Sidebar extends Component {
@@ -74,6 +75,7 @@ class Sidebar extends Component {
         to: '/devtools',
         open: false,
         dropdown: [
+          RequestLogs.asSidebarItem(),
           AppConfig.asSidebarItem(),
           FormBuilder.asSidebarItem()
         ]
@@ -156,23 +158,25 @@ class Sidebar extends Component {
             <i className={collapseBtn} />
           </span>
         </a>
-        <ul className='menu-list'>
-          {this.state.menuItems.map((item, index) => {
-            if (!item) { return }
-            return <SidebarItem
-              title={item.title}
-              index={index}
-              status={item.open}
-              collapsed={this.state.collapsed}
-              icon={item.icon}
-              to={item.to}
-              dropdown={item.dropdown}
-              onClick={this.handleActiveLink}
-              dropdownOnClick={(i) => this.handleToggle(i)}
-              activeItem={this.state.active}
-              key={item.title.toLowerCase().replace(/\s/g, '')} />
-          })}
-        </ul>
+        <div className='menu-container'>
+          <ul className='menu-list'>
+            {this.state.menuItems.map((item, index) => {
+              if (!item) { return }
+              return <SidebarItem
+                title={item.title}
+                index={index}
+                status={item.open}
+                collapsed={this.state.collapsed}
+                icon={item.icon}
+                to={item.to}
+                dropdown={item.dropdown}
+                onClick={this.handleActiveLink}
+                dropdownOnClick={(i) => this.handleToggle(i)}
+                activeItem={this.state.active}
+                key={item.title.toLowerCase().replace(/\s/g, '')} />
+            })}
+          </ul>
+        </div>
       </aside>
     </div></div>)
   }
