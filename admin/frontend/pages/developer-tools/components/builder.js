@@ -49,6 +49,11 @@ const baseSchema = {
     type: 'string',
     widget: 'TextWidget'
   },
+  tooltip: {
+    label: 'Tooltip',
+    type: 'string',
+    widget: 'TextWidget'
+  },
   className: {
     label: 'Class name',
     type: 'string'
