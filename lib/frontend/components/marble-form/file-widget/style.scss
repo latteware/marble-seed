@@ -1,0 +1,63 @@
+.file-widget {
+    background-color: #E8F4FA;
+    padding: 0 !important;
+    pre {
+        display: block;
+        padding: 1em;
+        margin: 0;
+        white-space: pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    label {
+        box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+    }
+    .file {
+        &-cta {
+            flex-grow: 1;
+            justify-content: center;
+            height: 3rem;
+            color: #FFF;
+            font-weight: 700;
+            background-color: #066391;
+            border: none;
+            font-size: .85rem;
+        }
+        &-label:hover .file-cta {
+            background-color: rgba(6, 99, 145, 0.75) !important;
+            color: #FFF;
+            font-weight: 700;
+        }
+        &-name {
+            background: #FFF;
+            height: 3rem;
+            width: 80%;
+            max-width: 80%;
+            border: none;
+            &__name {
+                font-weight: bold;
+                font-size: .8rem;
+            }
+            &__size {
+                font-size: .8rem;
+            }
+        }
+        &-display {
+            div {
+                .icon {
+                    padding: 2.5rem 0 .5rem;
+                }
+                .info {
+                    padding: .5rem 0 1.5rem;
+                }
+                background-color: #FFF;
+            }
+            max-height: 300px;
+            max-width: 100%;
+            min-width: 100%;
+            overflow: auto;
+            padding: .85rem .85rem .6rem;
+        }
+    }
+}
