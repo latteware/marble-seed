@@ -92,6 +92,7 @@ class UserForm extends Component {
 
     let successMessage, formData
 
+    let buttonLabel = 'Update'
     if (this.props.mode === 'invite') {
       schema.sendInvite = {
         type: 'Boolean',
@@ -99,6 +100,7 @@ class UserForm extends Component {
         default: true
       }
       successMessage = 'User was invited correctly'
+      buttonLabel = 'Invite'
     } else if (this.props.mode === 'password') {
       schema.password = {
         type: 'String',
@@ -113,6 +115,8 @@ class UserForm extends Component {
         label: 'Confirm password',
         required: true
       }
+
+      buttonLabel = 'Create'
     } else if (this.props.mode === 'update') {
       formData = this.state.formData
       successMessage = 'User was updated correctly'
@@ -123,11 +127,11 @@ class UserForm extends Component {
         <MarbleForm
           schema={schema}
           formData={formData}
-          buttonLabel='Update'
-          errors={this.state.errors}
+          buttonLabel={buttonLabel}
           onChange={async (data) => { await this.changeHandler(data) }}
           onSubmit={async (data) => { await this.submitHandler(data) }}
           defaultSuccessMessage={successMessage}
+          errors={this.state.errors}
         />
       </div>
     )

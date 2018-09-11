@@ -9,11 +9,9 @@ import CreateGroup from './create'
 
 class GroupsList extends ListPageComponent {
   finishUp (data) {
-    this.setState({
-      className: ''
-    })
-
-    this.props.history.push(env.PREFIX + '/manage/groups/' + data.uuid)
+    setTimeout(() => {
+      this.props.history.push(env.PREFIX + '/manage/groups/' + data.uuid)
+    }, 10)
   }
 
   getColumns () {

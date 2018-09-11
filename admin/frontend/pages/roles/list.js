@@ -9,11 +9,9 @@ import CreateRole from './create'
 
 class RoleList extends ListPageComponent {
   finishUp (data) {
-    this.setState({
-      className: ''
-    })
-
-    this.props.history.push(env.PREFIX + '/manage/roles/' + data.uuid)
+    setTimeout(() => {
+      this.props.history.push(env.PREFIX + '/manage/roles/' + data.uuid)
+    }, 10)
   }
 
   getColumns () {

@@ -9,11 +9,9 @@ import CreateOrganization from './create'
 
 class OrganizationList extends ListPageComponent {
   finishUp (data) {
-    this.setState({
-      className: ''
-    })
-
-    this.props.history.push(env.PREFIX + '/manage/organizations/' + data.uuid)
+    setTimeout(() => {
+      this.props.history.push(env.PREFIX + '/manage/organizations/' + data.uuid)
+    }, 10)
   }
 
   getColumns () {
