@@ -24,7 +24,8 @@ const baseSchema = {
       'MultipleSelectWidget',
       'DateWidget',
       'DateTimeWidget',
-      'CheckboxWidget'
+      'CheckboxWidget',
+      'FileWidget'
     ],
     placeholder: 'Select a widget',
     widget: 'SelectWidget',
@@ -196,6 +197,45 @@ const WidgetSchemas = {
       label: 'default',
       type: 'boolean',
       widget: 'CheckboxWidget'
+    }
+  },
+  FileWidget: {
+    placeholder: {
+      widget: 'HiddenWidget'
+    },
+    className: {
+      widget: 'HiddenWidget'
+    },
+    tooltip: {
+      widget: 'HiddenWidget'
+    },
+    default: {
+      widget: 'HiddenWidget'
+    },
+    required: {
+      widget: 'HiddenWidget'
+    },
+    disabled: {
+      widget: 'HiddenWidget'
+    },
+    type: {
+      widget: 'SelectWidget',
+      name: 'output',
+      label: 'Output',
+      required: true,
+      default: 'base64',
+      options: [
+        { label: 'base64', value: 'base64' },
+        { label: 'image', value: 'image' },
+        { label: 'json', value: 'json' },
+        { label: 'text', value: 'text' },
+        { label: 'csv', value: 'csv' }
+      ]
+    },
+    size: {
+      label: 'Max size(in mbs)',
+      widget: 'NumberWidget',
+      type: Number
     }
   }
 }

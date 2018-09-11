@@ -13,6 +13,7 @@ class FormBuilderContainer extends Component {
     super(...arguments)
     this.state = {
       schema: {},
+      formData: {},
       result: null,
       currentDisplay: 'form'
     }
@@ -22,23 +23,34 @@ class FormBuilderContainer extends Component {
     this.setState({ schema })
   }
 
+  handleChange (data) {
+    this.setState({formData: data})
+  }
+
   setCurrentDisplay (currentDisplay) {
     this.setState({currentDisplay})
   }
 
   setResult (result) {
-    this.setState({result})
+    this.setState({
+      formData: {},
+      result
+    })
   }
 
   render () {
-    const { schema, currentDisplay, result } = this.state
+    const { schema, currentDisplay, result, formData } = this.state
 
     const formEl = <div>
       <MarbleForm
         schema={schema}
+        formData={formData}
+        onChange={(data) => this.handleChange(data)}
         onSubmit={(data) => this.setResult(data)}
       />
-      {result && <pre style={{marginTop: 20}}>{JSON.stringify(result, null, 2)}</pre>}
+      <div style={{maxWidth: 500, overflowX: 'scroll'}}>
+        {result && <pre style={{marginTop: 20}}>{JSON.stringify(result, null, 2)}</pre>}
+      </div>
     </div>
 
     return (
