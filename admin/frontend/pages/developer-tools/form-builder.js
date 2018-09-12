@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Page from '~base/page'
+import React from 'react'
+import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 import FormBuilder from './components/builder'
 
@@ -8,7 +8,7 @@ import 'react-datepicker/src/stylesheets/datepicker.scss'
 
 import MarbleForm from '~base/components/marble-form'
 
-class FormBuilderContainer extends Component {
+class FormBuilderContainer extends PageComponent {
   constructor () {
     super(...arguments)
     this.state = {
@@ -100,11 +100,18 @@ class FormBuilderContainer extends Component {
   }
 }
 
-export default Page({
+FormBuilderContainer.config({
+  name: 'form-builder',
   path: '/devtools/form-builder',
   icon: 'file',
   title: 'Form Builder',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: 'Developer tools'},
+    {label: 'Form builder'}
+  ],
   exact: true,
-  validate: loggedIn,
-  component: FormBuilderContainer
+  validate: loggedIn
 })
+
+export default FormBuilderContainer
