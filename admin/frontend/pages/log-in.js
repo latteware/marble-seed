@@ -105,8 +105,8 @@ class LogIn extends Component {
                 <div className='column'>
                   <MarbleForm
                     schema={schema}
-                    onSubmit={async (data) => { await this.submitHandler(data) }}
-                    onChange={(data) => { this.changeHandler(data) }}
+                    onSubmit={(data) => this.submitHandler(data)}
+                    onChange={(data) => this.changeHandler(data)}
                     handleMessages={false}
                     errorMessage={this.state.error}
                     label='Log in'

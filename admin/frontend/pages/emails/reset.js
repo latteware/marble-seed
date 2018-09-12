@@ -140,8 +140,8 @@ class EmailResetLanding extends Component {
               schema={schema}
               formData={this.state.formData}
               errors={errors}
-              onSubmit={async (data) => { await this.submitHandler(data) }}
-              onChange={(data) => { this.changeHandler(data) }}
+              onSubmit={(data) => this.submitHandler(data)}
+              onChange={(data) => this.changeHandler(data)}
               defaultSuccessMessage={'User was updated correctly'}
             />
           </div>

@@ -69,8 +69,8 @@ class ResetPassword extends Component {
               <MarbleForm
                 schema={schema}
                 formData={this.state.formData}
-                onSubmit={async (data) => { await this.submitHandler(data) }}
-                onChange={(data) => { this.changeHandler(data) }}
+                onSubmit={(data) => this.submitHandler(data)}
+                onChange={(data) => this.changeHandler(data)}
                 label='Send reset password link'
                 defaultSuccessMessage='Link has been sended to your email'
                 defaultErrorMessage='We cant process this request currently'
