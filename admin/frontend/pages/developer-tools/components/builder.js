@@ -241,15 +241,18 @@ const WidgetSchemas = {
   },
   RadioWidget: {
     default: {
-      label: 'default',
+      label: 'Default',
       type: 'string',
-      widget: 'RadioWidget'
+      widget: 'TextWidget'
     },
     options: {
-      name: 'options',
+      label: 'Options',
       placeholder: 'Select options',
       widget: 'MultipleSelectWidget',
       addable: true
+    },
+    placeholder: {
+      widget: 'HiddenWidget'
     }
   }
 }
