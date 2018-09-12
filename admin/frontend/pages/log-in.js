@@ -75,8 +75,6 @@ class LogIn extends Component {
   }
 
   render () {
-    const {error} = this.state
-
     var resetLink
     if (env.EMAIL_SEND) {
       resetLink = (
@@ -107,19 +105,12 @@ class LogIn extends Component {
                 <div className='column'>
                   <MarbleForm
                     schema={schema}
-                    onSubmit={async (data) => { await this.submitHandler(data) }}
-                    onChange={(data) => { this.changeHandler(data) }}
+                    onSubmit={(data) => this.submitHandler(data)}
+                    onChange={(data) => this.changeHandler(data)}
                     handleMessages={false}
                     errorMessage={this.state.error}
-                  >
-                    <button
-                      className='button is-primary is-fullwidth'
-                      type='submit'
-                      disabled={!!error}
-                    >
-                      Log in
-                    </button>
-                  </MarbleForm>
+                    label='Log in'
+                  />
                 </div>
               </div>
               {resetLink}

@@ -30,28 +30,12 @@ class EmailResetLanding extends Component {
         password_1: '',
         password_2: ''
       },
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden',
       user: {}
     }
   }
 
   componentWillMount () {
     this.verifyToken()
-  }
-
-  changeHandler (formData) {
-    if (formData.password_2 && formData.password_1 !== formData.password_2) {
-      this.setState({
-        errors: {
-          password_2: 'Passwords don\'t match'
-        }
-      })
-    } else {
-      this.setState({
-        errors: {}
-      })
-    }
   }
 
   async verifyToken () {
@@ -84,27 +68,33 @@ class EmailResetLanding extends Component {
     })
   }
 
-  async submitHandler (formData) {
-    formData.uuid = this.state.token
-    formData.password = formData.password_1
-
-    var data
-    try {
-      data = await api.post('/user/set-password', formData)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
+  changeHandler (formData) {
+    if (formData.password_2 && formData.password_1 !== formData.password_2) {
+      this.setState({
+        errors: {
+          password_2: 'Passwords don\'t match'
+        }
+      })
+    } else {
+      this.setState({
+        errors: {}
       })
     }
+  }
+
+  async submitHandler (formData) {
+    const postData = {
+      uuid: this.state.token,
+      password: formData.password_1
+    }
+
+    const data = await api.post('/user/set-password', postData)
 
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
     tree.set('loggedIn', true)
     tree.commit()
-
-    this.setState({...this.state, apiCallMessage: 'message is-success'})
 
     setTimeout(() => {
       this.props.history.push('/app', {})
@@ -136,8 +126,8 @@ class EmailResetLanding extends Component {
                 schema={schema}
                 formData={this.state.formData}
                 errors={errors}
-                onSubmit={async (data) => { await this.submitHandler(data) }}
-                onChange={(data) => { this.changeHandler(data) }}
+                onSubmit={(data) => this.submitHandler(data)}
+                onChange={(data) => this.changeHandler(data)}
                 defaultSuccessMessage={'User was updated correctly'}
               />
             </div>
