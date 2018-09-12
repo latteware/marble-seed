@@ -30,10 +30,14 @@ class OrganizationForm extends Component {
   }
 
   async submitHandler (formData) {
-    var data = await api.post(this.props.url, formData)
+    const res = await api.post(this.props.url, formData)
 
     if (this.props.load) { await this.props.load() }
-    if (this.props.finishUp) { this.props.finishUp(data.data) }
+    return res.data
+  }
+
+  successHandler (data) {
+    if (this.props.finishUp) { this.props.finishUp(data) }
   }
 
   render () {
@@ -41,8 +45,9 @@ class OrganizationForm extends Component {
       <div>
         <MarbleForm schema={schema}
           formData={this.state.formData}
-          onChange={(data) => { this.changeHandler(data) }}
-          onSubmit={async (data) => { await this.submitHandler(data) }}
+          onChange={(data) => this.changeHandler(data)}
+          onSuccess={(data) => this.successHandler(data)}
+          onSubmit={(data) => this.submitHandler(data)}
           buttonLabel={this.props.label || 'Save'}
         />
       </div>

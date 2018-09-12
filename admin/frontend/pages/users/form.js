@@ -73,15 +73,17 @@ class UserForm extends Component {
   }
 
   async submitHandler (formData) {
-    var data = await api.post(this.props.url, formData)
+    const res = await api.post(this.props.url, formData)
 
     if (this.props.load) {
       await this.props.load()
     }
 
-    if (this.props.finishUp) {
-      this.props.finishUp(data.data)
-    }
+    return res.data
+  }
+
+  successHandler (data) {
+    if (this.props.finishUp) { this.props.finishUp(data) }
   }
 
   render () {
@@ -128,8 +130,9 @@ class UserForm extends Component {
           schema={schema}
           formData={formData}
           buttonLabel={buttonLabel}
-          onChange={async (data) => { await this.changeHandler(data) }}
-          onSubmit={async (data) => { await this.submitHandler(data) }}
+          onChange={(data) => this.changeHandler(data)}
+          onSuccess={(data) => this.successHandler(data)}
+          onSubmit={(data) => this.submitHandler(data)}
           defaultSuccessMessage={successMessage}
           errors={this.state.errors}
         />
