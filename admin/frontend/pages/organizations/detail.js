@@ -109,13 +109,7 @@ class OrganizationDetail extends PageComponent {
                           url={'/admin/organizations/' + this.props.match.params.uuid}
                           initialState={organization}
                           load={() => this.reload()}
-                        >
-                          <div className='field is-grouped'>
-                            <div className='control'>
-                              <button className='button is-primary'>Save</button>
-                            </div>
-                          </div>
-                        </OrganizationForm>
+                        />
                       </div>
                     </div>
                   </div>
@@ -153,7 +147,7 @@ class OrganizationDetail extends PageComponent {
 OrganizationDetail.config({
   name: 'organization-details',
   path: '/manage/organizations/:uuid',
-  title: '<%= organization.name %> | Group details',
+  title: '<%= organization.name %> | Organization details',
   breadcrumbs: [
     {label: 'Dashboard', path: '/'},
     {label: 'Organizations', path: '/manage/organizations'},

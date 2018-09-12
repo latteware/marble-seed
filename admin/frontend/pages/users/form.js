@@ -73,15 +73,17 @@ class UserForm extends Component {
   }
 
   async submitHandler (formData) {
-    var data = await api.post(this.props.url, formData)
+    const res = await api.post(this.props.url, formData)
 
     if (this.props.load) {
       await this.props.load()
     }
 
-    if (this.props.finishUp) {
-      this.props.finishUp(data.data)
-    }
+    return res.data
+  }
+
+  successHandler (data) {
+    if (this.props.finishUp) { this.props.finishUp(data) }
   }
 
   render () {
@@ -92,6 +94,7 @@ class UserForm extends Component {
 
     let successMessage, formData
 
+    let buttonLabel = 'Update'
     if (this.props.mode === 'invite') {
       schema.sendInvite = {
         type: 'Boolean',
@@ -99,6 +102,7 @@ class UserForm extends Component {
         default: true
       }
       successMessage = 'User was invited correctly'
+      buttonLabel = 'Invite'
     } else if (this.props.mode === 'password') {
       schema.password = {
         type: 'String',
@@ -113,6 +117,8 @@ class UserForm extends Component {
         label: 'Confirm password',
         required: true
       }
+
+      buttonLabel = 'Create'
     } else if (this.props.mode === 'update') {
       formData = this.state.formData
       successMessage = 'User was updated correctly'
@@ -123,11 +129,12 @@ class UserForm extends Component {
         <MarbleForm
           schema={schema}
           formData={formData}
-          buttonLabel='Update'
-          errors={this.state.errors}
-          onChange={async (data) => { await this.changeHandler(data) }}
-          onSubmit={async (data) => { await this.submitHandler(data) }}
+          buttonLabel={buttonLabel}
+          onChange={(data) => this.changeHandler(data)}
+          onSuccess={(data) => this.successHandler(data)}
+          onSubmit={(data) => this.submitHandler(data)}
           defaultSuccessMessage={successMessage}
+          errors={this.state.errors}
         />
       </div>
     )

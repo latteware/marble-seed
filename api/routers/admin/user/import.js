@@ -7,14 +7,14 @@ module.exports = new Route({
   method: 'post',
   path: '/import',
   handler: async function (ctx) {
-    const dataType = ctx.request.body.file.split(',')[0].split(';')[0]
+    const {file} = ctx.request.body
+    const dataType = file.mimeType
 
-    if (dataType !== 'data:text/csv') {
+    if (dataType !== 'text/csv' && dataType !== 'text/plain') {
       ctx.throw(400, 'The file should be a CSV file!')
     }
 
-    var buf = Buffer.from(ctx.request.body.file.split(',')[1], 'base64')
-    var data = parse(buf.toString('utf-8'), {columns: true})
+    var data = parse(file.content, {columns: true})
 
     const schema = lov.array().required().items(
       lov.object().keys({

@@ -146,13 +146,7 @@ class RoleDetail extends PageComponent {
                           url={'/admin/roles/' + this.props.match.params.uuid}
                           initialState={role}
                           load={() => this.reload()}
-                        >
-                          <div className='field is-grouped'>
-                            <div className='control'>
-                              <button className='button is-primary'>Save</button>
-                            </div>
-                          </div>
-                        </RoleForm>
+                        />
                       </div>
                     </div>
                   </div>
