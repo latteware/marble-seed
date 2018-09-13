@@ -25,7 +25,8 @@ const baseSchema = {
       'DateWidget',
       'DateTimeWidget',
       'CheckboxWidget',
-      'FileWidget'
+      'FileWidget',
+      'RadioWidget'
     ],
     placeholder: 'Select a widget',
     widget: 'SelectWidget',
@@ -236,6 +237,22 @@ const WidgetSchemas = {
       label: 'Max size(in mbs)',
       widget: 'NumberWidget',
       type: Number
+    }
+  },
+  RadioWidget: {
+    default: {
+      label: 'Default',
+      type: 'string',
+      widget: 'TextWidget'
+    },
+    options: {
+      label: 'Options',
+      placeholder: 'Select options',
+      widget: 'MultipleSelectWidget',
+      addable: true
+    },
+    placeholder: {
+      widget: 'HiddenWidget'
     }
   }
 }
