@@ -12,7 +12,7 @@ class Profile extends Component {
     return (
       <section className='section'>
         <div className='columns is-multiline'>
-          <div className='column is-one-third'>
+          <div className='column is-full is-one-third-desktop'>
             <div className='panel is-bg-white'>
               <p className='panel-heading'>
                 Perfil
@@ -30,8 +30,8 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <div className='column is-two-thirds'>
-            <TokensList/>
+          <div className='column is-full is-two-thirds-desktop'>
+            <TokensList />
           </div>
         </div>
       </section>

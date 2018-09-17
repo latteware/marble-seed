@@ -17,7 +17,7 @@ export default Page({
       return (<div className='section'>
         <section className='is-fullwidth'>
           <div className='columns is-multiline'>
-            <div className='column is-one-third'>
+            <div className='column is-full is-one-third-desktop'>
 
               <div className='panel is-bg-white'>
                 <p className='panel-heading'>
@@ -38,7 +38,7 @@ export default Page({
               </div>
             </div>
 
-            <div className='column is-two-thirds'>
+            <div className='column is-full is-two-thirds-desktop'>
               <TokensList />
             </div>
           </div>
