@@ -103,13 +103,7 @@ class GroupDetail extends PageComponent {
                         url={'/admin/groups/' + this.props.match.params.uuid}
                         initialState={group}
                         load={() => this.reload()}
-                      >
-                        <div className='field is-grouped'>
-                          <div className='control'>
-                            <button className='button is-primary'>Save</button>
-                          </div>
-                        </div>
-                      </GroupForm>
+                      />
                     </div>
                   </div>
                 </div>
@@ -130,7 +124,7 @@ class GroupDetail extends PageComponent {
                         baseUrl='/admin/users'
                         columns={this.getColumns()}
                         filters={{group: this.props.match.params.uuid}}
-                        />
+                      />
                     </div>
                   </div>
                 </div>

@@ -1,46 +1,46 @@
 import React, { Component } from 'react'
 
+import MarbleForm from '~base/components/marble-form'
 import api from '~base/api'
-
-import {
-  BaseForm,
-  TextWidget,
-  EmailWidget,
-  SelectWidget,
-  CheckboxWidget
-} from '~base/components/base-form'
-
-var schema = {
-  type: 'object',
-  title: '',
-  required: [
-    'email'
-  ],
-  properties: {
-    name: {type: 'string', title: 'Name'},
-    email: {type: 'string', title: 'Email'},
-    screenName: {type: 'string', title: 'Screen Name'},
-    isAdmin: {type: 'boolean', title: 'Is Admin?', default: false},
-    role: {
-      type: 'string',
-      title: 'Role',
-      enum: [],
-      enumNames: []
-    }
-  }
-}
-
-const uiSchema = {
-  name: {'ui:widget': TextWidget},
-  email: {'ui:widget': EmailWidget},
-  screenName: {'ui:widget': TextWidget},
-  isAdmin: {'ui:widget': CheckboxWidget},
-  role: {'ui:widget': SelectWidget}
-}
 
 class UserForm extends Component {
   constructor (props) {
     super(props)
+
+    const schema = {
+      'name': {
+        'label': 'Name',
+        'default': '',
+        'id': 'name',
+        'name': 'name',
+        'widget': 'TextWidget',
+        'required': true
+      },
+      'email': {
+        'widget': 'EmailWidget',
+        'name': 'email',
+        'label': 'Email',
+        'required': true
+      },
+      'screenName': {
+        'widget': 'TextWidget',
+        'name': 'screenname',
+        'label': 'Screen name',
+        'required': true
+      },
+      'isAdmin': {
+        'widget': 'CheckboxWidget',
+        'name': 'isAdmin',
+        'label': 'Is Admin?'
+      },
+      'role': {
+        'widget': 'SelectWidget',
+        'name': 'role',
+        'label': 'Role',
+        'allowEmpty': true,
+        'options': []
+      }
+    }
 
     const initialState = this.props.initialState || {}
 
@@ -53,84 +53,89 @@ class UserForm extends Component {
 
     this.state = {
       formData,
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden'
+      schema,
+      errors: {}
     }
   }
 
   errorHandler (e) {}
 
-  changeHandler ({formData}) {
+  changeHandler (formData) {
+    let errors = {}
+    if (formData.password && formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords don\'t match'
+    }
+
     this.setState({
       formData,
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden'
+      errors
     })
   }
 
-  clearState () {
-    this.setState({
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden',
-      formData: this.props.initialState
-    })
-  }
+  async submitHandler (formData) {
+    const res = await api.post(this.props.url, formData)
 
-  async submitHandler ({formData}) {
-    try {
-      var data = await api.post(this.props.url, formData)
+    if (this.props.load) {
       await this.props.load()
-      this.setState({...this.state, apiCallMessage: 'message is-success'})
-      if (this.props.finishUp) {
-        this.props.finishUp(data.data)
-      }
-      return
-    } catch (e) {
-      return this.setState({
-        ...this.state,
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
-      })
     }
+
+    return res.data
+  }
+
+  successHandler (data) {
+    if (this.props.finishUp) { this.props.finishUp(data) }
   }
 
   render () {
-    var error
-    if (this.state.error) {
-      error = <div>
-        Error: {this.state.error}
-      </div>
-    }
+    const {schema} = this.state
+    schema.role.options = this.props.roles.map(item => {
+      return {label: item.name, value: item.uuid}
+    })
 
-    schema.properties.role.enum = this.props.roles.map(item => { return item.uuid })
-    schema.properties.role.enumNames = this.props.roles.map(item => { return item.name })
+    let successMessage, formData
 
-    if (this.state.formData.email) {
-      uiSchema.email['ui:disabled'] = true
+    let buttonLabel = 'Update'
+    if (this.props.mode === 'invite') {
+      schema.sendInvite = {
+        type: 'Boolean',
+        widget: 'HiddenWidget',
+        default: true
+      }
+      successMessage = 'User was invited correctly'
+      buttonLabel = 'Invite'
+    } else if (this.props.mode === 'password') {
+      schema.password = {
+        type: 'String',
+        widget: 'PasswordWidget',
+        label: 'Password',
+        required: true
+      }
+
+      schema.confirmPassword = {
+        type: 'String',
+        widget: 'PasswordWidget',
+        label: 'Confirm password',
+        required: true
+      }
+
+      buttonLabel = 'Create'
+    } else if (this.props.mode === 'update') {
+      formData = this.state.formData
+      successMessage = 'User was updated correctly'
     }
 
     return (
       <div>
-        <BaseForm schema={schema}
-          uiSchema={uiSchema}
-          formData={this.state.formData}
-          onChange={(e) => { this.changeHandler(e) }}
-          onSubmit={(e) => { this.submitHandler(e) }}
-          onError={(e) => { this.errorHandler(e) }}
-        >
-          <div className={this.state.apiCallMessage}>
-            <div className='message-body is-size-7 has-text-centered'>
-              Los datos se han guardado correctamente
-            </div>
-          </div>
-
-          <div className={this.state.apiCallErrorMessage}>
-            <div className='message-body is-size-7 has-text-centered'>
-              {error}
-            </div>
-          </div>
-          {this.props.children}
-        </BaseForm>
+        <MarbleForm
+          schema={schema}
+          formData={formData}
+          buttonLabel={buttonLabel}
+          onChange={(data) => this.changeHandler(data)}
+          onSuccess={(data) => this.successHandler(data)}
+          onSubmit={(data) => this.submitHandler(data)}
+          defaultSuccessMessage={successMessage}
+          errors={this.state.errors}
+        />
       </div>
     )
   }

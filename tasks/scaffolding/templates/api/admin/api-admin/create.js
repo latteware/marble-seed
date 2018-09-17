@@ -6,19 +6,19 @@ module.exports = new Route({
   method: 'post',
   path: '/',
   validator: lov.object().keys({
-    {% for item in fields %}
-      {% if item.isRequired %}
+    {% for item in fields -%}
+      {% if item.isRequired -%}
         {{ item.name }}: lov.{{ item.type | lower }}().required(),
-      {% endif %}
-    {% endfor %}
+      {% endif -%}
+    {% endfor -%}
   }),
   handler: async function (ctx) {
     var data = ctx.request.body
 
     const {{ name | lower }} = await {{ name | capitalize }}.create({
-      {% for item in fields %}
-          {{ item.name }}: data.{{ item.name }},
-      {% endfor %}
+      {% for item in fields -%}
+        {{ item.name }}: data.{{ item.name }},
+      {% endfor -%}
     })
 
     ctx.body = {

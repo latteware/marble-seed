@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Loader from '~base/components/spinner'
 import api from '~base/api'
 
 import {

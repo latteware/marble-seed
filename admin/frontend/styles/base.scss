@@ -8,6 +8,44 @@ body {
   height: 100%;
 }
 
+@media only screen and (max-width: 450px) and (orientation: portrait) {
+  pre {
+    max-width: 75vw;
+    overflow-x: auto;
+  }
+}
+
+.main-wrapper{
+  background-color: #FAFAFA;
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    width: 100vw;
+    overflow-y: scroll;
+  }
+}
+
+.main-section{
+  min-height: calc(100vh - 130px);
+}
+
+.section {
+  padding: 2.6875rem 1.5rem;
+}
+
+.is-transparent {
+  opacity: 0.6;
+}
+
+.is-active-btn {
+  border-bottom: 3px solid #9C27B0;
+  a {
+    opacity: 1;
+  }
+
+}
+p, span, li, h1, h2, h3, h4, h5, th, td {
+  font-family: 'Muli', sans-serif;
+}
+
 .label {
   color: #363636;
   display: block;
@@ -36,8 +74,19 @@ html, body {
   position: fixed;
 }
 
+.navbar {
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+}
+
 .navbar-menu {
-  background-color: black;
+  background-color: #fff;
+}
+
+.overflow-table{
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    max-width: 75vw;
+    overflow-x: scroll;
+  }
 }
 
 .c-topbar {
@@ -73,6 +122,11 @@ html, body {
 
 .offcanvas {
   background-color: #5d5d5d;
+  height: 100%;;
+}
+
+.modal {
+  z-index: 100;
 }
 
 .burger-desktop {
@@ -102,6 +156,17 @@ html, body {
   min-height: 100vh;
   flex-direction: column;
   flex: 1;
+}
+
+.wrap {
+  min-height: 100vh;
+  @media only screen and (max-width: 450px) and (orientation: portrait) {
+    & .sidebar-container {
+      position: fixed;
+      z-index: 999;
+      height: 100vh;
+    }
+  }
 }
 
 .is-flex-column {
@@ -170,7 +235,7 @@ html, body {
 }
 
 .navbar-item {
-  color: white;
+  color: #0C2938;
 
   .img-logo {
     max-height: none;
@@ -184,15 +249,11 @@ html, body {
 }
 
 a.navbar-item:hover {
-  color: #00d1b2;
   background-color: transparent;
 }
 
 .navbar-logo {
-  a.navbar-item:hover {
-    background-color: black
-  }
-  background-color: black
+  background-color: transparent;
 }
 
 footer {
@@ -366,4 +427,17 @@ pre.json {
   margin: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #E6EAEE;
+}
+
+.Select--multi.is-danger .Select-control{
+  border-color: red
+}
+
+.marble-form .column{
+  margin-bottom: 0px;
+}
+
+.marble-form .column.hidden{
+  margin-bottom: 0px;
+  padding: 0px;
 }

@@ -36,11 +36,6 @@ class AdminLayout extends Component {
       this.setState({user})
     })
 
-    const config = await api.get('/app-config')
-    tree.set('config', config)
-
-    tree.commit()
-
     var me
     if (tree.get('jwt')) {
       try {
@@ -74,6 +69,11 @@ class AdminLayout extends Component {
       tree.commit()
     }
 
+    const config = await api.get('/app-config')
+    tree.set('config', config)
+
+    tree.commit()
+
     this.setState({loaded: true})
   }
 
@@ -83,12 +83,12 @@ class AdminLayout extends Component {
     }
 
     if (!isEmpty(this.state.user)) {
-      return (<div className='is-wrapper'>
-        <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
-        <div className='is-flex c-flex-1 columns is-gapless'>
-          <Sidebar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
-          <div className='column is-flex is-flex-column main-wrapper'>
-            <section className='c-flex-1 is-flex'>
+      return (<div className='columns wrap is-gapless c-flex-1 is-flex'>
+        <Sidebar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
+        <div className='column is-flex is-flex-column'>
+          <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
+          <div className='column is-flex-column is-paddingless main-wrapper'>
+            <section className='c-flex-1 is-flex main-section'>
               {this.props.children}
             </section>
             <Footer />

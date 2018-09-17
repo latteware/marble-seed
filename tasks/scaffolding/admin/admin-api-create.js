@@ -16,12 +16,25 @@ const task = new Task(async function (argv) {
     throw new Error('Model ' + argv.model + ' doesn\'t exits')
   }
 
-  const modelSchema = scaffolding.getModelSchemaForTemplate(model)
+  const QUESTIONS = [
+    {
+      name: 'properties',
+      type: 'checkbox',
+      message: 'Select properties to api/create:',
+      choices: scaffolding.getModelProperties(model)
+    }
+  ]
+
+  const answers = await scaffolding.prompt(QUESTIONS)
+
+  const properties = answers.properties
+
+  const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
   const templatePath = path.join('./tasks/scaffolding/templates/api/admin/api-admin/create.js')
   const dirPath = path.join('./api/routers/admin/' + modelSchema.name + '/')
   const filePath = dirPath + 'create.js'
-  const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   return true
 }, 500)

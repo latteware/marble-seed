@@ -24,7 +24,7 @@ module.exports = new Route({
       skip: ctx.request.query.start,
       find: {isDeleted: false, ...filters},
       sort: ctx.request.query.sort || '-dateCreated',
-      format: 'toAdmin'
+      formatter: 'toAdmin'
     })
 
     ctx.body = groups

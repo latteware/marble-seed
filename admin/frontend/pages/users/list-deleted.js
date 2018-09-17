@@ -38,7 +38,7 @@ class Header extends Component {
           className='button is-primary'
           onClick={() => this.restoreMultiple()}
           disabled={selectedRows.length === 0}
-          >
+        >
           Restore multiple users
         </button>
       </div>

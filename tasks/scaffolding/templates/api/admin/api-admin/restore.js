@@ -3,7 +3,7 @@ const { {{ name | capitalize }} } = require('models')
 
 module.exports = new Route({
   method: 'post',
-  path: '/restore/:uuid',
+  path: '/:uuid/restore',
   handler: async function (ctx) {
     var {{ name | lower }}Id = ctx.params.uuid
 

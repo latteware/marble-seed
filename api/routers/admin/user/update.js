@@ -22,13 +22,13 @@ module.exports = new Route({
       ctx.assert(role, 404, 'Role not found')
 
       user.role = role
-      delete data.role
     } else {
-      user.role = null
+      user.role = undefined
     }
 
+    delete data.role
     user.set(data)
-    user.save()
+    await user.save()
 
     ctx.body = {
       data: user.toAdmin()

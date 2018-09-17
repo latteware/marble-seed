@@ -1,0 +1,140 @@
+.Dashboard {
+  &-title{
+    font-size: 1.375rem;
+    margin-bottom: 13px;
+    font-weight: bold;
+  }
+  &-subtitle{
+    font-size: 1rem;
+  }
+  &-title, &-subtitle{
+    color: $light-blue;
+  }
+  &-info{
+    margin: 43px auto !important;
+  }
+  & .title, & .subtitle{
+    padding: 5px;
+  }
+  & .title{
+    color: $dark-blue;
+    size: 34px;
+  }
+  & .subtitle{
+    color: $light-blue;
+    font-size: 0.9375rem;
+  }
+  & .heading{
+    color: $light-blue;
+    font-size:  1rem; 
+  }
+  & .is-ancestor{
+    margin-top: 1rem;
+    margin-bottom: 1rem !important;
+    @media screen and (min-width: 768px) {
+      &{
+        margin-top: 1.1875rem;
+        margin-bottom: 1.9375rem !important;
+      }
+    }
+  }
+  & .is-child, & .quickActions{
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+  }
+  & .is-child {
+    border-radius: 3px;
+  }
+  &-welcome p {
+    font-size: 0.75rem;
+    color: $light-blue;
+    @media screen and (min-width: 768px) {
+      &{
+        text-align: right !important;
+      }
+    }
+    &:first-child{
+      font-weight: bold;
+      margin-bottom:0px;
+    }
+  }
+  & .is-child {
+    background-color: #fff;
+    padding: 15px 46px !important;
+  }
+}
+.quickActions{
+  width: 100%;
+  border-radius: 3px;
+
+  & th {
+    &, & span{
+      color: $light-blue !important;
+    }
+    border:none;
+    padding: 15px;
+    &:first-child {
+      text-align: left !important;
+      font-size:  1.125rem;
+    }
+    &:last-child {
+      text-align: right !important;
+      font-size:  0.75rem;
+      position: relative;
+      & span{
+        position: absolute;
+        top: 50%;
+        margin-top: -8px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+    }
+  }
+  &-list{
+    position: relative;
+    width: 40%;
+    & i{
+      margin-left: 12px;
+      margin-right: 12px;
+      cursor: pointer;
+    }
+    & > div{
+      position: absolute;
+      top: 50%;
+      margin-top: -12px;
+      width: 100%;
+      left: 0;
+    }
+  }
+  & .icon-list{
+    &-right{
+      font-size: 1rem;
+      color: $light-blue;
+    }
+    &-items{
+      color: $dark-blue;
+      text-align: center;
+    }
+  }
+  & .is-primary{
+    background-color: #229AD6;
+    &:hover{
+      cursor: text;
+      background-color: #229AD6;
+    }
+  }
+}
+.icon-list{
+  position: relative;
+  & > a {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+  &-left, &-right{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &-right{
+    padding: 13px;
+  } 
+}

@@ -349,7 +349,7 @@ class UserDetail extends PageComponent {
               type='button'
               onClick={() => this.resetOnClick()}
               disabled={!!this.state.resetLoading}
-              >
+            >
               {this.state.resetText}
             </button>
           </div>
@@ -370,25 +370,20 @@ class UserDetail extends PageComponent {
                 <div className='card'>
                   <header className='card-header'>
                     <p className='card-header-title'>
-                      { user.displayName }
+                      { user.screenName }
                     </p>
                   </header>
                   <div className='card-content'>
                     <div className='columns'>
                       <div className='column'>
                         <UserForm
+                          mode='update'
                           baseUrl='/admin/users'
                           url={'/admin/users/' + this.props.match.params.uuid}
                           initialState={this.state.user}
                           load={() => this.reload()}
                           roles={this.state.roles || []}
-                        >
-                          <div className='field is-grouped'>
-                            <div className='control'>
-                              <button className='button is-primary'>Save</button>
-                            </div>
-                          </div>
-                        </UserForm>
+                        />
                       </div>
                     </div>
                   </div>

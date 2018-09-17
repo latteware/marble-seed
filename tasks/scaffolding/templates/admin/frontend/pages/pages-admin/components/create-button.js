@@ -3,33 +3,24 @@ import { branch } from 'baobab-react/higher-order'
 import PropTypes from 'baobab-react/prop-types'
 
 import BaseModal from '~base/components/base-modal'
-import {{ name | capitalize }}Form from './create-form'
+import {{ name | capitalize }}Form from './form'
 
 var initialState = {
   {% for item in fields -%}
-    {{ item.name }}: '',
-  {% endfor -%}
+      {{ item.name }}: '',
+    {% endfor -%}
 }
 
 class Create{{ name | capitalize }} extends Component {
-  constructor (props) {
-    super(props)
-    this.hideModal = this.props.hideModal.bind(this)
-  }
-
-  componentWillMount () {
-    this.cursor = this.context.tree.select(this.props.branchName)
-  }
-
   render () {
     return (
       <BaseModal
         title='Create {{ name | capitalize }}'
         className={this.props.className}
-        hideModal={this.hideModal}
+        hideModal={() => this.hideModal()}
       >
         <{{ name | capitalize }}Form
-          baseUrl='/admin/{{ name | lower }}s'
+          baseUrl='/admin/{{ name }}s'
           url={this.props.url}
           finishUp={this.props.finishUp}
           initialState={initialState}

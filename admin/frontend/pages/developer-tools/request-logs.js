@@ -162,7 +162,9 @@ class RequestLogs extends PageComponent {
 
   async onFirstPageEnter () {
     const metadata = await api.get('/admin/request-logs/metadata')
+    const filters = this.getDefaultFilterValues()
 
+    this.setState({ filters })
     return {metadata}
   }
 
@@ -261,12 +263,33 @@ class RequestLogs extends PageComponent {
     }
   }
 
+  getDefaultFilterValues () {
+    return {
+      status: '',
+      pathname: '',
+      uuid: '',
+      type: ''
+    }
+  }
+
   reload () {
     this.setState({
       loadingLogs: true
     })
 
     this.load(this.state.filters)
+  }
+
+  clear () {
+    const filters = this.getDefaultFilterValues()
+
+    this.setState({
+      currentUuid: '',
+      error: '',
+      filters
+    }, () => {
+      this.reload()
+    })
   }
 
   handleSelectChange (type, e) {
@@ -304,6 +327,10 @@ class RequestLogs extends PageComponent {
     })
   }
 
+  isActiveBtn (value) {
+    return 'control ' + ((value === this.state.filters.status) ? 'is-active is-active-btn' : '')
+  }
+
   render () {
     const { loaded, metadata, logs, error } = this.state
     const { pathnames } = metadata
@@ -316,6 +343,10 @@ class RequestLogs extends PageComponent {
     const more = (logs.total / logs.data.length) > 1
     const classNameLoadLink = classNames('button is-white is-small', {
       'is-loading': this.state.loadingLogs
+    })
+
+    const classNameStatusBtn = classNames('button', {
+      'is-transparent': this.state.filters.status
     })
 
     let errorElement
@@ -343,22 +374,50 @@ class RequestLogs extends PageComponent {
                   </div>
                 </div>
               </div>
+              <div className='column is-narrow'>
+                <div className='field has-addons is-padding-bottom-small'>
+                  <div className='control'>
+                    <a className='button is-white' onClick={() => this.clear()}>
+                      <span className='icon'>
+                        <i className='fa fa-eraser' />
+                      </span>
+                      <span>Clear</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className='header columns'>
               <div className='column is-narrow'>
                 <p className='subtitle is-marginless'>Status codes</p>
                 <div className='field has-addons is-padding-bottom-small'>
-                  <div className='control'><a className='button is-white' onClick={() => this.setStatusFilter('')}>ALL</a></div>
-                  <div className='control'><a className='button is-success' onClick={() => this.setStatusFilter('success')}>200</a></div>
-                  <div className='control'><a className='button is-warning' onClick={() => this.setStatusFilter('warning')}>400</a></div>
-                  <div className='control'><a className='button is-danger' onClick={() => this.setStatusFilter('error')}>500</a></div>
+                  <div className={this.isActiveBtn('')}>
+                    <a
+                      className={classNameStatusBtn + ' is-white '}
+                      onClick={() => this.setStatusFilter('')}>ALL</a>
+                  </div>
+                  <div className={this.isActiveBtn('success')}>
+                    <a
+                      className={classNameStatusBtn + ' is-success '}
+                      onClick={() => this.setStatusFilter('success')}>200</a>
+                  </div>
+                  <div className={this.isActiveBtn('warning')}>
+                    <a
+                      className={classNameStatusBtn + ' is-warning '}
+                      onClick={() => this.setStatusFilter('warning')}>400</a>
+                  </div>
+                  <div className={this.isActiveBtn('error')}>
+                    <a
+                      className={classNameStatusBtn + ' is-danger '}
+                      onClick={() => this.setStatusFilter('error')}>500</a>
+                  </div>
                 </div>
               </div>
 
               <div className='column is-narrow'>
                 <p className='subtitle is-marginless'>Type</p>
                 <div className='select'>
-                  <select onChange={e => this.handleSelectChange('type', e)}>
+                  <select onChange={e => this.handleSelectChange('type', e)} value={this.state.filters.type}>
                     <option />
                     <option value='inbound'>Inbound</option>
                     <option value='outbound'>Oubound</option>
@@ -369,7 +428,7 @@ class RequestLogs extends PageComponent {
               <div className='column is-narrow'>
                 <p className='subtitle is-marginless'>Path</p>
                 <div className='select'>
-                  <select onChange={e => this.handleSelectChange('pathname', e)}>
+                  <select onChange={e => this.handleSelectChange('pathname', e)} value={this.state.filters.pathname}>
                     <option key='empty' />
                     {pathnames.map((pathname, key) => <option key={key} value={pathname}>{pathname}</option>)}
                   </select>

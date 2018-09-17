@@ -1,6 +1,5 @@
 const Route = require('lib/router/route')
-const {User} = require('models')
-const jwt = require('lib/jwt')
+const {UserToken} = require('models')
 const lov = require('lov')
 
 module.exports = new Route({
@@ -12,19 +11,28 @@ module.exports = new Route({
   }),
   handler: async function (ctx) {
     const { uuid, password } = ctx.request.body
-    const user = await User.findOne({uuid: uuid})
-    ctx.assert(user, 404, 'Invalid user!')
+
+    const token = await UserToken.findOne({uuid: uuid}).populate('user')
+    if (!token) {
+      return ctx.throw(401, 'Invalid token')
+    }
+
+    const user = token.user
+    if (user.isDeleted) {
+      return ctx.throw(401, 'User has been suspended')
+    }
 
     user.set({password})
     user.save()
 
+    const sessionToken = await user.createToken({
+      type: 'session'
+    })
+
     ctx.body = {
       user: user.toPublic(),
       isAdmin: user.isAdmin,
-      jwt: jwt.sign({
-        uuid: user.uuid,
-        apiToken: user.apiToken
-      })
+      jwt: sessionToken.getJwt()
     }
   }
 })

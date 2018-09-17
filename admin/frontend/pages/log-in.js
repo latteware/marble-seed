@@ -7,20 +7,21 @@ import tree from '~core/tree'
 import Link from '~base/router/link'
 import {forcePublic} from '~base/middlewares/'
 
-import {BaseForm, PasswordWidget, EmailWidget} from '~components/base-form'
+import MarbleForm from '~base/components/marble-form'
 
 const schema = {
-  type: 'object',
-  required: ['email', 'password'],
-  properties: {
-    email: {type: 'string', title: 'Email'},
-    password: {type: 'string', title: 'Password'}
+  'email': {
+    'widget': 'EmailWidget',
+    'name': 'email',
+    'label': 'Email',
+    'required': true
+  },
+  'password': {
+    'widget': 'PasswordWidget',
+    'name': 'password',
+    'required': true,
+    'label': 'Password'
   }
-}
-
-const uiSchema = {
-  password: {'ui:widget': PasswordWidget},
-  email: {'ui:widget': EmailWidget}
 }
 
 class LogIn extends Component {
@@ -31,66 +32,31 @@ class LogIn extends Component {
         email: '',
         password: ''
       },
-      apiCallErrorMessage: 'is-hidden'
-    }
-  }
-
-  errorHandler (e) {}
-
-  changeHandler ({formData}) {
-    this.setState({
-      formData,
-      apiCallErrorMessage: 'is-hidden',
       error: ''
-    })
+    }
   }
 
-  clearState () {
-    this.setState({
-      apiCallErrorMessage: 'is-hidden',
-      formData: this.props.initialState
-    })
+  async submitHandler (formData) {
+    const data = await api.post('/user/login', formData)
+
+    if (!data.isAdmin) {
+      throw new Error('Invalid user')
+    }
+
+    return data
   }
 
-  async submitHandler ({formData}) {
-    var data
-    try {
-      data = await api.post('/user/login', formData)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
-      })
-    }
+  succesHandler (data) {
+    window.localStorage.setItem('jwt', data.jwt)
+    tree.set('jwt', data.jwt)
+    tree.set('user', data.user)
+    tree.set('loggedIn', true)
+    tree.commit()
 
-    if (data.isAdmin) {
-      window.localStorage.setItem('jwt', data.jwt)
-      tree.set('jwt', data.jwt)
-      tree.set('user', data.user)
-      tree.set('loggedIn', true)
-      tree.commit()
-
-      this.props.history.push(env.PREFIX + '/', {})
-    } else {
-      this.setState({
-        error: 'Invalid user',
-        apiCallErrorMessage: 'message is-danger',
-        formData: {
-          email: '',
-          password: ''
-        }
-      })
-    }
+    this.props.history.push(env.PREFIX + '/', {})
   }
 
   render () {
-    var error
-    if (this.state.error) {
-      error = <div>
-        Error: {this.state.error}
-      </div>
-    }
-
     var resetLink
     if (env.EMAIL_SEND) {
       resetLink = (
@@ -119,28 +85,13 @@ class LogIn extends Component {
             <div className='content'>
               <div className='columns'>
                 <div className='column'>
-                  <BaseForm schema={schema}
-                    uiSchema={uiSchema}
+                  <MarbleForm
+                    schema={schema}
                     formData={this.state.formData}
-                    onChange={(e) => { this.changeHandler(e) }}
-                    onSubmit={(e) => { this.submitHandler(e) }}
-                    onError={(e) => { this.errorHandler(e) }}
-                  >
-                    <div className={this.state.apiCallErrorMessage}>
-                      <div className='message-body is-size-7 has-text-centered'>
-                        {error}
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        className='button is-primary is-fullwidth'
-                        type='submit'
-                        disabled={!!error}
-                      >
-                        Log in
-                      </button>
-                    </div>
-                  </BaseForm>
+                    onSubmit={(data) => this.submitHandler(data)}
+                    onSuccess={(data) => this.succesHandler(data)}
+                    label='Log in'
+                  />
                 </div>
               </div>
               {resetLink}

@@ -47,7 +47,7 @@ module.exports = new Route({
       skip: ctx.request.query.start,
       find: {isDeleted: {$ne: true}, ...filters},
       sort: ctx.request.query.sort || '-email',
-      format: 'toAdmin'
+      formatter: 'toAdmin'
     })
 
     ctx.body = users

@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   async load () {
-    const body = await request('get', null, 'https://www.reddit.com/r/all.json')
+    const body = await request('get', null, 'https://old.reddit.com/r/all.json')
 
     this.setState({
       loading: false,

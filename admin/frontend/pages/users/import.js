@@ -1,66 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react'
+
+import PageComponent from '~base/page-component'
 import api from '~base/api'
-
-import Page from '~base/page'
 import {loggedIn} from '~base/middlewares/'
-
-import {BaseForm, FileWidget} from '~base/components/base-form'
+import MarbleForm from '~base/components/marble-form'
 
 const schema = {
-  type: 'object',
-  required: ['file'],
-  properties: {
-    file: {type: 'string', title: 'File to import', format: 'data-url'}
+  'file': {
+    'widget': 'FileWidget',
+    'name': 'file',
+    'type': 'csv'
   }
 }
 
-const uiSchema = {
-  file: {'ui:widget': FileWidget, 'ui:className': 'is-centered'}
-}
-
-class ImportUsers extends Component {
+class ImportUsers extends PageComponent {
   constructor (props) {
     super(props)
 
     this.state = {
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden',
-      message: '',
       formData: {
         file: undefined
       }
     }
   }
 
-  errorHandler (e) {}
-
-  changeHandler ({formData}) {
-    this.setState({formData, apiCallMessage: 'is-hidden', apiCallErrorMessage: 'is-hidden'})
+  changeHandler (formData) {
+    this.setState({formData})
   }
 
-  async submitHandler ({formData}) {
-    var data
-    try {
-      data = await api.post('/admin/users/import/', formData)
-      console.log(data)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger'
-      })
-    }
-
-    this.setState({apiCallMessage: 'message is-success', message: data.message})
+  async submitHandler (formData) {
+    await api.post('/admin/users/import/', formData)
   }
 
   render () {
-    var error
-    if (this.state.error) {
-      error = <div>
-        {this.state.error}
-      </div>
-    }
-
     return (
       <div className='columns c-flex-1 is-marginless'>
         <div className='column is-paddingless'>
@@ -73,50 +45,24 @@ class ImportUsers extends Component {
             <div className='card'>
               <div className='card-content'>
                 <div className='columns'>
-                  <div className='column'>
-                    <BaseForm schema={schema}
-                      uiSchema={uiSchema}
+                  <div className='column' style={{maxWidth: 560, margin: '0 auto'}}>
+                    <MarbleForm
+                      schema={schema}
                       formData={this.state.formData}
-                      onChange={(e) => { this.changeHandler(e) }}
-                      onSubmit={(e) => { this.submitHandler(e) }}
-                      onError={(e) => { this.errorHandler(e) }}
-                      className='has-text-centered'
-                    >
-                      <div className={this.state.apiCallMessage}>
-                        <div
-                          className='message-body is-size-7 has-text-centered'
-                        >
-                          {this.state.message}
-                        </div>
-                      </div>
-                      <div className={this.state.apiCallErrorMessage}>
-                        <div
-                          className='message-body is-size-7 has-text-centered'
-                        >
-                          {error}
-                        </div>
-                      </div>
-                      <div>
-                        <button
-                          className='button is-primary'
-                          type='submit'
-                        >
-                          Importar
-                        </button>
-                      </div>
-                    </BaseForm>
-                  </div>
-                  <div className='column'>
-                    <h4>
-                      The <strong>.csv</strong> file should have the same format
-                      as the example below:
-                    </h4>
-                    <pre style={{marginTop: '1em'}}>
-                      "name","screenName","email","password"<br />
-                      "Juan Perez","Juan","juan@coporation.com","password"
-                    </pre>
+                      onChange={(data) => { this.changeHandler(data) }}
+                      onSubmit={async (data) => { await this.submitHandler(data) }}
+                      defaultSuccessMessage='Users imported correctly'
+                      buttonLabel='Import'
+                    />
                   </div>
                 </div>
+                <h4>The <strong>.csv</strong> file should have the same format
+                  as the example below:
+                </h4>
+                <pre style={{ marginTore: '1em' }}>
+                  "name","screenName","email","password"<br />
+                  "Juan Perez","Juan","juan@coporation.com","password"
+                </pre>
               </div>
             </div>
           </div>
@@ -126,11 +72,18 @@ class ImportUsers extends Component {
   }
 }
 
-export default Page({
+ImportUsers.config({
+  name: 'import-users',
   path: '/import/users',
-  title: 'Load users',
   icon: 'user',
+  title: 'Import Users',
+  breadcrumbs: [
+    {label: 'Dashboard', path: '/'},
+    {label: 'Import'},
+    {label: 'Users'}
+  ],
   exact: true,
-  validate: loggedIn,
-  component: ImportUsers
+  validate: loggedIn
 })
+
+export default ImportUsers

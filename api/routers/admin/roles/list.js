@@ -15,7 +15,7 @@ module.exports = new Route({
       skip: ctx.request.query.start,
       find: {isDeleted: false, ...filters},
       sort: '-dateCreated',
-      format: 'toAdmin'
+      formatter: 'toAdmin'
     })
 
     ctx.body = role

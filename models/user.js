@@ -23,9 +23,6 @@ const userSchema = new Schema({
   role: { type: Schema.Types.ObjectId, ref: 'Role' },
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
 
-  resetPasswordToken: { type: String, default: v4 },
-  inviteToken: { type: String, default: v4 },
-
   uuid: { type: String, default: v4 },
   apiToken: { type: String, default: v4 }
 }, {
@@ -153,20 +150,34 @@ userSchema.statics.register = async function (options) {
   return createdUser
 }
 
-userSchema.statics.validateInvite = async function (email, token) {
-  const userEmail = email.toLowerCase()
-  const user = await this.findOne({email: userEmail, inviteToken: token})
-  assert(user, 401, 'Invalid token! You should contact the administrator of this page.')
+userSchema.statics.validateInvite = async function (email, tokenUuid) {
+  const UserToken = mongoose.model('UserToken')
 
-  return user
+  const token = await UserToken.findOne({
+    uuid: tokenUuid,
+    type: 'invite-email'
+  }).populate('user')
+  const userEmail = email.toLowerCase()
+
+  assert(token, 401, 'Invalid token! You should contact the administrator of this page.')
+  assert(userEmail === token.user.email, 401, 'Invalid token! You should contact the administrator of this page.')
+
+  return token.user
 }
 
-userSchema.statics.validateResetPassword = async function (email, token) {
-  const userEmail = email.toLowerCase()
-  const user = await this.findOne({email: userEmail, resetPasswordToken: token})
-  assert(user, 401, 'Invalid token! You should contact the administrator of this page.')
+userSchema.statics.validateResetPassword = async function (email, tokenUuid) {
+  const UserToken = mongoose.model('UserToken')
 
-  return user
+  const token = await UserToken.findOne({
+    uuid: tokenUuid,
+    type: 'reset-email'
+  }).populate('user')
+  const userEmail = email.toLowerCase()
+
+  assert(token, 401, 'Invalid token! You should contact the administrator of this page.')
+  assert(userEmail === token.user.email, 401, 'Invalid token! You should contact the administrator of this page.')
+
+  return token.user
 }
 
 userSchema.methods.validatePassword = async function (password) {
@@ -180,13 +191,17 @@ userSchema.methods.validatePassword = async function (password) {
 }
 
 userSchema.methods.sendInviteEmail = async function () {
-  this.inviteToken = v4()
-  await this.save()
+  const UserToken = mongoose.model('UserToken')
+
+  const token = await UserToken.create({
+    user: this._id,
+    type: 'invite-email'
+  })
 
   const email = new Mailer('invite')
 
   const data = this.toJSON()
-  data.url = process.env.APP_HOST + '/emails/invite?token=' + this.inviteToken + '&email=' + encodeURIComponent(this.email)
+  data.url = process.env.APP_HOST + '/emails/invite?token=' + token.uuid + '&email=' + encodeURIComponent(this.email)
 
   await email.format(data)
   await email.send({
@@ -199,7 +214,13 @@ userSchema.methods.sendInviteEmail = async function () {
 }
 
 userSchema.methods.sendResetPasswordEmail = async function (admin) {
-  this.inviteToken = v4()
+  const UserToken = mongoose.model('UserToken')
+
+  const token = await UserToken.create({
+    user: this._id,
+    type: 'reset-email'
+  })
+
   await this.save()
   let url = process.env.APP_HOST
 
@@ -208,7 +229,7 @@ userSchema.methods.sendResetPasswordEmail = async function (admin) {
   const email = new Mailer('reset-password')
 
   const data = this.toJSON()
-  data.url = url + '/emails/reset?token=' + this.resetPasswordToken + '&email=' + encodeURIComponent(this.email)
+  data.url = url + '/emails/reset?token=' + token.uuid + '&email=' + encodeURIComponent(this.email)
 
   await email.format(data)
   await email.send({

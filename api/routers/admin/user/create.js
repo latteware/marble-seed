@@ -13,6 +13,8 @@ module.exports = new Route({
   }),
   handler: async function (ctx) {
     const userData = ctx.request.body
+    const roleUuid = userData.role
+    delete userData.role
 
     if (!userData.password && !userData.sendInvite) {
       ctx.throw(400, 'Password or Invite required!')
@@ -36,6 +38,8 @@ module.exports = new Route({
       }
 
       user.role = defaultRole
+    } else {
+      user.role = await Role.findOne({uuid: roleUuid})
     }
 
     user.save()

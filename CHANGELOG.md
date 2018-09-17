@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 
+
+### Added
+- Added Marble Form component, review docs [here](https://www.notion.so/marbleform/Marble-form-06ab3c3054644dacb754ab9164d594df) 
+- Added form builder on developer tools
+
+### Changed
+- Improve csv exports using `json2csv` with loader and optional filename
+- Migrate all forms to use Marble Form
+
+### Fixed
+- Fix list formatters on users, groups, roles and organizations
+- Reset password and invite users now use User tokens
+
 ## [0.6.1] - 2018-05-06
 
 ### Added

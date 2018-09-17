@@ -19,13 +19,12 @@ module.exports = new Route({
   handler: async function (ctx) {
     const filters = await queryParams.toFilters(ctx.request.query)
 
-    console.log('filters =>', filters)
-    var organization = await Organization.dataTables({
+    const organization = await Organization.dataTables({
       limit: ctx.request.query.limit || 20,
       skip: ctx.request.query.start,
       find: {isDeleted: false, ...filters},
       sort: ctx.request.query.sort || '-dateCreated',
-      format: 'toAdmin'
+      formatter: 'toAdmin'
     })
 
     ctx.body = organization
