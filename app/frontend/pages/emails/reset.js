@@ -25,11 +25,7 @@ class EmailResetLanding extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false,
-      formData: {
-        password_1: '',
-        password_2: ''
-      },
+      formData: {},
       user: {}
     }
   }

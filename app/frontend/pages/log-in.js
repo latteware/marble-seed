@@ -2,73 +2,36 @@ import React, { Component } from 'react'
 
 import tree from '~core/tree'
 import api from '~base/api'
-import Loader from '~base/components/spinner'
 import Link from '~base/router/link'
 import env from '~base/env-variables'
 import Page from '~base/page'
 import {forcePublic} from '~base/middlewares/'
 
-import {BaseForm, PasswordWidget, EmailWidget} from '~components/base-form'
+import MarbleForm from '~base/components/marble-form'
 
 const schema = {
-  type: 'object',
-  required: ['email', 'password'],
-  properties: {
-    email: {type: 'string', title: 'Email'},
-    password: {type: 'string', title: 'Password'}
+  'email': {
+    'widget': 'EmailWidget',
+    'label': 'Email',
+    'required': true
+  },
+  'password': {
+    'widget': 'PasswordWidget',
+    'required': true,
+    'label': 'Password'
   }
-}
-
-const uiSchema = {
-  password: {'ui:widget': PasswordWidget},
-  email: {'ui:widget': EmailWidget}
 }
 
 class LogIn extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false,
-      formData: {
-        email: '',
-        password: ''
-      },
-      apiCallErrorMessage: 'is-hidden'
+      formData: {}
     }
   }
 
-  errorHandler (e) {}
-
-  changeHandler ({formData}) {
-    this.setState({
-      formData,
-      apiCallErrorMessage: 'is-hidden',
-      error: ''
-    })
-  }
-
-  clearState () {
-    this.setState({
-      apiCallErrorMessage: 'is-hidden',
-      formData: this.props.initialState
-    })
-  }
-
-  async submitHandler ({formData}) {
-    this.setState({loading: true})
-
-    let data
-    try {
-      data = await api.post('/user/login', formData)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger',
-        loading: false
-      })
-    }
-
-    this.setState({loading: false})
+  async submitHandler (formData) {
+    const data = await api.post('/user/login', formData)
 
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
@@ -80,19 +43,6 @@ class LogIn extends Component {
   }
 
   render () {
-    let spinner
-
-    if (this.state.loading) {
-      spinner = <Loader />
-    }
-
-    var error
-    if (this.state.error) {
-      error = <div>
-        Error: {this.state.error}
-      </div>
-    }
-
     var resetLink
     if (env.EMAIL_SEND) {
       resetLink = (
@@ -121,29 +71,12 @@ class LogIn extends Component {
             <div className='content'>
               <div className='columns'>
                 <div className='column'>
-                  <BaseForm schema={schema}
-                    uiSchema={uiSchema}
+                  <MarbleForm
+                    schema={schema}
                     formData={this.state.formData}
-                    onSubmit={(e) => { this.submitHandler(e) }}
-                    onError={(e) => { this.errorHandler(e) }}
-                    onChange={(e) => { this.changeHandler(e) }}
-                  >
-                    { spinner }
-                    <div className={this.state.apiCallErrorMessage}>
-                      <div className='message-body is-size-7 has-text-centered'>
-                        {error}
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        className='button is-primary is-fullwidth'
-                        type='submit'
-                        disabled={!!error}
-                      >
-                        Log in
-                      </button>
-                    </div>
-                  </BaseForm>
+                    onSubmit={(data) => this.submitHandler(data)}
+                    buttonLabel='Log in'
+                  />
                 </div>
               </div>
               {resetLink}

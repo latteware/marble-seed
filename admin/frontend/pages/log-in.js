@@ -36,8 +36,6 @@ class LogIn extends Component {
     }
   }
 
-  errorHandler (e) {}
-
   changeHandler ({formData}) {
     this.setState({
       formData,
@@ -46,14 +44,7 @@ class LogIn extends Component {
   }
 
   async submitHandler (formData) {
-    var data
-    try {
-      data = await api.post('/user/login', formData)
-    } catch (e) {
-      return this.setState({
-        error: e.message
-      })
-    }
+    const data = await api.post('/user/login', formData)
 
     if (data.isAdmin) {
       window.localStorage.setItem('jwt', data.jwt)

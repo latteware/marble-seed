@@ -4,63 +4,41 @@ import tree from '~core/tree'
 import Page from '~base/page'
 import {forcePublic} from '~base/middlewares/'
 
-import {BaseForm, PasswordWidget, EmailWidget, TextWidget} from '~components/base-form'
+import MarbleForm from '~base/components/marble-form'
 
 const schema = {
-  type: 'object',
-  required: ['email', 'password', 'screenName', 'name'],
-  properties: {
-    name: {type: 'string', title: 'Name'},
-    screenName: {type: 'string', title: 'ScreenName'},
-    email: {type: 'string', title: 'Email'},
-    password: {type: 'string', title: 'Password'}
+  name: {
+    widget: 'TextWidget',
+    label: 'Name',
+    required: true
+  },
+  screenName: {
+    widget: 'TextWidget',
+    label: 'Screen name',
+    required: true
+  },
+  email: {
+    widget: 'EmailWidget',
+    label: 'Email',
+    required: true
+  },
+  password: {
+    widget: 'PasswordWidget',
+    required: true,
+    label: 'Password'
   }
-}
-
-const uiSchema = {
-  name: { 'ui:widget': TextWidget },
-  screenName: { 'ui:widget': TextWidget },
-  email: { 'ui:widget': EmailWidget },
-  password: { 'ui:widget': PasswordWidget }
 }
 
 class SignUp extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      formData: {
-        name: '',
-        screenName: '',
-        email: '',
-        password: ''
-      },
-      apiCallErrorMessage: 'is-hidden',
-      error: ''
+      formData: {}
     }
   }
 
-  errorHandler (e) {}
-
-  changeHandler ({formData}) {
-    this.setState({
-      formData,
-      apiCallErrorMessage: 'is-hidden',
-      error: ''
-    })
-  }
-
-  async submitHandler ({formData}) {
-    let data
-
-    try {
-      data = await api.post('/user/', formData)
-    } catch (e) {
-      return this.setState({
-        error: e.message,
-        apiCallErrorMessage: 'message is-danger',
-        loading: false
-      })
-    }
+  async submitHandler (formData) {
+    const data = await api.post('/user/', formData)
 
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
@@ -69,19 +47,9 @@ class SignUp extends Component {
     tree.commit()
 
     this.props.history.push('/app', {})
-    this.setState({
-      formData: {}
-    })
   }
 
   render () {
-    var error
-    if (this.state.error) {
-      error = <div>
-        Error: {this.state.error}
-      </div>
-    }
-
     return (
       <div className='SignUp single-form'>
         <div className='card'>
@@ -97,27 +65,11 @@ class SignUp extends Component {
           </header>
           <div className='card-content'>
             <div className='content'>
-              <BaseForm schema={schema}
-                uiSchema={uiSchema}
-                formData={this.state.formData}
+              <MarbleForm
+                schema={schema}
                 onSubmit={(e) => { this.submitHandler(e) }}
-                onError={(e) => { this.errorHandler(e) }}
-                onChange={(e) => { this.changeHandler(e) }}>
-                <div>
-                  <div className={this.state.apiCallErrorMessage}>
-                    <div className='message-body is-size-7 has-text-centered'>
-                      {error}
-                    </div>
-                  </div>
-                  <button
-                    className='button is-primary is-fullwidth'
-                    type='submit'
-                    disabled={!!error}
-                  >
-                    Sign up
-                  </button>
-                </div>
-              </BaseForm>
+                buttonLabel='Sign up'
+              />
             </div>
           </div>
         </div>
