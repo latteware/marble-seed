@@ -7,11 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.6.2] - 
 
 ### Added
-- Added marble form component
+- Added Marble Form component, review docs [here](https://www.notion.so/marbleform/Marble-form-06ab3c3054644dacb754ab9164d594df) 
 - Added form builder on developer tools
 
 ### Changed
 - Improve csv exports using `json2csv` with loader and optional filename
+- Migrate all forms to use Marble Form
 
 ### Fixed
 - Fix list formatters on users, groups, roles and organizations
