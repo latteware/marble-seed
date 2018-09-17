@@ -24,6 +24,7 @@ const baseSchema = {
       'MultipleSelectWidget',
       'DateWidget',
       'DateTimeWidget',
+      'TimeWidget',
       'CheckboxWidget',
       'FileWidget',
       'RadioWidget'
@@ -191,6 +192,14 @@ const WidgetSchemas = {
       label: 'default',
       type: 'date',
       widget: 'DateTimeWidget'
+    }
+  },
+  TimeWidget: {
+    default: {
+      label: 'default',
+      type: 'date',
+      widget: 'TimeWidget',
+      timeIntervals: 5
     }
   },
   CheckboxWidget: {
