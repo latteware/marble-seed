@@ -24,7 +24,7 @@ class EmailInviteLanding extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      formData: {},
+      errors: {},
       user: {}
     }
   }
@@ -74,6 +74,10 @@ class EmailInviteLanding extends Component {
 
     const data = await api.post('/user/set-password', postData)
 
+    return data
+  }
+
+  successHandler (data) {
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
@@ -109,6 +113,7 @@ class EmailInviteLanding extends Component {
                 schema={schema}
                 onChange={(data) => this.changeHandler(data)}
                 onSubmit={(data) => this.submitHandler(data)}
+                onSucess={(data) => this.successHandler(data)}
                 errors={this.state.errors}
                 buttonLabel='Create password'
               />

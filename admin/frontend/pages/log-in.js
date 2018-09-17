@@ -32,37 +32,28 @@ class LogIn extends Component {
         email: '',
         password: ''
       },
-      apiCallErrorMessage: 'is-hidden'
-    }
-  }
-
-  changeHandler ({formData}) {
-    this.setState({
-      formData,
       error: ''
-    })
+    }
   }
 
   async submitHandler (formData) {
     const data = await api.post('/user/login', formData)
 
-    if (data.isAdmin) {
-      window.localStorage.setItem('jwt', data.jwt)
-      tree.set('jwt', data.jwt)
-      tree.set('user', data.user)
-      tree.set('loggedIn', true)
-      tree.commit()
-
-      this.props.history.push(env.PREFIX + '/', {})
-    } else {
-      this.setState({
-        error: 'Invalid user',
-        formData: {
-          email: '',
-          password: ''
-        }
-      })
+    if (!data.isAdmin) {
+      throw new Error('Invalid user')
     }
+
+    return data
+  }
+
+  succesHandler (data) {
+    window.localStorage.setItem('jwt', data.jwt)
+    tree.set('jwt', data.jwt)
+    tree.set('user', data.user)
+    tree.set('loggedIn', true)
+    tree.commit()
+
+    this.props.history.push(env.PREFIX + '/', {})
   }
 
   render () {
@@ -96,10 +87,9 @@ class LogIn extends Component {
                 <div className='column'>
                   <MarbleForm
                     schema={schema}
+                    formData={this.state.formData}
                     onSubmit={(data) => this.submitHandler(data)}
-                    onChange={(data) => this.changeHandler(data)}
-                    handleMessages={false}
-                    errorMessage={this.state.error}
+                    onSuccess={(data) => this.succesHandler(data)}
                     label='Log in'
                   />
                 </div>

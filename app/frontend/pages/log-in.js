@@ -25,14 +25,16 @@ const schema = {
 class LogIn extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      formData: {}
-    }
+    this.state = {}
   }
 
   async submitHandler (formData) {
     const data = await api.post('/user/login', formData)
 
+    return data
+  }
+
+  successHandler (data) {
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
@@ -75,6 +77,7 @@ class LogIn extends Component {
                     schema={schema}
                     formData={this.state.formData}
                     onSubmit={(data) => this.submitHandler(data)}
+                    onSuccess={(data) => this.successHandler(data)}
                     buttonLabel='Log in'
                   />
                 </div>

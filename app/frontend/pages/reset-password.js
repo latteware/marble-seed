@@ -15,19 +15,14 @@ const schema = {
 class ResetPassword extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      loading: false,
-      formData: {
-        email: ''
-      },
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden'
-    }
+    this.state = {}
   }
 
   async submitHandler (formData) {
     await api.post('/user/reset-password', formData)
+  }
 
+  successHandler () {
     setTimeout(() => {
       this.props.history.push('/log-in', {})
     }, 2000)
@@ -57,6 +52,7 @@ class ResetPassword extends Component {
                 schema={schema}
                 formData={this.state.formData}
                 onSubmit={(data) => this.submitHandler(data)}
+                onSuccess={(data) => this.successHandler(data)}
                 buttonLabel='Send reset password link'
                 defaultSuccessMessage='Reset password email sent!'
               />
