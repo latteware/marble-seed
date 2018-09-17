@@ -25,11 +25,7 @@ class EmailResetLanding extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false,
-      formData: {
-        password_1: '',
-        password_2: ''
-      },
+      errors: {},
       user: {}
     }
   }
@@ -90,6 +86,10 @@ class EmailResetLanding extends Component {
 
     const data = await api.post('/user/set-password', postData)
 
+    return data
+  }
+
+  successHandler (data) {
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
@@ -98,7 +98,7 @@ class EmailResetLanding extends Component {
 
     setTimeout(() => {
       this.props.history.push('/app', {})
-    }, 4000)
+    }, 2000)
   }
 
   render () {
@@ -128,6 +128,7 @@ class EmailResetLanding extends Component {
                 errors={errors}
                 onSubmit={(data) => this.submitHandler(data)}
                 onChange={(data) => this.changeHandler(data)}
+                onSuccess={(data) => this.successHandler(data)}
                 defaultSuccessMessage={'User was updated correctly'}
               />
             </div>
