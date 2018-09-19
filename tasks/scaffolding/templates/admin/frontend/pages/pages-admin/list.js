@@ -5,7 +5,7 @@ import moment from 'moment'
 import env from '~base/env-variables'
 import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
-import Create{{ name | capitalize }} from './components/create-button'
+import Create{{ name | capitalize }} from './create'
 
 class {{ name | capitalize }}List extends ListPageComponent {
   finishUp (data) {
