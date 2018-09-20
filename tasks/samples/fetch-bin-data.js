@@ -24,6 +24,8 @@ const task = new Task(async function (argv) {
   return res
 })
 
+task.setName('fetch-bin-data')
+
 if (require.main === module) {
   task.setCliHandlers()
   task.run()

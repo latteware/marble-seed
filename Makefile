@@ -7,6 +7,9 @@ help:
 api-server:
 	@$(BIN_DIR)/nodemon api/runner.js
 
+queue-server:
+	@$(BIN_DIR)/nodemon api/queue-runner.js	
+
 app-server:
 	@$(BIN_DIR)/nodemon --ignore app/frontend app/runner.js
 
