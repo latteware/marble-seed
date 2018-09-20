@@ -40,7 +40,12 @@ class OrganizationDetail extends PageComponent {
 
   async deleteOnClick () {
     var url = '/admin/organizations/' + this.props.match.params.uuid
-    await api.del(url)
+    const res = await api.del(url)
+
+    return res.data
+  }
+
+  deleteSuccessHandler () {
     this.props.history.push('/admin/manage/organizations')
   }
 
@@ -88,6 +93,7 @@ class OrganizationDetail extends PageComponent {
                       className='button is-danger'
                       classNameButton='button is-danger'
                       onConfirm={() => this.deleteOnClick()}
+                      onSuccess={() => this.deleteSuccessHandler()}
                     >
                       Delete
                     </ConfirmButton>
