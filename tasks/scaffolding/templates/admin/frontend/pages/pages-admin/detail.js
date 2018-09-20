@@ -1,11 +1,10 @@
 import React from 'react'
-import Link from '~base/router/link'
 import api from '~base/api'
 import Loader from '~base/components/spinner'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
-import {{ name | capitalize }}Form from './components/form'
+import {{ name | capitalize }}Form from './form'
 
 class {{ name | capitalize }}Detail extends PageComponent {
   constructor (props) {
@@ -37,26 +36,6 @@ class {{ name | capitalize }}Detail extends PageComponent {
     var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
     await api.del(url)
     this.props.history.push('/admin/{{ name | lower }}s')
-  }
-
-  getColumns () {
-    return [
-      {%- for item in fields -%}
-      {
-        title: '{{ item.name | capitalize }}',
-        property: '{{ item.name | lower }}',
-        default: 'N/A'
-      },
-      {% endfor -%}
-      {
-        'title': 'Actions',
-        formatter: (row) => {
-          return <Link className='button' to={'/{{ name | lower }}s/' + row.uuid}>
-            Detalle
-          </Link>
-        }
-      }
-    ]
   }
 
   render () {
@@ -98,7 +77,7 @@ class {{ name | capitalize }}Detail extends PageComponent {
                     <div className='column'>
                       <{{ name | capitalize }}Form
                         url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
-                        initialState={ {{ name | lower }} }
+                        formData={ {{ name | lower }} }
                         load={() => this.reload()}
                       >
                         <div className='field is-grouped'>

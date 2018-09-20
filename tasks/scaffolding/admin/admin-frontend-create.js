@@ -31,13 +31,13 @@ const task = new Task(async function (argv) {
 
   const modelSchema = scaffolding.getModelSchemaForTemplate(model, properties)
 
-  const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/components/create-button.js')
-  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/components/')
-  const filePath = dirPath + 'create-button.js'
+  const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/create.js')
+  const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
+  const filePath = dirPath + 'create.js'
   await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
-  const templatePath2 = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/components/form.js')
-  const dirPath2 = path.join('./admin/frontend/pages/' + modelSchema.name + 's/components/')
+  const templatePath2 = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/form.js')
+  const dirPath2 = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
   const filePath2 = dirPath + 'form.js'
   await scaffolding.createFileFromTemplate(dirPath2, filePath2, templatePath2, modelSchema)
 
