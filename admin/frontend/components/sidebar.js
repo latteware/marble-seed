@@ -17,6 +17,8 @@ import AppConfig from '../pages/developer-tools/app-config'
 import RequestLogs from '../pages/developer-tools/request-logs'
 import FormBuilder from '../pages/developer-tools/form-builder'
 
+import Articles from '../pages/articles/list'
+
 // #Import
 
 class Sidebar extends Component {
@@ -98,7 +100,8 @@ class Sidebar extends Component {
         dropdown: [
           Buttons.asSidebarItem()
         ]
-      }
+      },
+      Articles.asSidebarItem()
     ]
   }
 

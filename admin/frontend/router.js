@@ -20,6 +20,8 @@ import Organizations from './pages/organizations/list'
 import OrganizationDetail from './pages/organizations/detail'
 import Roles from './pages/roles/list'
 import RoleDetail from './pages/roles/detail'
+import Articles from './pages/articles/list'
+import ArticlesDetail from './pages/articles/detail'
 import Groups from './pages/groups/list'
 import GroupDetail from './pages/groups/detail'
 import RequestLogs from './pages/developer-tools/request-logs'
@@ -50,6 +52,9 @@ const AppRouter = () => {
 
           {Organizations.asRouterItem()}
           {OrganizationDetail.asRouterItem()}
+
+          {Articles.asRouterItem()}
+          {ArticlesDetail.asRouterItem()}
 
           {Roles.asRouterItem()}
           {RoleDetail.asRouterItem()}
