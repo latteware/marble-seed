@@ -5,6 +5,7 @@ import Loader from '~base/components/spinner'
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 import {{ name | capitalize }}Form from './form'
+import ConfirmButton from '~base/components/confirm-button'
 
 class {{ name | capitalize }}Detail extends PageComponent {
   constructor (props) {
@@ -34,7 +35,12 @@ class {{ name | capitalize }}Detail extends PageComponent {
 
   async deleteOnClick () {
     var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
-    await api.del(url)
+    const res = await api.del(url)
+
+    return res.data
+  }
+  
+  deleteSuccessHandler () {
     this.props.history.push('/admin/{{ name | lower }}s')
   }
 
@@ -53,13 +59,15 @@ class {{ name | capitalize }}Detail extends PageComponent {
             <div className='column has-text-right'>
               <div className='field is-grouped is-grouped-right'>
                 <div className='control'>
-                  <button
+                  <ConfirmButton
+                    title='Delete {{ name | capitalize }}'
                     className='button is-danger'
-                    type='button'
-                    onClick={() => this.deleteOnClick()}
+                    classNameButton='button is-danger'
+                    onConfirm={() => this.deleteOnClick()}
+                    onSuccess={() => this.deleteSuccessHandler()}
                   >
                     Delete
-                  </button>
+                  </ConfirmButton>
                 </div>
               </div>
             </div>
