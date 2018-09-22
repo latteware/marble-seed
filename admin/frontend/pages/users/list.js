@@ -5,10 +5,7 @@ import Link from '~base/router/link'
 import api from '~base/api'
 import ListPageComponent from '~base/list-page-component'
 import {loggedIn} from '~base/middlewares/'
-import tree from '~core/tree'
-
 import CreateUser from './create'
-import DeleteButton from '~base/components/base-deleteButton'
 
 class UserList extends ListPageComponent {
   async onFirstPageEnter () {
@@ -88,25 +85,12 @@ class UserList extends ListPageComponent {
       {
         'title': 'Actions',
         formatter: (row) => {
-          const currentUser = tree.get('user')
-
           return (
             <div className='field is-grouped'>
               <div className='control'>
                 <Link className='button' to={'/manage/users/' + row.uuid}>
                   Detalle
                 </Link>
-              </div>
-              <div className='control'>
-                {currentUser.uuid !== row.uuid && (
-                  <DeleteButton
-                    iconOnly
-                    icon='fa fa-trash'
-                    objectName='Usuario'
-                    objectDelete={() => this.deleteObject(row)}
-                    message={`Está seguro de querer desactivar a ${row.email} ?`}
-                  />
-                )}
               </div>
             </div>
           )

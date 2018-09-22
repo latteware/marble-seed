@@ -6,9 +6,9 @@ module.exports = new Route({
   method: 'delete',
   path: '/:uuid',
   handler: async function (ctx) {
-    var organizationId = ctx.params.uuid
+    const organizationId = ctx.params.uuid
 
-    var org = await Organization.findOne({'uuid': organizationId})
+    const org = await Organization.findOne({'uuid': organizationId})
     ctx.assert(org, 404, 'Organization not found')
 
     org.set({isDeleted: true})

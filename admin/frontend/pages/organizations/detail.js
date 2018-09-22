@@ -7,6 +7,7 @@ import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import OrganizationForm from './form'
+import ConfirmButton from '~base/components/confirm-button'
 
 class OrganizationDetail extends PageComponent {
   constructor (props) {
@@ -39,7 +40,12 @@ class OrganizationDetail extends PageComponent {
 
   async deleteOnClick () {
     var url = '/admin/organizations/' + this.props.match.params.uuid
-    await api.del(url)
+    const res = await api.del(url)
+
+    return res.data
+  }
+
+  deleteSuccessHandler () {
     this.props.history.push('/admin/manage/organizations')
   }
 
@@ -82,13 +88,15 @@ class OrganizationDetail extends PageComponent {
               <div className='column has-text-right'>
                 <div className='field is-grouped is-grouped-right'>
                   <div className='control'>
-                    <button
+                    <ConfirmButton
+                      title='Delete Organization'
                       className='button is-danger'
-                      type='button'
-                      onClick={() => this.deleteOnClick()}
+                      classNameButton='button is-danger'
+                      onConfirm={() => this.deleteOnClick()}
+                      onSuccess={() => this.deleteSuccessHandler()}
                     >
                       Delete
-                    </button>
+                    </ConfirmButton>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import DeleteButton from '~base/components/base-deleteButton'
+import ConfirmButton from '~base/components/confirm-button'
 
 class AppConfigItem extends Component {
   constructor (props) {
@@ -171,12 +171,14 @@ class AppConfigItem extends Component {
           </form>
         </div>
         <div className='column is-1'>
-          <DeleteButton
-            objectName={appConfig.key}
-            objectDelete={() => this.handleRemoveItem()}
+          <ConfirmButton
+            title='Delete config'
+            className='button is-danger'
+            classNameButton='button is-danger'
+            onConfirm={() => this.handleRemoveItem()}
           >
             <i className='fa fa-trash-o' />
-          </DeleteButton>
+          </ConfirmButton>
         </div>
       </div>
     </div>)
