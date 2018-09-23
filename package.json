@@ -15,7 +15,6 @@
     "url": "github.com/latteware/marble-seed"
   },
   "dependencies": {
-    "ajv": "5.0.0",
     "app-module-path": "^2.2.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -75,7 +74,6 @@
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
     "react-sortable-hoc": "^0.8.3",
-    "react-spinkit": "^3.0.0",
     "replace": "^0.3.0",
     "request-promise-native": "^1.0.5",
     "sass-loader": "^6.0.6",

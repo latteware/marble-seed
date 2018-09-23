@@ -8,7 +8,6 @@ import env from '~base/env-variables'
 import FontAwesome from 'react-fontawesome'
 
 import {loggedIn} from '~base/middlewares/'
-import Loader from '~base/components/spinner'
 import UserForm from './form'
 import Multiselect from '~base/components/base-multiselect'
 import ConfirmButton from '~base/components/confirm-button'
@@ -302,12 +301,11 @@ class UserDetail extends PageComponent {
   }
 
   render () {
-    const {user, loaded} = this.state
-    const currentUser = tree.get('user')
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const {user} = this.state
+    const currentUser = tree.get('user')
 
     const availableGroupsList = this.state.groups.filter(item => {
       return (this.state.selectedGroups.findIndex(group => {

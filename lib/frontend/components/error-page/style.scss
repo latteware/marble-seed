@@ -1,0 +1,96 @@
+.boo-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 64px;
+  padding-bottom: 64px;
+
+  .boo {
+    width: 160px;
+    height: 184px;
+    background-color: #f7f7f7;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3.3939393939px solid #9b9b9b;
+    border-bottom: 0;
+    overflow: hidden;
+    border-radius: 80px 80px 0 0;
+    box-shadow: -16px 0 0 2px rgba(234, 234, 234, 0.5) inset;
+    position: relative;
+    padding-bottom: 32px;
+    animation: floating 3s ease-in-out infinite;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: -18.8235294118px;
+      bottom: -8.3116883117px;
+      width: calc(100% + 32px);
+      height: 32px;
+      background-repeat: repeat-x;
+      background-size: 32px 32px;
+      background-position: left bottom;
+      background-image: linear-gradient(-45deg, #f7f7f7 16px, transparent 0), linear-gradient(45deg, #f7f7f7 16px, transparent 0), linear-gradient(-45deg, #9b9b9b 18.8235294118px, transparent 0), linear-gradient(45deg, #9b9b9b 18.8235294118px, transparent 0);
+    }
+    
+    .face {
+      width: 24px;
+      height: 3.2px;
+      border-radius: 5px;
+      background-color: #9b9b9b;
+      position: absolute;
+      left: 50%;
+      bottom: 56px;
+      transform: translateX(-50%);
+    }
+    
+    .face::before,
+    .face::after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background-color: #9b9b9b;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 40px;
+    }
+    
+    .face::before {
+      left: -24px;
+    }
+    
+    .face::after {
+      right: -24px;
+    }
+  }
+  
+  .shadow {
+    width: 128px;
+    height: 16px;
+    background-color: rgba(218, 213, 213, 0.75);
+    margin-top: 29px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50%;
+    animation: floatingShadow 3s ease-in-out infinite;
+  }
+
+  h1 {
+    font-size: 33px;
+    color:#9b9b9b;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  > p {
+    font-size: 18px;
+    color:#9b9b9b;    
+    text-align: center;
+    max-width: 400px;
+    margin: 10px auto;    
+  }
+}
