@@ -8,8 +8,8 @@ class App extends PageComponent {
   constructor (props) {
     super(props)
     this.state = {
-      posts: [],
-      loading: true
+      ...this.baseState,
+      posts: []
     }
   }
 

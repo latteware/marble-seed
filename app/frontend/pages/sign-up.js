@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PageComponent from '~base/page-component'
+
 import api from '~base/api'
 import tree from '~core/tree'
-import Page from '~base/page'
 import {forcePublic} from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
@@ -29,10 +30,12 @@ const schema = {
   }
 }
 
-class SignUp extends Component {
+class SignUp extends PageComponent {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      ...this.baseState
+    }
   }
 
   async submitHandler (formData) {
@@ -52,6 +55,9 @@ class SignUp extends Component {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     return (
       <div className='SignUp single-form'>
         <div className='card'>
@@ -81,10 +87,12 @@ class SignUp extends Component {
   }
 }
 
-export default Page({
+SignUp.config({
   path: '/sign-up',
   title: 'Sign Up',
   exact: true,
   validate: forcePublic,
   component: SignUp
 })
+
+export default SignUp

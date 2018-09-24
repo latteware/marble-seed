@@ -18,7 +18,9 @@ class AdminLayout extends Component {
       user: {},
       loaded: false,
       burger: false,
-      menuCollapse: false
+      menuCollapse: false,
+      hasLoadError: false,
+      error: ''
     }
   }
 

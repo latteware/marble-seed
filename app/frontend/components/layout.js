@@ -3,6 +3,8 @@ import { root } from 'baobab-react/higher-order'
 
 import api from '~base/api'
 import tree from '~core/tree'
+import ErrorPage from '~base/components/error-page'
+import Loader from '~base/components/spinner'
 
 import NavBar from '~components/navbar'
 
@@ -11,7 +13,9 @@ class Layout extends Component {
     super(props)
     this.state = {
       user: {},
-      loaded: false
+      loaded: false,
+      hasLoadError: false,
+      error: ''
     }
   }
 
@@ -34,8 +38,11 @@ class Layout extends Component {
           tree.commit()
         }
 
-        this.setState({loaded: true})
-        return
+        return this.setState({
+          loaded: true,
+          hasLoadError: true,
+          error: err.message
+        })
       }
 
       tree.set('user', me.user)
@@ -54,7 +61,11 @@ class Layout extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <div>Loading...</div>
+      return <Loader className='boo-wrapper' style={{fontSize: '140%', color: '#093952'}} />
+    }
+
+    if (this.state.hasLoadError) {
+      return <ErrorPage message={this.state.error} />
     }
 
     var userData

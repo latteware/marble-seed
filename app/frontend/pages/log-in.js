@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
+import PageComponent from '~base/page-component'
 import tree from '~core/tree'
 import api from '~base/api'
 import Link from '~base/router/link'
 import env from '~base/env-variables'
-import Page from '~base/page'
 import {forcePublic} from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
@@ -22,10 +22,12 @@ const schema = {
   }
 }
 
-class LogIn extends Component {
+class LogIn extends PageComponent {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      ...this.baseState
+    }
   }
 
   async submitHandler (formData) {
@@ -45,6 +47,9 @@ class LogIn extends Component {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     var resetLink
     if (env.EMAIL_SEND) {
       resetLink = (
@@ -91,10 +96,12 @@ class LogIn extends Component {
   }
 }
 
-export default Page({
+LogIn.config({
   path: '/log-in',
   title: 'Log in',
   exact: true,
   validate: forcePublic,
   component: LogIn
 })
+
+export default LogIn

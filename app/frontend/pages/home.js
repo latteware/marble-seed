@@ -4,10 +4,15 @@ import PageComponent from '~base/page-component'
 class Home extends PageComponent {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      ...this.baseState
+    }
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     return (
       <section className='home hero is-info bsa'>
         <div className='container'>
