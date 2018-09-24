@@ -4,7 +4,6 @@ import api from '~base/api'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
-import Loader from '~base/components/spinner'
 import RoleForm from './form'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import ConfirmButton from '~base/components/confirm-button'
@@ -12,9 +11,9 @@ import ConfirmButton from '~base/components/confirm-button'
 class RoleDetail extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      loading: true,
-      loaded: false,
+      ...this.baseState,
       role: {}
     }
   }
@@ -75,11 +74,10 @@ class RoleDetail extends PageComponent {
   }
 
   render () {
-    const {role, loaded} = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const {role} = this.state
 
     let defaultButton
     if (!role.isDefault) {

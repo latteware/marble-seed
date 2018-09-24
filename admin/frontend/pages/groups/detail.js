@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from '~base/router/link'
 import api from '~base/api'
-import Loader from '~base/components/spinner'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
@@ -11,9 +10,9 @@ import ConfirmButton from '~base/components/confirm-button'
 class GroupDetail extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      loading: true,
-      loaded: false,
+      ...this.baseState,
       group: {}
     }
   }
@@ -68,11 +67,10 @@ class GroupDetail extends PageComponent {
   }
 
   render () {
-    const {group, loaded} = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const {group} = this.state
 
     return (<div className='columns c-flex-1 is-marginless'>
       <div className='column is-paddingless'>
