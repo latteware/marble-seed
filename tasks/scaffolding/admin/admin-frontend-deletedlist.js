@@ -38,7 +38,7 @@ const task = new Task(async function (argv) {
 
   const routerPath = path.join('./admin/frontend/router.js')
   scaffolding.replaceInFile(routerPath, '// #Import', 'import Deleted' + s.capitalize(modelSchema.name) + 's from \'./pages/' + modelSchema.name + 's/deleted-list\'\n// #Import')
-  scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{Deleted' + s.capitalize(modelSchema.name) + 's.asRouterItem()}\n          <div id=\'route\' />')
+  scaffolding.replaceInFile(routerPath, /{\/\* Add routes here \*\/}/, `{Deleted${s.capitalize(modelSchema.name)}s.asRouterItem()}\n          {/* Add routes here */}`)
 
   const sidebarPath = path.join('./admin/frontend/components/sidebar.js')
   scaffolding.replaceInFile(sidebarPath, '// #Import', 'import Deleted' + s.capitalize(modelSchema.name) + 's from \'../pages/' + modelSchema.name + 's/deleted-list\'\n// #Import')
