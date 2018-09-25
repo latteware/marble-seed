@@ -15,7 +15,7 @@ class Create{{ name | capitalize }} extends Component {
       <BaseModal
         title='Create {{ name | capitalize }}'
         className={this.props.className}
-        hideModal={() => this.hideModal()}
+        hideModal={() => this.props.hideModal()}
       >
         <{{ name | capitalize }}Form
           baseUrl='/admin/{{ name }}s'

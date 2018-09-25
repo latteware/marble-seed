@@ -87,13 +87,7 @@ class {{ name | capitalize }}Detail extends PageComponent {
                         url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
                         formData={ {{ name | lower }} }
                         load={() => this.reload()}
-                      >
-                        <div className='field is-grouped'>
-                          <div className='control'>
-                            <button className='button is-primary'>Save</button>
-                          </div>
-                        </div>
-                      </{{ name | capitalize }}Form>
+                      />
                     </div>
                   </div>
                 </div>
