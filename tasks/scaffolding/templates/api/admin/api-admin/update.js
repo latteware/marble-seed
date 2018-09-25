@@ -25,7 +25,7 @@ module.exports = new Route({
       {% endfor -%}
     })
 
-    {{ name | lower }}.save()
+    await {{ name | lower }}.save()
 
     ctx.body = {
       data: {{ name | lower }}.toAdmin()
