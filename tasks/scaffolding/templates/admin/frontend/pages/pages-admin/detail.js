@@ -1,6 +1,5 @@
 import React from 'react'
 import api from '~base/api'
-import Loader from '~base/components/spinner'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
@@ -12,8 +11,7 @@ class {{ name | capitalize }}Detail extends PageComponent {
     super(props)
 
     this.state = {
-      loading: true,
-      loaded: false,
+      ...this.baseState,
       {{ name }}: {}
     }
   }
@@ -45,11 +43,10 @@ class {{ name | capitalize }}Detail extends PageComponent {
   }
 
   render () {
-    const { {{ name | lower }}, loaded } = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const { {{ name | lower }} } = this.state
 
     return (<div className='columns c-flex-1 is-marginless'>
       <div className='column is-paddingless'>
