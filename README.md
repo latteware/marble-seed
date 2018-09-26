@@ -95,3 +95,8 @@ And add to the getMenuItems array in the same file:
 At this point, you will have all the api calls required for the admin app, but they are all only available for the admin users.
 
 To use this in the application, you will need to create your own API call outside of the /api/routers/admin folder as you might require them
+
+## Production set up
+
+To set up servers to run you app in production, follow this guide: https://www.notion.so/marbleform/Marble-seeds-server-from-0-e678d21f951546abae66f3f35bc7a420
+
