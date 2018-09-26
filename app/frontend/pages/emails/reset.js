@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Page from '~base/page'
+import React from 'react'
+import PageComponent from '~base/page-component'
 
 import tree from '~core/tree'
 import api from '~base/api'
@@ -21,17 +21,20 @@ const schema = {
   }
 }
 
-class EmailResetLanding extends Component {
+class EmailResetLanding extends PageComponent {
   constructor (props) {
     super(props)
     this.state = {
+      ...this.baseState,
       errors: {},
       user: {}
     }
   }
 
-  componentWillMount () {
-    this.verifyToken()
+  async onPageEnter () {
+    const data = await this.verifyToken()
+
+    return data
   }
 
   async verifyToken () {
@@ -57,11 +60,10 @@ class EmailResetLanding extends Component {
       })
     }
 
-    this.setState({
-      ...this.state,
+    return {
       token: tokenData.token,
       user: data.user
-    })
+    }
   }
 
   changeHandler (formData) {
@@ -129,7 +131,7 @@ class EmailResetLanding extends Component {
                 onSubmit={(data) => this.submitHandler(data)}
                 onChange={(data) => this.changeHandler(data)}
                 onSuccess={(data) => this.successHandler(data)}
-                defaultSuccessMessage={'User was updated correctly'}
+                defaultSuccessMessage={'Password added, redirecting to the app'}
               />
             </div>
           </div>
@@ -139,9 +141,11 @@ class EmailResetLanding extends Component {
   }
 }
 
-export default Page({
+EmailResetLanding.config({
   path: '/emails/reset',
   title: 'Email reset',
   exact: true,
   component: EmailResetLanding
 })
+
+export default EmailResetLanding

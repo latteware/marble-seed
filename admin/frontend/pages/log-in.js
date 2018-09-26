@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import Page from '~base/page'
+import PageComponent from '~base/page-component'
 import api from '~base/api'
 import env from '~base/env-variables'
 import tree from '~core/tree'
@@ -24,15 +24,13 @@ const schema = {
   }
 }
 
-class LogIn extends Component {
+class LogIn extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      formData: {
-        email: '',
-        password: ''
-      },
-      error: ''
+      ...this.baseState,
+      formData: {}
     }
   }
 
@@ -57,6 +55,9 @@ class LogIn extends Component {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     var resetLink
     if (env.EMAIL_SEND) {
       resetLink = (
@@ -103,9 +104,11 @@ class LogIn extends Component {
   }
 }
 
-export default Page({
+LogIn.config({
   path: '/log-in',
   exact: true,
   validate: forcePublic,
   component: LogIn
 })
+
+export default LogIn

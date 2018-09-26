@@ -1,15 +1,16 @@
 import React from 'react'
 import moment from 'moment'
 
+import tree from '~core/tree'
 import PageComponent from '~base/page-component'
 import api from '~base/api'
 import env from '~base/env-variables'
 import FontAwesome from 'react-fontawesome'
 
 import {loggedIn} from '~base/middlewares/'
-import Loader from '~base/components/spinner'
 import UserForm from './form'
 import Multiselect from '~base/components/base-multiselect'
+import ConfirmButton from '~base/components/confirm-button'
 
 class UserDetail extends PageComponent {
   constructor (props) {
@@ -17,9 +18,6 @@ class UserDetail extends PageComponent {
 
     this.state = {
       ...this.baseState,
-      resetLoading: false,
-      resetText: 'Reset password',
-      resetClass: 'button is-danger',
       user: {},
       roles: [],
       orgs: [],
@@ -221,39 +219,21 @@ class UserDetail extends PageComponent {
   }
 
   async resetOnClick () {
-    await this.setState({
-      resetLoading: true,
-      resetText: 'Sending email...',
-      resetClass: 'button is-info'
-    })
-
     var url = '/user/reset-password'
+    const res = await api.post(url, {email: this.state.user.email})
 
-    try {
-      await api.post(url, {email: this.state.user.email})
-      setTimeout(() => {
-        this.setState({
-          resetLoading: true,
-          resetText: 'Sucess!',
-          resetClass: 'button is-success'
-        })
-      }, 3000)
-    } catch (e) {
-      await this.setState({
-        resetLoading: true,
-        resetText: 'Error!',
-        resetClass: 'button is-danger'
-      })
-    }
+    return res.data
+  }
 
-    setTimeout(() => {
-      this.setState({
-        resetLoading: false,
-        resetText: 'Reset Password',
-        resetClass: 'button is-danger'
-      })
-    }, 10000)
-    // this.load()
+  async deleteOnClick () {
+    var url = '/admin/users/' + this.props.match.params.uuid
+    const res = await api.del(url)
+
+    return res.data
+  }
+
+  deleteSuccessHandler () {
+    this.props.history.push('/admin/manage/users')
   }
 
   getDateCreated () {
@@ -321,11 +301,11 @@ class UserDetail extends PageComponent {
   }
 
   render () {
-    const {user, loaded} = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const {user} = this.state
+    const currentUser = tree.get('user')
 
     const availableGroupsList = this.state.groups.filter(item => {
       return (this.state.selectedGroups.findIndex(group => {
@@ -339,22 +319,33 @@ class UserDetail extends PageComponent {
       }) === -1)
     })
 
-    var resetButton
+    let resetButton
     if (env.EMAIL_SEND) {
-      resetButton = (<div className='column has-text-right'>
-        <div className='field is-grouped is-grouped-right'>
-          <div className='control'>
-            <button
-              className={this.state.resetClass}
-              type='button'
-              onClick={() => this.resetOnClick()}
-              disabled={!!this.state.resetLoading}
-            >
-              {this.state.resetText}
-            </button>
-          </div>
-        </div>
-      </div>)
+      resetButton = <div className='control'>
+        <ConfirmButton
+          title='Send reset password email'
+          className='button is-link'
+          classNameButton='button is-link'
+          onConfirm={() => this.resetOnClick()}
+        >
+          Reset password
+        </ConfirmButton>
+      </div>
+    }
+
+    let deleteButton
+    if (currentUser.uuid !== user.uuid) {
+      deleteButton = <div className='control'>
+        <ConfirmButton
+          title='Delete User'
+          className='button is-danger'
+          classNameButton='button is-danger'
+          onConfirm={() => this.deleteOnClick()}
+          onSuccess={() => this.deleteSuccessHandler()}
+        >
+          Delete
+        </ConfirmButton>
+      </div>
     }
 
     return (
@@ -363,10 +354,15 @@ class UserDetail extends PageComponent {
           <div className='section'>
             <div className='columns'>
               {this.getBreadcrumbs()}
-              {resetButton}
+              <div className='column has-text-right'>
+                <div className='field is-grouped is-grouped-right'>
+                  {resetButton}
+                  {deleteButton}
+                </div>
+              </div>
             </div>
-            <div className='columns is-mobile'>
-              <div className='column'>
+            <div className='columns is-multiline'>
+              <div className='column is-full is-half-desktop'>
                 <div className='card'>
                   <header className='card-header'>
                     <p className='card-header-title'>
@@ -389,7 +385,7 @@ class UserDetail extends PageComponent {
                   </div>
                 </div>
               </div>
-              <div className='column'>
+              <div className='column is-full is-half-desktop'>
                 <div className='columns'>
                   <div className='column'>
                     <div className='card'>

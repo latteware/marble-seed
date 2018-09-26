@@ -5,7 +5,10 @@ help:
 	@echo "  \033[34mapi-server\033[0m  start dev server"
 
 api-server:
-	@$(BIN_DIR)/nodemon api/runner.js
+	@$(BIN_DIR)/nodemon --ignore '*/frontend/**' api/runner.js
+
+queue-server:
+	@$(BIN_DIR)/nodemon api/queue-runner.js	
 
 app-server:
 	@$(BIN_DIR)/nodemon --ignore app/frontend app/runner.js

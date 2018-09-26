@@ -4,7 +4,6 @@ import _ from 'lodash'
 import tree from '~core/tree'
 import api from '~base/api'
 import PageComponent from '~base/page-component'
-import Loader from '~base/components/spinner'
 import {loggedIn} from '~base/middlewares/'
 import AppConfigItem from './components/app-config-item'
 
@@ -143,11 +142,10 @@ class AppConfig extends PageComponent {
   }
 
   render () {
-    const {loaded, newAppConfig, configs, error} = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const {newAppConfig, configs, error} = this.state
 
     let valueInput = (<div className='control'>
       <input className='input'

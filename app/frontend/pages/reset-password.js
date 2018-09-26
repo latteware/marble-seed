@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PageComponent from '~base/page-component'
 
-import Page from '~base/page'
 import api from '~base/api'
 import MarbleForm from '~base/components/marble-form'
 
@@ -12,10 +12,12 @@ const schema = {
   }
 }
 
-class ResetPassword extends Component {
+class ResetPassword extends PageComponent {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      ...this.baseState
+    }
   }
 
   async submitHandler (formData) {
@@ -29,6 +31,9 @@ class ResetPassword extends Component {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     return (
       <div className='LogIn single-form'>
         <div className='card'>
@@ -64,9 +69,11 @@ class ResetPassword extends Component {
   }
 }
 
-export default Page({
+ResetPassword.config({
   path: '/password/forgotten',
   title: 'Reset Password',
   exact: true,
   component: ResetPassword
 })
+
+export default ResetPassword

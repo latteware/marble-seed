@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Page from '~base/page'
+import React from 'react'
+import PageComponent from '~base/page-component'
 
 import tree from '~core/tree'
 import api from '~base/api'
@@ -20,17 +20,21 @@ const schema = {
   }
 }
 
-class EmailInviteLanding extends Component {
+class EmailInviteLanding extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
+      ...this.baseState,
       errors: {},
       user: {}
     }
   }
 
-  componentWillMount () {
-    this.verifyToken()
+  async onPageEnter () {
+    const data = await this.verifyToken()
+
+    return data
   }
 
   async verifyToken () {
@@ -46,10 +50,10 @@ class EmailInviteLanding extends Component {
 
     const data = await api.post('/emails/invite/validate', tokenData)
 
-    this.setState({
+    return {
       token: tokenData.token,
       user: data.user
-    })
+    }
   }
 
   changeHandler (formData) {
@@ -113,9 +117,10 @@ class EmailInviteLanding extends Component {
                 schema={schema}
                 onChange={(data) => this.changeHandler(data)}
                 onSubmit={(data) => this.submitHandler(data)}
-                onSucess={(data) => this.successHandler(data)}
+                onSuccess={(data) => this.successHandler(data)}
                 errors={this.state.errors}
                 buttonLabel='Create password'
+                defaultSuccessMessage={'Password added, redirecting to the app'}
               />
             </div>
           </div>
@@ -125,9 +130,11 @@ class EmailInviteLanding extends Component {
   }
 }
 
-export default Page({
+EmailInviteLanding.config({
   path: '/emails/invite',
   title: 'Email invite',
   exact: true,
   component: EmailInviteLanding
 })
+
+export default EmailInviteLanding

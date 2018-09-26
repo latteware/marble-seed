@@ -35,12 +35,12 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/admin/frontend/pages/pages-admin/detail.js')
   const dirPath = path.join('./admin/frontend/pages/' + modelSchema.name + 's/')
   const filePath = dirPath + 'detail.js'
-  const fileApi = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, modelSchema)
 
   const routerPath = path.join('./admin/frontend/router.js')
 
   scaffolding.replaceInFile(routerPath, '// #Import', 'import ' + s.capitalize(modelSchema.name) + 'Detail from \'./pages/' + modelSchema.name + 's/detail\'\n// #Import')
-  scaffolding.replaceInFile(routerPath, '<div id=\'route\' />', '{' + s.capitalize(modelSchema.name) + 'Detail.asRouterItem()}\n          <div id=\'route\' />')
+  scaffolding.replaceInFile(routerPath, /{\/\* Add routes here \*\/}/, `{${s.capitalize(modelSchema.name)}Detail.asRouterItem()}\n          {/* Add routes here */}`)
 
   return true
 }, 500)

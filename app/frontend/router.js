@@ -1,12 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Redirect,
   Route
 } from 'react-router-dom'
 
-import tree from '~core/tree'
+import ErrorPage from '~base/components/error-page'
 import Layout from '~components/layout'
 
 import Home from './pages/home'
@@ -20,32 +19,16 @@ import ResetPassword from './pages/reset-password'
 
 import App from './pages/app'
 
-const LoginRoute = ({ component: Component, ...rest }) => {
-  return <Route {...rest} render={props => {
-    if (tree.get('loggedIn')) {
-      return <Redirect to={{
-        pathname: '/app'
-      }} />
-    } else {
-      return <Component {...props} />
-    }
-  }} />
-}
+class NotFoundPage extends Component {
+  constructor (props) {
+    super(props)
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return <Route {...rest} render={props => {
-    if (!tree.get('loggedIn')) {
-      return <Redirect to={{
-        pathname: '/log-in'
-      }} />
-    } else {
-      return <Component {...props} />
-    }
-  }} />
-}
+    this.state = {}
+  }
 
-const NoMatch = () => {
-  return <div>Not Found</div>
+  render () {
+    return <ErrorPage message='Not found' />
+  }
 }
 
 const AppRouter = () => {
@@ -64,7 +47,9 @@ const AppRouter = () => {
         {App.asRouterItem()}
         {Profile.asRouterItem()}
 
-        <Route component={NoMatch} />
+        {/* Add routes here */}
+
+        <Route component={NotFoundPage} />
       </Switch>
     </Layout>
   </Router>)

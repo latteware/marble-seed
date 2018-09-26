@@ -1,19 +1,17 @@
 import React from 'react'
-import Link from '~base/router/link'
 import api from '~base/api'
-import Loader from '~base/components/spinner'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
-import {{ name | capitalize }}Form from './components/form'
+import {{ name | capitalize }}Form from './form'
+import ConfirmButton from '~base/components/confirm-button'
 
 class {{ name | capitalize }}Detail extends PageComponent {
   constructor (props) {
     super(props)
 
     this.state = {
-      loading: true,
-      loaded: false,
+      ...this.baseState,
       {{ name }}: {}
     }
   }
@@ -35,36 +33,20 @@ class {{ name | capitalize }}Detail extends PageComponent {
 
   async deleteOnClick () {
     var url = '/admin/{{ name | lower }}s/' + this.props.match.params.uuid
-    await api.del(url)
+    const res = await api.del(url)
+
+    return res.data
+  }
+  
+  deleteSuccessHandler () {
     this.props.history.push('/admin/{{ name | lower }}s')
   }
 
-  getColumns () {
-    return [
-      {%- for item in fields -%}
-      {
-        title: '{{ item.name | capitalize }}',
-        property: '{{ item.name | lower }}',
-        default: 'N/A'
-      },
-      {% endfor -%}
-      {
-        'title': 'Actions',
-        formatter: (row) => {
-          return <Link className='button' to={'/{{ name | lower }}s/' + row.uuid}>
-            Detalle
-          </Link>
-        }
-      }
-    ]
-  }
-
   render () {
-    const { {{ name | lower }}, loaded } = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const { {{ name | lower }} } = this.state
 
     return (<div className='columns c-flex-1 is-marginless'>
       <div className='column is-paddingless'>
@@ -74,13 +56,15 @@ class {{ name | capitalize }}Detail extends PageComponent {
             <div className='column has-text-right'>
               <div className='field is-grouped is-grouped-right'>
                 <div className='control'>
-                  <button
+                  <ConfirmButton
+                    title='Delete {{ name | capitalize }}'
                     className='button is-danger'
-                    type='button'
-                    onClick={() => this.deleteOnClick()}
+                    classNameButton='button is-danger'
+                    onConfirm={() => this.deleteOnClick()}
+                    onSuccess={() => this.deleteSuccessHandler()}
                   >
                     Delete
-                  </button>
+                  </ConfirmButton>
                 </div>
               </div>
             </div>
@@ -98,15 +82,9 @@ class {{ name | capitalize }}Detail extends PageComponent {
                     <div className='column'>
                       <{{ name | capitalize }}Form
                         url={'/admin/{{ name | lower }}s/' + this.props.match.params.uuid}
-                        initialState={ {{ name | lower }} }
+                        formData={ {{ name | lower }} }
                         load={() => this.reload()}
-                      >
-                        <div className='field is-grouped'>
-                          <div className='control'>
-                            <button className='button is-primary'>Save</button>
-                          </div>
-                        </div>
-                      </{{ name | capitalize }}Form>
+                      />
                     </div>
                   </div>
                 </div>

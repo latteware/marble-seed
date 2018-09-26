@@ -84,7 +84,7 @@ class RequestLog extends Component {
     const { log } = this.props
     const { toggled } = this.state
 
-    const className = classNames('request-log message is-small', {
+    const className = classNames('request-log message ', {
       'is-danger': log.status >= 500,
       'is-warning': log.status >= 400 && log.status < 500,
       'is-success': log.status >= 200 && log.status < 400,
@@ -147,7 +147,7 @@ class RequestLogs extends PageComponent {
     super(props)
 
     this.state = {
-      loaded: false,
+      ...this.baseState,
       loadingLogs: false,
       logsPerPage: 20,
       filters: {},
@@ -332,12 +332,11 @@ class RequestLogs extends PageComponent {
   }
 
   render () {
-    const { loaded, metadata, logs, error } = this.state
-    const { pathnames } = metadata
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
-    }
+    const { metadata, logs, error } = this.state
+    const { pathnames } = metadata
 
     const loading = this.state.loadingLogs
     const more = (logs.total / logs.data.length) > 1

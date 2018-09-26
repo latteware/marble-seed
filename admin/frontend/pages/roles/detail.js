@@ -4,16 +4,16 @@ import api from '~base/api'
 
 import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
-import Loader from '~base/components/spinner'
 import RoleForm from './form'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
+import ConfirmButton from '~base/components/confirm-button'
 
 class RoleDetail extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      loading: true,
-      loaded: false,
+      ...this.baseState,
       role: {}
     }
   }
@@ -58,7 +58,12 @@ class RoleDetail extends PageComponent {
 
   async deleteOnClick () {
     var url = '/admin/roles/' + this.props.match.params.uuid
-    await api.del(url)
+    const res = await api.del(url)
+
+    return res.data
+  }
+
+  deleteSuccessHandler () {
     this.props.history.push('/admin/manage/roles')
   }
 
@@ -68,55 +73,46 @@ class RoleDetail extends PageComponent {
     this.reload()
   }
 
-  getDeleteButton () {
-    if (!this.state.role.isDefault) {
-      return (
-        <div className='column has-text-right'>
-          <div className='field is-grouped is-grouped-right'>
-            <div className='control'>
-              <button
-                className='button is-danger'
-                type='button'
-                onClick={() => this.deleteOnClick()}
-                >
-                  Delete
-                </button>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    return null
-  }
-
-  getDefaultButton () {
-    if (!this.state.role.isDefault) {
-      return (
-        <div className='column'>
-          <div className='field is-grouped is-grouped-left'>
-            <div className='control'>
-              <button
-                className='button is-primary'
-                type='button'
-                onClick={() => this.defaultOnClick()}
-                >
-                  Set as default
-                </button>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    return null
-  }
-
   render () {
-    const {role, loaded} = this.state
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
 
-    if (!loaded) {
-      return <Loader />
+    const {role} = this.state
+
+    let defaultButton
+    if (!role.isDefault) {
+      defaultButton = <div className='column'>
+        <div className='field is-grouped is-grouped-left'>
+          <div className='control'>
+            <button
+              className='button is-primary'
+              type='button'
+              onClick={() => this.defaultOnClick()}
+              >
+                Set as default
+              </button>
+          </div>
+        </div>
+      </div>
+    }
+
+    let deleteButton
+    if (!this.state.role.isDefault) {
+      deleteButton = <div className='column has-text-right'>
+        <div className='field is-grouped is-grouped-right'>
+          <div className='control'>
+            <ConfirmButton
+              title='Delete Role'
+              className='button is-danger'
+              classNameButton='button is-danger'
+              onConfirm={() => this.deleteOnClick()}
+              onSuccess={() => this.deleteSuccessHandler()}
+            >
+              Delete
+            </ConfirmButton>
+          </div>
+        </div>
+      </div>
     }
 
     return (
@@ -127,8 +123,8 @@ class RoleDetail extends PageComponent {
               {this.getBreadcrumbs()}
             </div>
             <div className='columns'>
-              {this.getDefaultButton()}
-              {this.getDeleteButton()}
+              {defaultButton}
+              {deleteButton}
             </div>
             <div className='columns'>
               <div className='column'>

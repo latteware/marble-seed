@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import Page from '~base/page'
+import PageComponent from '~base/page-component'
 import tree from '~core/tree'
 import api from '~base/api'
 import {forcePublic} from '~base/middlewares/'
@@ -22,23 +22,21 @@ const schema = {
   }
 }
 
-class EmailResetLanding extends Component {
+class EmailResetLanding extends PageComponent {
   constructor (props) {
     super(props)
+
     this.state = {
-      loading: false,
-      formData: {
-        password_1: '',
-        password_2: ''
-      },
-      apiCallMessage: 'is-hidden',
-      apiCallErrorMessage: 'is-hidden',
+      ...this.baseState,
+      formData: {},
       user: {}
     }
   }
 
-  componentWillMount () {
-    this.verifyToken()
+  async onPageEnter () {
+    const data = await this.verifyToken()
+
+    return data
   }
 
   async verifyToken () {
@@ -64,11 +62,10 @@ class EmailResetLanding extends Component {
       })
     }
 
-    this.setState({
-      ...this.state,
+    return {
       token: tokenData.token,
       user: data.user
-    })
+    }
   }
 
   changeHandler (formData) {
@@ -93,6 +90,10 @@ class EmailResetLanding extends Component {
 
     const data = await api.post('/user/set-password', postData)
 
+    return data
+  }
+
+  successHandler (data) {
     window.localStorage.setItem('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
@@ -101,6 +102,9 @@ class EmailResetLanding extends Component {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     const {errors, user} = this.state
 
     let contentEl
@@ -141,6 +145,7 @@ class EmailResetLanding extends Component {
               formData={this.state.formData}
               errors={errors}
               onSubmit={(data) => this.submitHandler(data)}
+              onSuccess={(data) => this.successHandler(data)}
               onChange={(data) => this.changeHandler(data)}
               defaultSuccessMessage={'User was updated correctly'}
             />
@@ -157,9 +162,11 @@ class EmailResetLanding extends Component {
   }
 }
 
-export default Page({
+EmailResetLanding.config({
   path: '/emails/reset',
   exact: true,
   validate: forcePublic,
   component: EmailResetLanding
 })
+
+export default EmailResetLanding

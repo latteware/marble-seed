@@ -7,10 +7,15 @@ class Buttons extends PageComponent {
   constructor (props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      ...this.baseState
+    }
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     return (
       <div className='button-page columns c-flex-1 is-marginless buttons-test'>
         <div className='column is-paddingless'>
