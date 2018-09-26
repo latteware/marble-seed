@@ -117,9 +117,10 @@ class EmailInviteLanding extends PageComponent {
                 schema={schema}
                 onChange={(data) => this.changeHandler(data)}
                 onSubmit={(data) => this.submitHandler(data)}
-                onSucess={(data) => this.successHandler(data)}
+                onSuccess={(data) => this.successHandler(data)}
                 errors={this.state.errors}
                 buttonLabel='Create password'
+                defaultSuccessMessage={'Password added, redirecting to the app'}
               />
             </div>
           </div>

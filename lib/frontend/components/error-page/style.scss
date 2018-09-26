@@ -28,6 +28,18 @@
   }
 }
 
+.loader-wrapper{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 64px;
+  padding-bottom: 64px;
+  font-size: 140%;
+  color: #093952;
+}
+
 .container-not-found {
   font-family: 'Varela Round', sans-serif;
   position: relative;

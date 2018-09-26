@@ -131,7 +131,7 @@ class EmailResetLanding extends PageComponent {
                 onSubmit={(data) => this.submitHandler(data)}
                 onChange={(data) => this.changeHandler(data)}
                 onSuccess={(data) => this.successHandler(data)}
-                defaultSuccessMessage={'User was updated correctly'}
+                defaultSuccessMessage={'Password added, redirecting to the app'}
               />
             </div>
           </div>

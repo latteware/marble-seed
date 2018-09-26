@@ -87,7 +87,7 @@ class AdminLayout extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <Loader className='boo-wrapper' style={{fontSize: '140%', color: '#093952'}} />
+      return <Loader className='loader-wrapper' />
     }
 
     if (this.state.hasLoadError) {
