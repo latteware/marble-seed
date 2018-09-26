@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
 
+import ErrorPage from '~base/components/error-page'
 import AdminLayout from '~components/admin-layout'
 
 import LogIn from './pages/log-in'
@@ -28,8 +29,16 @@ import Buttons from './pages/ui-components/buttons'
 import FormBuilder from './pages/developer-tools/form-builder'
 // #Import
 
-const NoMatch = () => {
-  return <div>Not Found</div>
+class NotFoundPage extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  render () {
+    return <ErrorPage message='Not found' />
+  }
 }
 
 const AppRouter = () => {
@@ -62,8 +71,9 @@ const AppRouter = () => {
           {Buttons.asRouterItem()}
           {FormBuilder.asRouterItem()}
 
-          <div id='route' />
-          <Route component={NoMatch} />
+          {/* Add routes here */}
+
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
     </AdminLayout>

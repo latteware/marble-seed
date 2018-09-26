@@ -9,9 +9,11 @@ import 'react-datepicker/src/stylesheets/datepicker.scss'
 import MarbleForm from '~base/components/marble-form'
 
 class FormBuilderContainer extends PageComponent {
-  constructor () {
-    super(...arguments)
+  constructor (props) {
+    super(props)
+
     this.state = {
+      ...this.baseState,
       schema: {},
       formData: {},
       result: null,
@@ -39,6 +41,9 @@ class FormBuilderContainer extends PageComponent {
   }
 
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     const { schema, currentDisplay, result, formData } = this.state
 
     const formEl = <div>

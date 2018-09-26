@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
-
-import Page from '~base/page'
+import React from 'react'
+import PageComponent from '~base/page-component'
 import {loggedIn} from '~base/middlewares/'
 
 import UpdatePasswordForm from '~base/components/update-password'
 import UpdateProfileForm from '~base/components/update-profile'
 import TokensList from '~base/components/token-list'
 
-class Profile extends Component {
+class Profile extends PageComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      ...this.baseState
+    }
+  }
+
   render () {
+    const basicStates = super.getBasicStates()
+    if (basicStates) { return basicStates }
+
     return (
       <section className='section'>
         <div className='columns is-multiline'>
@@ -39,10 +48,12 @@ class Profile extends Component {
   }
 }
 
-export default Page({
+Profile.config({
   path: '/profile',
   title: 'Profile',
   exact: true,
   validate: loggedIn,
   component: Profile
 })
+
+export default Profile

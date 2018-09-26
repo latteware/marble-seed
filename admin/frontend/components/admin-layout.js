@@ -4,6 +4,8 @@ import { root } from 'baobab-react/higher-order'
 
 import api from '~base/api'
 import tree from '~core/tree'
+import ErrorPage from '~base/components/error-page'
+import Loader from '~base/components/spinner'
 
 import Sidebar from '~components/sidebar'
 import Footer from '~components/footer'
@@ -16,7 +18,9 @@ class AdminLayout extends Component {
       user: {},
       loaded: false,
       burger: false,
-      menuCollapse: false
+      menuCollapse: false,
+      hasLoadError: false,
+      error: ''
     }
   }
 
@@ -47,8 +51,12 @@ class AdminLayout extends Component {
           tree.commit()
         }
 
-        this.setState({loaded: true})
-        return
+        // Loaded and has errors
+        return this.setState({
+          loaded: true,
+          hasLoadError: true,
+          error: err.message
+        })
       }
 
       if (!me.user.isAdmin) {
@@ -79,7 +87,11 @@ class AdminLayout extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <div>Loading...</div>
+      return <Loader className='loader-wrapper' />
+    }
+
+    if (this.state.hasLoadError) {
+      return <ErrorPage message={this.state.error} />
     }
 
     if (!isEmpty(this.state.user)) {

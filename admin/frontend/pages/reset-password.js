@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import Page from '~base/page'
+import PageComponent from '~base/page-component'
 import api from '~base/api'
 import env from '~base/env-variables'
 import {forcePublic} from '~base/middlewares/'
@@ -15,20 +15,12 @@ const schema = {
   }
 }
 
-class ResetPassword extends Component {
+class ResetPassword extends PageComponent {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false,
-      formData: {
-        email: ''
-      }
-    }
-  }
-
-  changeHandler ({formData}) {
-    if (!this.state.bigError) {
-      this.setState({formData})
+      ...this.baseState,
+      formData: {}
     }
   }
 
@@ -36,11 +28,9 @@ class ResetPassword extends Component {
     formData.admin = true
 
     await api.post('/user/reset-password', formData)
+  }
 
-    this.setState({
-      loading: false
-    })
-
+  successHandler () {
     setTimeout(() => {
       this.props.history.push(env.PREFIX + '/log-in', {})
     }, 5000)
@@ -70,10 +60,9 @@ class ResetPassword extends Component {
                 schema={schema}
                 formData={this.state.formData}
                 onSubmit={(data) => this.submitHandler(data)}
-                onChange={(data) => this.changeHandler(data)}
+                onSuccess={(data) => this.successHandler(data)}
                 label='Send reset password link'
                 defaultSuccessMessage='Link has been sended to your email'
-                defaultErrorMessage='We cant process this request currently'
               />
             </div>
           </div>
@@ -83,9 +72,11 @@ class ResetPassword extends Component {
   }
 }
 
-export default Page({
+ResetPassword.config({
   path: '/password/forgotten',
   exact: true,
   validate: forcePublic,
   component: ResetPassword
 })
+
+export default ResetPassword
