@@ -7,8 +7,6 @@ const Models = require('models')
 const fs = require('fs')
 const _ = require('lodash')
 
-var argv = require('minimist')(process.argv.slice(2))
-
 const task = new Task(async function (argv) {
   if (!argv.file) {
     throw new Error('A JSON file with the data is required!')
