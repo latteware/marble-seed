@@ -4,10 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.4] -
+### Changed
+- Upgraded all task to the correct format
+
+### Removed
+- Remove storybooks 
+
+## [0.6.3] - 
+### Added
+- Added task as Queue and as Background job
+- Added Marble Form component, review docs [here](https://www.notion.so/marbleform/Marble-form-06ab3c3054644dacb754ab9164d594df) 
+
 ## [0.6.2] - 
 
 ### Added
-- Added Marble Form component, review docs [here](https://www.notion.so/marbleform/Marble-form-06ab3c3054644dacb754ab9164d594df) 
 - Added form builder on developer tools
 
 ### Changed
