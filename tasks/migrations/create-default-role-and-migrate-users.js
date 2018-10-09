@@ -1,56 +1,47 @@
 // node tasks/create-defaul-role-and-migrate-users --save
 require('../../config')
+require('lib/databases/mongo')
+
+const Task = require('lib/task')
 const fs = require('fs')
-const connection = require('lib/databases/mongo')
 const {User, Role} = require('models')
 
-var argv = require('minimist')(process.argv.slice(2))
-
-var today = new Date()
-var timestamp = today.getTime()
-
+const today = new Date()
+const timestamp = today.getTime()
 const output = fs.createWriteStream(
   './tasks/migrations/logs/create-default-role-and-migrate-users-' + timestamp + '.txt'
 )
 
-var migrateUsers = async function () {
-  console.log('Starting .....')
-  try {
-    console.log('Fetching users .....')
-    var users = await User.find({})
+const task = new Task(async function (argv) {
+  console.log('Fetching users .....')
+  var users = await User.find({})
 
-    let defaultRole = await Role.findOne({name: 'Default'})
-    if (!defaultRole) {
-      defaultRole = await Role.create({
-        name: 'Default',
-        slug: 'default',
-        description: 'Default role',
-        isDefault: true
-      })
-    }
-
-    console.log('Applying migration .....')
-    for (var user of users) {
-      if (!user.role) {
-        user.role = defaultRole
-
-        if (argv.save) await user.save()
-        else output.write(user.uuid + ' role: ' + user.role + '\n')
-      }
-    }
-  } catch (e) {
-    console.log('ERROR!!!!')
-    console.log(e)
-    output.write('ERROR!!!! \n')
-    output.write(e)
+  let defaultRole = await Role.findOne({name: 'Default'})
+  if (!defaultRole) {
+    defaultRole = await Role.create({
+      name: 'Default',
+      slug: 'default',
+      description: 'Default role',
+      isDefault: true
+    })
   }
 
-  console.log('All done! Bye!')
-  connection.close()
-}
+  console.log('Applying migration .....')
+  for (var user of users) {
+    if (!user.role) {
+      user.role = defaultRole
+
+      if (argv.save) await user.save()
+      else output.write(user.uuid + ' role: ' + user.role + '\n')
+    }
+  }
+
+  return `Users ${users.length} users`
+})
 
 if (require.main === module) {
-  migrateUsers()
+  task.setCliHandlers()
+  task.run()
 } else {
-  module.exports = migrateUsers
+  module.exports = task
 }
