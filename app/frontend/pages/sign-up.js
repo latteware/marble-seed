@@ -75,7 +75,7 @@ class SignUp extends PageComponent {
             <div className='content'>
               <MarbleForm
                 schema={schema}
-                onSubmit={(e) => { this.submitHandler(e) }}
+                onSubmit={(e) => this.submitHandler(e)}
                 onSuccess={(data) => this.successHandler(data)}
                 buttonLabel='Sign up'
               />
