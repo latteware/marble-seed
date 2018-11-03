@@ -80,9 +80,7 @@ class NavBar extends Component {
       navbarMenuClassName = 'navbar-menu is-active'
     }
 
-    var navButtons
-    let avatar
-    let username
+    let navButtons, navMainLink, avatar, username
     if (this.props.loggedIn) {
       avatar = 'http://1bigappstore.com/images/avt-default.jpg'
 
@@ -117,6 +115,10 @@ class NavBar extends Component {
           </div>
         </div>
       </div>)
+
+      navMainLink = (<NavLink exact className='navbar-item' to='/app'>
+        Marble Seeds
+      </NavLink>)
     } else {
       navButtons = (<div className='navbar-end'>
         <div className='navbar-item'>
@@ -130,14 +132,14 @@ class NavBar extends Component {
           </div>
         </div>
       </div>)
+
+      navMainLink = (<NavLink className='navbar-item' exact to='/'>Marble Seeds</NavLink>)
     }
 
     return (
       <nav className='navbar'>
         <div className='navbar-brand'>
-          <NavLink exact className='navbar-item' to='/'>
-            Marble Seeds
-          </NavLink>
+          {navMainLink}
 
           <div className='navbar-burger burger' onClick={(e) => this.handleNavbarBurgerClick(e)}>
             <span />
