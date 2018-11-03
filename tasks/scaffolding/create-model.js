@@ -80,7 +80,7 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/model.js')
   const dirPath = path.join('./models/')
   const filePath = path.join('./models/' + model.name + '.js')
-  const fileModel = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, model)
+  await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, model)
 
   const modelIndexPath = path.join('./models/index.js')
 
