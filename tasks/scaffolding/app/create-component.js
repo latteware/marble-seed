@@ -12,7 +12,7 @@ const componentTemplate = './tasks/scaffolding/templates/app/frontend/component.
 const task = new Task(async function (argv) {
   const QUESTIONS = [
     {
-      name: 'componentName',
+      name: 'name',
       type: 'input',
       message: 'Whats is the name of the component?'
     }
@@ -21,8 +21,8 @@ const task = new Task(async function (argv) {
   const answers = await scaffolding.prompt(QUESTIONS)
 
   const templateData = {
-    name: answers.componentName,
-    className: s(answers.componentName).camelcase().capitalize().value(),
+    name: answers.name,
+    className: s.classify(answers.name),
     slug: s.slugify(answers.componentName)
   }
 
