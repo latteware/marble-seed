@@ -25,9 +25,19 @@ const schema = {
 class LogIn extends PageComponent {
   constructor (props) {
     super(props)
+
+    const expiredSession = tree.get('expiredSession')
+    tree.set('expiredSession', false)
+    tree.commit()
+
     this.state = {
-      ...this.baseState
+      ...this.baseState,
+      expiredSession
     }
+  }
+
+  removeExpiredSession () {
+    this.setState({expiredSession: false})
   }
 
   async submitHandler (formData) {
@@ -61,6 +71,18 @@ class LogIn extends PageComponent {
       )
     }
 
+    let expiredSession
+    if (this.state.expiredSession) {
+      expiredSession = <div className='columns'>
+        <div className='column'>
+          <div className='notification is-warning'>
+            <button className='delete' onClick={() => this.removeExpiredSession()} />
+            Session expired
+          </div>
+        </div>
+      </div>
+    }
+
     return (
       <div className='LogIn single-form'>
         <div className='card'>
@@ -76,6 +98,7 @@ class LogIn extends PageComponent {
           </header>
           <div className='card-content'>
             <div className='content'>
+              {expiredSession}
               <div className='columns'>
                 <div className='column'>
                   <MarbleForm
