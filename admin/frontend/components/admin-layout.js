@@ -1,7 +1,9 @@
 import {isEmpty} from 'lodash'
 import React, { Component } from 'react'
 import { root } from 'baobab-react/higher-order'
+import { withRouter } from 'react-router'
 
+import env from '~base/env-variables'
 import api from '~base/api'
 import tree from '~core/tree'
 import ErrorPage from '~base/components/error-page'
@@ -48,38 +50,42 @@ class AdminLayout extends Component {
         if (err.status === 401) {
           window.localStorage.removeItem('jwt')
           tree.set('jwt', null)
+          tree.set('expiredSession', true)
           tree.commit()
+
+          this.props.history.push(env.PREFIX + '/log-in')
+        } else {
+          // Loaded and has errors
+          return this.setState({
+            loaded: true,
+            hasLoadError: true,
+            error: err.message
+          })
+        }
+      }
+
+      if (me) {
+        if (!me.user.isAdmin) {
+          const {history} = this.props
+
+          window.localStorage.removeItem('jwt')
+          tree.set('jwt', null)
+          tree.set('user', null)
+          tree.set('loggedIn', false)
+          tree.commit()
+
+          history.push('/')
         }
 
-        // Loaded and has errors
-        return this.setState({
-          loaded: true,
-          hasLoadError: true,
-          error: err.message
-        })
-      }
+        tree.set('user', me.user)
+        tree.set('loggedIn', me.loggedIn)
 
-      if (!me.user.isAdmin) {
-        const {history} = this.props
-
-        window.localStorage.removeItem('jwt')
-        tree.set('jwt', null)
-        tree.set('user', null)
-        tree.set('loggedIn', false)
         tree.commit()
-
-        history.push('/')
       }
-
-      tree.set('user', me.user)
-      tree.set('loggedIn', me.loggedIn)
-
-      tree.commit()
     }
 
     const config = await api.get('/app-config')
     tree.set('config', config)
-
     tree.commit()
 
     this.setState({loaded: true})
@@ -115,4 +121,4 @@ class AdminLayout extends Component {
   }
 }
 
-export default root(tree, AdminLayout)
+export default root(tree, withRouter(AdminLayout))
