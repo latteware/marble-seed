@@ -3,6 +3,7 @@ import { NavLink } from '~base/router'
 import { branch } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router'
 
+import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
 
@@ -57,7 +58,7 @@ class NavBar extends Component {
       console.log('Error removing token, logging out anyway ...')
     }
 
-    window.localStorage.removeItem('jwt')
+    storage.remove('jwt')
     tree.set('jwt', null)
     tree.set('user', null)
     tree.set('loggedIn', false)
