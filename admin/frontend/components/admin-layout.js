@@ -4,6 +4,7 @@ import { root } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router'
 
 import env from '~base/env-variables'
+import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
 import ErrorPage from '~base/components/error-page'
@@ -48,7 +49,7 @@ class AdminLayout extends Component {
         me = await api.get('/user/me')
       } catch (err) {
         if (err.status === 401) {
-          window.localStorage.removeItem('jwt')
+          storage.remove('jwt')
           tree.set('jwt', null)
           tree.set('expiredSession', true)
           tree.commit()
@@ -68,7 +69,7 @@ class AdminLayout extends Component {
         if (!me.user.isAdmin) {
           const {history} = this.props
 
-          window.localStorage.removeItem('jwt')
+          storage.remove('jwt')
           tree.set('jwt', null)
           tree.set('user', null)
           tree.set('loggedIn', false)

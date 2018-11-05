@@ -1,6 +1,7 @@
 import React from 'react'
 import PageComponent from '~base/page-component'
 
+import storage from '~base/storage'
 import tree from '~core/tree'
 import api from '~base/api'
 
@@ -92,7 +93,7 @@ class EmailResetLanding extends PageComponent {
   }
 
   successHandler (data) {
-    window.localStorage.setItem('jwt', data.jwt)
+    storage.set('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
     tree.set('loggedIn', true)
