@@ -46,7 +46,7 @@
     "inline-css": "^2.2.2",
     "inquirer": "^4.0.0",
     "json2csv": "^4.1.3",
-    "jsonwebtoken": "^7.4.2",
+    "jsonwebtoken": "^8.4.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^2.5.0",
     "koa-cors": "0.0.16",
@@ -72,7 +72,7 @@
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
     "react-sortable-hoc": "^0.8.3",
-    "replace": "^0.3.0",
+    "replace": "^1.0.1",
     "request-promise-native": "^1.0.5",
     "sass-loader": "^6.0.6",
     "shortid": "^2.2.8",
@@ -81,7 +81,7 @@
     "traverse": "^0.6.6",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "underscore.string": "^3.3.4",
-    "url-loader": "^0.5.9",
+    "url-loader": "^1.1.2",
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2"
@@ -90,8 +90,8 @@
     "chai": "^4.1.1",
     "co-mocha": "^1.2.0",
     "co-supertest": "0.0.10",
-    "mocha": "^3.5.0",
-    "nodemon": "^1.11.0",
-    "supertest": "^1.0"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "supertest": "^3.4.2"
   }
 }
