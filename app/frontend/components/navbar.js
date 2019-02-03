@@ -3,6 +3,7 @@ import { NavLink } from '~base/router'
 import { branch } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router'
 
+import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
 
@@ -57,7 +58,7 @@ class NavBar extends Component {
       console.log('Error removing token, logging out anyway ...')
     }
 
-    window.localStorage.removeItem('jwt')
+    storage.remove('jwt')
     tree.set('jwt', null)
     tree.set('user', null)
     tree.set('loggedIn', false)
@@ -80,9 +81,7 @@ class NavBar extends Component {
       navbarMenuClassName = 'navbar-menu is-active'
     }
 
-    var navButtons
-    let avatar
-    let username
+    let navButtons, navMainLink, avatar, username
     if (this.props.loggedIn) {
       avatar = 'http://1bigappstore.com/images/avt-default.jpg'
 
@@ -92,7 +91,7 @@ class NavBar extends Component {
 
       navButtons = (<div className='navbar-end'>
         <div className='navbar-item is-size-7 has-text-grey is-capitalized'>
-          Bienvenido { username }
+          Welcome { username }
         </div>
         <div className='is-flex is-align-center'>
           <img className='is-rounded' src={avatar} width='40' height='45' alt='Avatar' />
@@ -117,6 +116,10 @@ class NavBar extends Component {
           </div>
         </div>
       </div>)
+
+      navMainLink = (<NavLink exact className='navbar-item' to='/app'>
+        Marble Seeds
+      </NavLink>)
     } else {
       navButtons = (<div className='navbar-end'>
         <div className='navbar-item'>
@@ -130,14 +133,14 @@ class NavBar extends Component {
           </div>
         </div>
       </div>)
+
+      navMainLink = (<NavLink className='navbar-item' exact to='/'>Marble Seeds</NavLink>)
     }
 
     return (
       <nav className='navbar'>
         <div className='navbar-brand'>
-          <NavLink className='navbar-item' to='/'>
-            <h1>Marble Seeds</h1>
-          </NavLink>
+          {navMainLink}
 
           <div className='navbar-burger burger' onClick={(e) => this.handleNavbarBurgerClick(e)}>
             <span />

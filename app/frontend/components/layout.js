@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { root } from 'baobab-react/higher-order'
+import { withRouter } from 'react-router'
 
+import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
 import ErrorPage from '~base/components/error-page'
@@ -33,29 +35,33 @@ class Layout extends Component {
         me = await api.get('/user/me')
       } catch (err) {
         if (err.status === 401) {
-          window.localStorage.removeItem('jwt')
+          storage.remove('jwt')
           tree.set('jwt', null)
+          tree.set('expiredSession', true)
           tree.commit()
-        }
 
-        return this.setState({
-          loaded: true,
-          hasLoadError: true,
-          error: err.message
-        })
+          this.props.history.push('/log-in')
+        } else {
+          return this.setState({
+            loaded: true,
+            hasLoadError: true,
+            error: err.message
+          })
+        }
       }
 
-      tree.set('user', me.user)
-      tree.set('loggedIn', me.loggedIn)
+      if (me) {
+        tree.set('user', me.user)
+        tree.set('loggedIn', me.loggedIn)
 
-      tree.commit()
+        tree.commit()
+      }
     }
 
     const config = await api.get('/app-config')
+
     tree.set('config', config)
-
     tree.commit()
-
     this.setState({loaded: true})
   }
 
@@ -78,4 +84,4 @@ class Layout extends Component {
   }
 }
 
-export default root(tree, Layout)
+export default root(tree, withRouter(Layout))

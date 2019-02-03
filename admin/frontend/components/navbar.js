@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { branch } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router'
 
+import storage from '~base/storage'
 import tree from '~core/tree'
 
 class AdminNavBar extends Component {
@@ -17,7 +18,7 @@ class AdminNavBar extends Component {
   handleLogout () {
     const {history} = this.props
 
-    window.localStorage.removeItem('jwt')
+    storage.remove('jwt')
     tree.set('jwt', null)
     tree.set('user', null)
     tree.set('loggedIn', false)

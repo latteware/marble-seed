@@ -47,7 +47,8 @@ module.exports = {
       'PREFIX': JSON.stringify(''),
       'API_HOST': JSON.stringify(config.server.apiHost),
       'EMAIL_SEND': JSON.stringify(config.mailer.active),
-      'BASE_TITLE': JSON.stringify(config.server.adminTitle)
+      'BASE_TITLE': JSON.stringify(config.server.adminTitle),
+      'STORAGE_PREFIX': JSON.stringify(config.storage.prefix)
     }),
     new webpack.DefinePlugin({
       'process.env': {

@@ -1,7 +1,9 @@
 import Baobab from 'baobab'
 
+import storage from '~base/storage'
+
 const initialState = {
-  jwt: window.localStorage.getItem('jwt'),
+  jwt: storage.get('jwt'),
   config: {}
 }
 
