@@ -26,7 +26,7 @@ class OrganizationForm extends Component {
   }
 
   changeHandler (formData) {
-    this.setState({formData})
+    this.setState({ formData })
   }
 
   async submitHandler (formData) {
@@ -43,7 +43,8 @@ class OrganizationForm extends Component {
   render () {
     return (
       <div>
-        <MarbleForm schema={schema}
+        <MarbleForm
+          schema={schema}
           formData={this.state.formData}
           onChange={(data) => this.changeHandler(data)}
           onSuccess={(data) => this.successHandler(data)}

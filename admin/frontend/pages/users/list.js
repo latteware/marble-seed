@@ -4,14 +4,14 @@ import env from '~base/env-variables'
 import Link from '~base/router/link'
 import api from '~base/api'
 import ListPageComponent from '~base/list-page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import CreateUser from './create'
 
 class UserList extends ListPageComponent {
   async onFirstPageEnter () {
     const organizations = await this.loadOrgs()
 
-    return {organizations}
+    return { organizations }
   }
 
   async loadOrgs () {
@@ -39,27 +39,27 @@ class UserList extends ListPageComponent {
         type: 'object',
         required: [],
         properties: {
-          screenName: {type: 'text', title: 'Por nombre'},
-          email: {type: 'text', title: 'Por email'},
-          organization: {type: 'text', title: 'Por organización', values: []}
+          screenName: { type: 'text', title: 'Por nombre' },
+          email: { type: 'text', title: 'Por email' },
+          organization: { type: 'text', title: 'Por organización', values: [] }
         }
       },
       uiSchema: {
-        screenName: {'ui:widget': 'SearchFilter'},
-        email: {'ui:widget': 'SearchFilter'},
-        organization: {'ui:widget': 'SelectSearchFilter'}
+        screenName: { 'ui:widget': 'SearchFilter' },
+        email: { 'ui:widget': 'SearchFilter' },
+        organization: { 'ui:widget': 'SelectSearchFilter' }
       }
     }
 
     if (this.state.organizations) {
-      data.schema.properties.organization.values = this.state.organizations.map(item => { return {uuid: item.uuid, name: item.name} })
+      data.schema.properties.organization.values = this.state.organizations.map(item => { return { uuid: item.uuid, name: item.name } })
     }
 
     return data
   }
 
   exportFormatter (row) {
-    return {name: row.name, email: row.email}
+    return { name: row.name, email: row.email }
   }
 
   getColumns () {
