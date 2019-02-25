@@ -4,7 +4,7 @@ import moment from 'moment'
 import env from '~base/env-variables'
 
 import ListPageComponent from '~base/list-page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import CreateOrganization from './create'
 
 class OrganizationList extends ListPageComponent {
@@ -50,24 +50,19 @@ class OrganizationList extends ListPageComponent {
   }
 
   getFilters () {
-    const data = {
-      schema: {
-        type: 'object',
-        required: [],
-        properties: {
-          name: {type: 'text', title: 'Por nombre'}
-        }
-      },
-      uiSchema: {
-        name: {'ui:widget': 'SearchFilter'}
+    const schema = {
+      name: {
+        widget: 'TextWidget',
+        name: 'name',
+        placeholder: 'Por nombre'
       }
     }
 
-    return data
+    return schema
   }
 
   exportFormatter (row) {
-    return {name: row.name}
+    return { name: row.name }
   }
 }
 
