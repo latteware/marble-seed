@@ -27,6 +27,8 @@ import RequestLogs from './pages/developer-tools/request-logs'
 import AppConfig from './pages/developer-tools/app-config'
 import Buttons from './pages/ui-components/buttons'
 import FormBuilder from './pages/developer-tools/form-builder'
+import EmailBuilder from './pages/developer-tools/email-builder/list'
+import EmailDetail from './pages/developer-tools/email-builder/detail'
 // #Import
 
 class NotFoundPage extends Component {
@@ -70,6 +72,8 @@ const AppRouter = () => {
           {AppConfig.asRouterItem()}
           {Buttons.asRouterItem()}
           {FormBuilder.asRouterItem()}
+          {EmailBuilder.asRouterItem()}
+          {EmailDetail.asRouterItem()}
 
           {/* Add routes here */}
 

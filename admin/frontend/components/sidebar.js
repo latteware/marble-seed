@@ -16,6 +16,7 @@ import Link from '~base/router/link'
 import AppConfig from '../pages/developer-tools/app-config'
 import RequestLogs from '../pages/developer-tools/request-logs'
 import FormBuilder from '../pages/developer-tools/form-builder'
+import EmailBuilder from '../pages/developer-tools/email-builder/list'
 
 // #Import
 
@@ -79,7 +80,8 @@ class Sidebar extends Component {
         dropdown: [
           RequestLogs.asSidebarItem(),
           AppConfig.asSidebarItem(),
-          FormBuilder.asSidebarItem()
+          FormBuilder.asSidebarItem(),
+          EmailBuilder.asSidebarItem()
         ]
       }, {
         title: 'Restore data',
