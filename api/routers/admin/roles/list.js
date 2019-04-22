@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {Role} = require('models')
+const { Role } = require('models')
 const QueryParams = require('lib/router/query-params')
 
 const queryParams = new QueryParams()
@@ -13,7 +13,7 @@ module.exports = new Route({
     var role = await Role.dataTables({
       limit: ctx.request.query.limit || 20,
       skip: ctx.request.query.start,
-      find: {isDeleted: false, ...filters},
+      find: { isDeleted: false, ...filters },
       sort: '-dateCreated',
       formatter: 'toAdmin'
     })

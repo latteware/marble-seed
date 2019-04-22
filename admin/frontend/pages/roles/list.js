@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import env from '~base/env-variables'
 import ListPageComponent from '~base/list-page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import CreateRole from './create'
 
 class RoleList extends ListPageComponent {
@@ -64,11 +64,11 @@ class RoleList extends ListPageComponent {
         type: 'object',
         required: [],
         properties: {
-          name: {type: 'text', title: 'Por nombre'}
+          name: { type: 'text', title: 'Por nombre' }
         }
       },
       uiSchema: {
-        name: {'ui:widget': 'SearchFilter'}
+        name: { 'ui:widget': 'SearchFilter' }
       }
     }
 
@@ -76,7 +76,7 @@ class RoleList extends ListPageComponent {
   }
 
   exportFormatter (row) {
-    return {name: row.name}
+    return { name: row.name }
   }
 }
 

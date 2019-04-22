@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../../utils')
 const api = require('api/')
 const request = require('supertest')
-const {AppConfig} = require('models')
+const { AppConfig } = require('models')
 
 function test () {
   return request(http.createServer(api.callback()))
@@ -231,14 +231,14 @@ describe('App Config admin API', () => {
         .send({
           key: 'foo',
           type: 'object',
-          value: {active: true}
+          value: { active: true }
         })
         .set('Accept', 'application/json')
         .expect(200)
 
       expect(res.body.key).equal('foo')
       expect(res.body.type).equal('object')
-      expect(res.body.value).to.deep.equal({active: true})
+      expect(res.body.value).to.deep.equal({ active: true })
     })
 
     it('should return a 422 for invalid boolean', async function () {
@@ -344,7 +344,7 @@ describe('App Config admin API', () => {
       expect(res.body.type).equal('string')
       expect(res.body.value).equal('quz')
 
-      const newConfig = await AppConfig.findOne({key: 'foo'})
+      const newConfig = await AppConfig.findOne({ key: 'foo' })
       expect(newConfig.value).equal('quz')
     })
 
@@ -367,7 +367,7 @@ describe('App Config admin API', () => {
       expect(res.body.type).equal('boolean')
       expect(res.body.value).equal(true)
 
-      const newConfig = await AppConfig.findOne({key: 'foo'})
+      const newConfig = await AppConfig.findOne({ key: 'foo' })
       expect(newConfig.value).equal(true)
     })
 
@@ -390,7 +390,7 @@ describe('App Config admin API', () => {
       expect(res.body.type).equal('boolean')
       expect(res.body.value).equal(false)
 
-      const newConfig = await AppConfig.findOne({key: 'foo'})
+      const newConfig = await AppConfig.findOne({ key: 'foo' })
       expect(newConfig.value).equal(false)
     })
 
@@ -411,7 +411,7 @@ describe('App Config admin API', () => {
       expect(res.body.type).equal('string')
       expect(res.body.value).equal(undefined)
 
-      const newConfig = await AppConfig.findOne({key: 'foo'})
+      const newConfig = await AppConfig.findOne({ key: 'foo' })
       expect(newConfig.value).equal(undefined)
     })
 
@@ -424,7 +424,7 @@ describe('App Config admin API', () => {
 
       const res = await test()
         .post('/api/admin/app-config/' + config.key)
-        .send({value: 'string'})
+        .send({ value: 'string' })
         .set('Accept', 'application/json')
 
       expect(res.status).equal(422)
@@ -440,7 +440,7 @@ describe('App Config admin API', () => {
 
       const res = await test()
         .post('/api/admin/app-config/' + config.key)
-        .send({value: 'string'})
+        .send({ value: 'string' })
         .set('Accept', 'application/json')
 
       expect(res.status).equal(422)
@@ -456,7 +456,7 @@ describe('App Config admin API', () => {
 
       const res = await test()
         .post('/api/admin/app-config/' + config.key)
-        .send({value: false})
+        .send({ value: false })
         .set('Accept', 'application/json')
 
       expect(res.status).equal(422)
@@ -472,7 +472,7 @@ describe('App Config admin API', () => {
 
       const res = await test()
         .post('/api/admin/app-config/' + config.key)
-        .send({value: 'string'})
+        .send({ value: 'string' })
         .set('Accept', 'application/json')
 
       expect(res.status).equal(422)
@@ -482,13 +482,13 @@ describe('App Config admin API', () => {
     it('should return a 422 for invalid object', async function () {
       const config = await AppConfig.create({
         key: 'foo',
-        value: {active: true},
+        value: { active: true },
         type: 'object'
       })
 
       const res = await test()
         .post('/api/admin/app-config/' + config.key)
-        .send({value: 'string'})
+        .send({ value: 'string' })
         .set('Accept', 'application/json')
 
       expect(res.status).equal(422)

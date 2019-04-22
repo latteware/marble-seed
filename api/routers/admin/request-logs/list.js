@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {RequestLog} = require('models')
+const { RequestLog } = require('models')
 const QueryParams = require('lib/router/query-params')
 
 const queryParams = new QueryParams()
@@ -42,8 +42,8 @@ queryParams.addFilter('uuid', async function (filters, value, ctx) {
 
   if (requestLog) {
     filters.$or = [
-      {_id: requestLog._id},
-      {replayFrom: requestLog._id}
+      { _id: requestLog._id },
+      { replayFrom: requestLog._id }
     ]
   } else {
     ctx.throw(404, 'Request log not found')
@@ -59,7 +59,7 @@ module.exports = new Route({
     const requestLogs = await RequestLog.dataTables({
       limit: ctx.request.query.limit || 20,
       skip: ctx.request.query.start,
-      find: {isDeleted: {$ne: true}, ...filters},
+      find: { isDeleted: { $ne: true }, ...filters },
       sort: ctx.request.query.sort || '-createdAt'
     })
 

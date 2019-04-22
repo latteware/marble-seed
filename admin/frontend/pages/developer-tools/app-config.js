@@ -4,7 +4,7 @@ import _ from 'lodash'
 import tree from '~core/tree'
 import api from '~base/api'
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import AppConfigItem from './components/app-config-item'
 
 class AppConfig extends PageComponent {
@@ -27,7 +27,7 @@ class AppConfig extends PageComponent {
   async onPageEnter () {
     const configs = await api.get('/admin/app-config', {})
 
-    return {configs}
+    return { configs }
   }
 
   async updateTree () {
@@ -78,10 +78,10 @@ class AppConfig extends PageComponent {
   }
 
   async handleSubmit (e) {
-    const {configs, newAppConfig} = this.state
+    const { configs, newAppConfig } = this.state
     e.preventDefault()
 
-    this.setState({submitting: true})
+    this.setState({ submitting: true })
 
     try {
       const data = {
@@ -101,15 +101,15 @@ class AppConfig extends PageComponent {
 
       this.updateTree()
     } catch (e) {
-      this.setState({error: e.message})
+      this.setState({ error: e.message })
       console.error('Error?', e)
     }
 
-    this.setState({submitting: false})
+    this.setState({ submitting: false })
   }
 
   async handleUpdateItem (data) {
-    const {configs} = this.state
+    const { configs } = this.state
 
     const res = await api.post(`/admin/app-config/${data.key}`, {
       value: this._parseValue(data.type, data.value)
@@ -129,7 +129,7 @@ class AppConfig extends PageComponent {
   }
 
   async handleRemoveItem (data) {
-    const {configs} = this.state
+    const { configs } = this.state
 
     try {
       await api.del(`/admin/app-config/${data.key}`)
@@ -145,7 +145,7 @@ class AppConfig extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {newAppConfig, configs, error} = this.state
+    const { newAppConfig, configs, error } = this.state
 
     let valueInput = (<div className='control'>
       <input className='input'
@@ -303,9 +303,9 @@ AppConfig.config({
   title: 'App config',
   icon: 'bandcamp',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Developer tools'},
-    {label: 'App config'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Developer tools' },
+    { label: 'App config' }
   ],
   exact: true,
   validate: loggedIn

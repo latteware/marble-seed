@@ -1,6 +1,6 @@
 const Route = require('lib/router/route')
 
-const {Role} = require('models')
+const { Role } = require('models')
 
 module.exports = new Route({
   method: 'get',
@@ -8,7 +8,7 @@ module.exports = new Route({
   handler: async function (ctx) {
     var roleId = ctx.params.uuid
 
-    const role = await Role.findOne({'uuid': roleId})
+    const role = await Role.findOne({ 'uuid': roleId })
     ctx.assert(role, 404, 'Role not found')
 
     ctx.body = {

@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../utils')
 const api = require('api/')
 const request = require('supertest')
-const {Organization} = require('models')
+const { Organization } = require('models')
 
 function test () {
   return request(http.createServer(api.callback()))
@@ -49,7 +49,7 @@ describe('Organization CRUD', () => {
         .expect(200)
 
       orgUuid = res.body.data.uuid
-      const newOrg = await Organization.findOne({'uuid': orgUuid})
+      const newOrg = await Organization.findOne({ 'uuid': orgUuid })
       expect(newOrg.name).equal('Una org')
       expect(newOrg.description).equal('Una descripción')
     })
@@ -94,7 +94,7 @@ describe('Organization CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newOrg = await Organization.findOne({'uuid': orgUuid})
+      const newOrg = await Organization.findOne({ 'uuid': orgUuid })
       expect(newOrg.name).equal('Una org')
       expect(newOrg.description).equal('Otra descripción')
     })
@@ -164,7 +164,7 @@ describe('Organization CRUD', () => {
     })
 
     it('should add a user to an organzation and return a 200', async function () {
-      const organization = await Organization.create({name: 'new organization'})
+      const organization = await Organization.create({ name: 'new organization' })
       const res = await test()
         .post('/api/admin/users/' + userUuid + '/add/organization')
         .send({
@@ -173,7 +173,7 @@ describe('Organization CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newOrg = await Organization.findOne({'uuid': organization.uuid}).populate('users')
+      const newOrg = await Organization.findOne({ 'uuid': organization.uuid }).populate('users')
 
       expect(res.body.data.organizations[0].uuid).equal(newOrg.uuid)
       expect(newOrg.users[0].uuid).equal(userUuid)
@@ -218,7 +218,7 @@ describe('Organization CRUD', () => {
         .expect(200)
 
       expect(res.body.data.organizations.length).equal(0)
-      const newOrg = await Organization.findOne({'uuid': orgUuid})
+      const newOrg = await Organization.findOne({ 'uuid': orgUuid })
       expect(newOrg.users.length).equal(0)
     })
   })
@@ -237,7 +237,7 @@ describe('Organization CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newOrg = await Organization.findOne({'uuid': orgUuid})
+      const newOrg = await Organization.findOne({ 'uuid': orgUuid })
       expect(newOrg.isDeleted).equal(true)
     })
   })

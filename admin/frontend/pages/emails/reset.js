@@ -4,7 +4,7 @@ import PageComponent from '~base/page-component'
 import storage from '~base/storage'
 import tree from '~core/tree'
 import api from '~base/api'
-import {forcePublic} from '~base/middlewares/'
+import { forcePublic } from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
 
@@ -106,7 +106,7 @@ class EmailResetLanding extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {errors, user} = this.state
+    const { errors, user } = this.state
 
     let contentEl
     if (user && !user.isAdmin) {

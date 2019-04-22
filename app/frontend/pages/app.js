@@ -2,7 +2,7 @@ import React from 'react'
 
 import request from '~core/request'
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 
 class App extends PageComponent {
   constructor (props) {
@@ -26,7 +26,7 @@ class App extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {posts} = this.state
+    const { posts } = this.state
 
     const postsList = posts.map(post => {
       return <div key={post.id}>

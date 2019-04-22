@@ -9,7 +9,7 @@ const queue = new Queue({
   task: async function (data) {
     console.log('Running queue with =>', data)
 
-    return {...data, success: true}
+    return { ...data, success: true }
   }
 })
 

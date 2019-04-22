@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase, createUser } = require('../utils')
 const api = require('api/')
 const request = require('supertest')
-const {User, UserToken} = require('models')
+const { User, UserToken } = require('models')
 const lov = require('lov')
 
 function test () {
@@ -70,7 +70,7 @@ describe('/user', () => {
 
     it('should return a 200', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       const res = await test()
@@ -113,7 +113,7 @@ describe('/user', () => {
 
     it('should return a 200', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
       const newPassword = '123'
 
@@ -130,7 +130,7 @@ describe('/user', () => {
 
       expect(res.body.user.uuid).equal(user.uuid)
 
-      const updatedUser = await User.findOne({uuid: user.uuid})
+      const updatedUser = await User.findOne({ uuid: user.uuid })
       expect(await updatedUser.validatePassword(newPassword)).equal(true)
     })
   })
@@ -171,7 +171,7 @@ describe('/user', () => {
 
     it('should return user data', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       const res = await test()
@@ -204,7 +204,7 @@ describe('/user', () => {
 
     it('should return user data', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'api'})
+      const token = await user.createToken({ type: 'api' })
       const basicAuth = Buffer.from(token.key + ':' + token.secret).toString('base64')
 
       const res = await test()
@@ -236,7 +236,7 @@ describe('/user', () => {
 
     it('should return a 403 when basic auth is sended', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'api'})
+      const token = await user.createToken({ type: 'api' })
       const basicAuth = Buffer.from(token.key + ':' + token.secret).toString('base64')
 
       await test()
@@ -249,12 +249,12 @@ describe('/user', () => {
 
     it('should return a 200 and token data for Bearer auth', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       const res = await test()
         .post('/api/user/tokens')
-        .send({name: 'new token'})
+        .send({ name: 'new token' })
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${jwt}`)
         .expect(200)
@@ -283,7 +283,7 @@ describe('/user', () => {
 
     it('should return a 403 when basic auth is sended', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'api'})
+      const token = await user.createToken({ type: 'api' })
       const basicAuth = Buffer.from(token.key + ':' + token.secret).toString('base64')
 
       await test()
@@ -295,20 +295,20 @@ describe('/user', () => {
 
     it('should return a 200 and token data for Bearer auth', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       // Create tokens
       await test()
         .post('/api/user/tokens')
-        .send({name: 'new token'})
+        .send({ name: 'new token' })
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${jwt}`)
         .expect(200)
 
       await test()
         .post('/api/user/tokens')
-        .send({name: 'secondary token'})
+        .send({ name: 'secondary token' })
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${jwt}`)
         .expect(200)
@@ -334,7 +334,7 @@ describe('/user', () => {
   describe('[delete] / Revoke current session token', () => {
     it('should return 401 after session token is revoked', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       const res = await test()
@@ -358,7 +358,7 @@ describe('/user', () => {
 
     it('should have one deleted token in the DB', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
       const res = await test()
@@ -369,7 +369,7 @@ describe('/user', () => {
 
       expect(res.body.loggedIn).equal(true)
 
-      expect(await UserToken.count({isDeleted: {$ne: true}})).equal(1)
+      expect(await UserToken.count({ isDeleted: { $ne: true } })).equal(1)
 
       await test().del('/api/user/')
         .set('Accept', 'application/json')
@@ -382,13 +382,13 @@ describe('/user', () => {
         .expect(401)
 
       expect(await UserToken.count()).equal(1)
-      expect(await UserToken.count({isDeleted: {$ne: true}})).equal(0)
+      expect(await UserToken.count({ isDeleted: { $ne: true } })).equal(0)
     })
 
     it('should return 403 is a api token tries to be revoked this way', async function () {
       const user = await createUser({ password })
 
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
       const basicAuth = Buffer.from(apiToken.key + ':' + apiToken.secret).toString('base64')
 
       await test().del('/api/user/')
@@ -408,10 +408,10 @@ describe('/user', () => {
 
     it('should return 200 and {success: true} when deleting with Bearer auth', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
 
       const res = await test()
         .del(`/api/user/tokens/${apiToken.uuid}`)
@@ -424,7 +424,7 @@ describe('/user', () => {
 
     it('should return 200 and {success: true} when deleting current api token', async function () {
       const user = await createUser({ password })
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
       const basicAuth = Buffer.from(apiToken.key + ':' + apiToken.secret).toString('base64')
 
       const res = await test()
@@ -438,8 +438,8 @@ describe('/user', () => {
 
     it('should return 403 and {success: true} when deleting other api token', async function () {
       const user = await createUser({ password })
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
-      const secondaryToken = await user.createToken({type: 'api', name: 'bar'})
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
+      const secondaryToken = await user.createToken({ type: 'api', name: 'bar' })
       const basicAuth = Buffer.from(apiToken.key + ':' + apiToken.secret).toString('base64')
 
       await test()
@@ -451,11 +451,11 @@ describe('/user', () => {
 
     it('should return be removed from the token list', async function () {
       const user = await createUser({ password })
-      const token = await user.createToken({type: 'session'})
+      const token = await user.createToken({ type: 'session' })
       const jwt = token.getJwt()
 
-      await user.createToken({type: 'api', name: 'bar'})
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
+      await user.createToken({ type: 'api', name: 'bar' })
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
       const basicAuth = Buffer.from(apiToken.key + ':' + apiToken.secret).toString('base64')
 
       const firstRes = await test()
@@ -485,7 +485,7 @@ describe('/user', () => {
     it('should return be removed from the token list', async function () {
       const user = await createUser({ password })
 
-      const apiToken = await user.createToken({type: 'api', name: 'foo'})
+      const apiToken = await user.createToken({ type: 'api', name: 'foo' })
       const basicAuth = Buffer.from(apiToken.key + ':' + apiToken.secret).toString('base64')
 
       await test()
@@ -501,7 +501,7 @@ describe('/user', () => {
         .expect(401)
 
       expect(await UserToken.count()).equal(1)
-      expect(await UserToken.count({isDeleted: {$ne: true}})).equal(0)
+      expect(await UserToken.count({ isDeleted: { $ne: true } })).equal(0)
     })
   })
 })

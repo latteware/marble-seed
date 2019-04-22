@@ -1,7 +1,7 @@
 const Route = require('lib/router/route')
 const QueryParams = require('lib/router/query-params')
 
-const {AppConfig} = require('models')
+const { AppConfig } = require('models')
 
 const queryParams = new QueryParams()
 

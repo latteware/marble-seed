@@ -1,6 +1,6 @@
 const Route = require('lib/router/route')
 
-const {User} = require('models')
+const { User } = require('models')
 
 module.exports = new Route({
   method: 'delete',
@@ -8,7 +8,7 @@ module.exports = new Route({
   handler: async function (ctx) {
     var userId = ctx.params.uuid
 
-    var user = await User.findOne({'uuid': userId, 'isDeleted': {$ne: true}})
+    var user = await User.findOne({ 'uuid': userId, 'isDeleted': { $ne: true } })
     ctx.assert(user, 404, 'User not found')
 
     user.set({

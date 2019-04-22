@@ -2,7 +2,7 @@ const Route = require('lib/router/route')
 const lov = require('lov')
 const _ = require('lodash')
 
-const {AppConfig} = require('models')
+const { AppConfig } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -42,7 +42,7 @@ module.exports = new Route({
       return ctx.throw(422, 'invalid object')
     }
 
-    const existingKey = await AppConfig.findOne({key: data.key})
+    const existingKey = await AppConfig.findOne({ key: data.key })
     if (existingKey) {
       return ctx.throw(412, 'key already exits')
     }

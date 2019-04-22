@@ -20,7 +20,7 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/tasks/task.js')
   const dirPath = path.join('./tasks/')
   const filePath = path.join('./tasks/' + task + '.js')
-  const fileTask = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, {task: task})
+  const fileTask = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, { task: task })
 
   return true
 }, 500)

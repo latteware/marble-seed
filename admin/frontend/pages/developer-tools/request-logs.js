@@ -6,7 +6,7 @@ import moment from 'moment'
 import classNames from 'classnames'
 
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 
 class RequestLog extends Component {
   constructor (props) {
@@ -27,11 +27,11 @@ class RequestLog extends Component {
     const body = await api.get('/admin/request-logs/' + uuid)
 
     var jsonString = JSON.stringify(body.data, null, 2)
-    this.setState({log: body.data, jsonString: jsonString})
+    this.setState({ log: body.data, jsonString: jsonString })
   }
 
   async showLog () {
-    this.setState({toggled: !this.state.toggled})
+    this.setState({ toggled: !this.state.toggled })
     await this.loadLog(this.props.log.uuid)
   }
 
@@ -44,13 +44,13 @@ class RequestLog extends Component {
   }
 
   async replayRequest () {
-    this.setState({isReplaying: ' is-loading'})
+    this.setState({ isReplaying: ' is-loading' })
 
     const url = `/admin/request-logs/${this.props.log.uuid}/replay`
     try {
       let res = await api.post(url)
 
-      this.setState({isReplaying: ''})
+      this.setState({ isReplaying: '' })
 
       this.props.handleReplayRequest({
         uuid: this.props.log.uuid,
@@ -64,15 +64,15 @@ class RequestLog extends Component {
   }
 
   async downloadRequest () {
-    this.setState({isDownloading: ' is-loading'})
+    this.setState({ isDownloading: ' is-loading' })
 
     const url = `/admin/request-logs/export/${this.props.log.uuid}`
 
     try {
       let res = await api.get(url)
-      var blob = new window.Blob([JSON.stringify(res, null, '  ')], {type: 'application/json;charset=utf-8'})
+      var blob = new window.Blob([JSON.stringify(res, null, '  ')], { type: 'application/json;charset=utf-8' })
       FileSaver.saveAs(blob, `${this.props.log.path}.json`)
-      this.setState({isDownloading: ''})
+      this.setState({ isDownloading: '' })
     } catch (e) {
       this.setState({
         isDownloading: ''
@@ -132,7 +132,7 @@ class RequestLog extends Component {
             </div>
           </div>
           <div className='columns'>
-            <div className='column' style={{paddingTop: '0px'}}>
+            <div className='column' style={{ paddingTop: '0px' }}>
               {this.getBody()}
             </div>
           </div>
@@ -165,7 +165,7 @@ class RequestLogs extends PageComponent {
     const filters = this.getDefaultFilterValues()
 
     this.setState({ filters })
-    return {metadata}
+    return { metadata }
   }
 
   async onPageEnter () {
@@ -174,7 +174,7 @@ class RequestLogs extends PageComponent {
       limit: this.state.logsPerPage
     })
 
-    return {logs}
+    return { logs }
   }
 
   async load (filters) {
@@ -197,7 +197,7 @@ class RequestLogs extends PageComponent {
         loadingLogs: false,
         filters,
         error: e.message,
-        logs: {data: [], total: 0}
+        logs: { data: [], total: 0 }
       })
     }
   }
@@ -316,7 +316,7 @@ class RequestLogs extends PageComponent {
   }
 
   list () {
-    const {logs, newReplay} = this.state
+    const { logs, newReplay } = this.state
 
     return logs.data.map(log => {
       return <RequestLog
@@ -469,9 +469,9 @@ RequestLogs.config({
   exact: true,
   validate: loggedIn,
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Developer tools'},
-    {label: 'Request logs'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Developer tools' },
+    { label: 'Request logs' }
   ]
 })
 

@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {Group, User} = require('models')
+const { Group, User } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -7,10 +7,10 @@ module.exports = new Route({
   handler: async function (ctx) {
     const userId = ctx.params.uuid
 
-    const user = await User.findOne({'uuid': userId, 'isDeleted': false}).populate('groups')
+    const user = await User.findOne({ 'uuid': userId, 'isDeleted': false }).populate('groups')
     ctx.assert(user, 404, 'User not found')
 
-    const group = await Group.findOne({'uuid': ctx.request.body.group})
+    const group = await Group.findOne({ 'uuid': ctx.request.body.group })
     ctx.assert(group, 404, 'Group not found')
 
     if (user.groups.find(item => { return String(item) === String(group._id) })) {

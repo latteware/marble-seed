@@ -6,7 +6,7 @@ module.exports = new Route({
   method: 'get',
   path: '/tokens',
   handler: async function (ctx) {
-    const {user} = ctx.state
+    const { user } = ctx.state
 
     if (!user) {
       return ctx.throw(403)
@@ -17,7 +17,7 @@ module.exports = new Route({
     }
 
     const tokens = await UserToken.find({
-      isDeleted: {$ne: true},
+      isDeleted: { $ne: true },
       user: user._id,
       type: 'api'
     })

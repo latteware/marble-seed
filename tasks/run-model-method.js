@@ -16,7 +16,7 @@ const task = new Task(async function (argv) {
     throw new Error(`Model ${argv.model} not found`)
   }
 
-  const doc = await model.findOne({uuid: argv.uuid})
+  const doc = await model.findOne({ uuid: argv.uuid })
   if (!doc) {
     throw new Error(`Document with ${argv.uuid} not found`)
   }
@@ -36,7 +36,7 @@ const task = new Task(async function (argv) {
         const hidrateModel = match[2]
 
         if (arg && hidrateModel && argv[arg] && models[hidrateModel]) {
-          argv[arg] = await models[hidrateModel].findOne({uuid: argv[arg]})
+          argv[arg] = await models[hidrateModel].findOne({ uuid: argv[arg] })
         }
       } else {
         throw new Error(`Invalid replacement for ${item}`)

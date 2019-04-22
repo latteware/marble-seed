@@ -105,7 +105,7 @@ class EmailResetLanding extends PageComponent {
   }
 
   render () {
-    const {errors} = this.state
+    const { errors } = this.state
 
     return (
       <div className='Reset single-form'>

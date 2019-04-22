@@ -50,7 +50,7 @@ class NavBar extends Component {
   }
 
   async handleLogout () {
-    const {history} = this.props
+    const { history } = this.props
 
     try {
       await api.del('/user')
@@ -69,9 +69,9 @@ class NavBar extends Component {
 
   handleNavbarBurgerClick () {
     if (this.state.mobileMenu === 'open') {
-      this.setState({mobileMenu: 'close'})
+      this.setState({ mobileMenu: 'close' })
     } else {
-      this.setState({mobileMenu: 'open'})
+      this.setState({ mobileMenu: 'open' })
     }
   }
 

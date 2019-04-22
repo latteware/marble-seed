@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import env from '~base/env-variables'
 import api from '~base/api'
 import ListPageComponent from '~base/list-page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 
 class Header extends Component {
   constructor (props) {
@@ -50,7 +50,7 @@ class UserDeletedList extends ListPageComponent {
   async onFirstPageEnter () {
     const organizations = await this.loadOrgs()
 
-    return {organizations}
+    return { organizations }
   }
 
   async loadOrgs () {
@@ -75,20 +75,20 @@ class UserDeletedList extends ListPageComponent {
         type: 'object',
         required: [],
         properties: {
-          screenName: {type: 'text', title: 'Por nombre'},
-          email: {type: 'text', title: 'Por email'},
-          organization: {type: 'text', title: 'Por organización', values: []}
+          screenName: { type: 'text', title: 'Por nombre' },
+          email: { type: 'text', title: 'Por email' },
+          organization: { type: 'text', title: 'Por organización', values: [] }
         }
       },
       uiSchema: {
-        screenName: {'ui:widget': 'SearchFilter'},
-        email: {'ui:widget': 'SearchFilter'},
-        organization: {'ui:widget': 'SelectSearchFilter'}
+        screenName: { 'ui:widget': 'SearchFilter' },
+        email: { 'ui:widget': 'SearchFilter' },
+        organization: { 'ui:widget': 'SelectSearchFilter' }
       }
     }
 
     if (this.state.organizations) {
-      data.schema.properties.organization.values = this.state.organizations.map(item => { return {uuid: item.uuid, name: item.name} })
+      data.schema.properties.organization.values = this.state.organizations.map(item => { return { uuid: item.uuid, name: item.name } })
     }
 
     return data

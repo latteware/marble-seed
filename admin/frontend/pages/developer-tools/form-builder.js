@@ -1,6 +1,6 @@
 import React from 'react'
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import FormBuilder from './components/builder'
 
 import 'react-select/scss/default.scss'
@@ -26,11 +26,11 @@ class FormBuilderContainer extends PageComponent {
   }
 
   handleChange (data) {
-    this.setState({formData: data})
+    this.setState({ formData: data })
   }
 
   setCurrentDisplay (currentDisplay) {
-    this.setState({currentDisplay})
+    this.setState({ currentDisplay })
   }
 
   setResult (result) {
@@ -53,8 +53,8 @@ class FormBuilderContainer extends PageComponent {
         onChange={(data) => this.handleChange(data)}
         onSubmit={(data) => this.setResult(data)}
       />
-      <div style={{maxWidth: 500, overflowX: 'scroll'}}>
-        {result && <pre style={{marginTop: 20}}>{JSON.stringify(result, null, 2)}</pre>}
+      <div style={{ maxWidth: 500, overflowX: 'scroll' }}>
+        {result && <pre style={{ marginTop: 20 }}>{JSON.stringify(result, null, 2)}</pre>}
       </div>
     </div>
 
@@ -111,9 +111,9 @@ FormBuilderContainer.config({
   icon: 'file',
   title: 'Form Builder',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Developer tools'},
-    {label: 'Form builder'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Developer tools' },
+    { label: 'Form builder' }
   ],
   exact: true,
   validate: loggedIn

@@ -3,7 +3,7 @@ import React from 'react'
 import PageComponent from '~base/page-component'
 import api from '~base/api'
 import env from '~base/env-variables'
-import {forcePublic} from '~base/middlewares/'
+import { forcePublic } from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
 

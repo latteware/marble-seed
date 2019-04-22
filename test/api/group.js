@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../utils')
 const api = require('api/')
 const request = require('supertest')
-const {Group, User} = require('models')
+const { Group, User } = require('models')
 
 function test () {
   return request(http.createServer(api.callback()))
@@ -49,7 +49,7 @@ describe('Group CRUD', () => {
         .expect(200)
 
       groupUuid = res.body.data.uuid
-      const newGroup = await Group.findOne({'uuid': groupUuid})
+      const newGroup = await Group.findOne({ 'uuid': groupUuid })
       expect(newGroup.name).equal('Un group')
       expect(newGroup.description).equal('Una descripción')
     })
@@ -99,7 +99,7 @@ describe('Group CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newGroup = await Group.findOne({'uuid': baseGroup.uuid})
+      const newGroup = await Group.findOne({ 'uuid': baseGroup.uuid })
       expect(newGroup.name).equal('Un group')
       expect(newGroup.description).equal('Otra descripción')
     })
@@ -174,7 +174,7 @@ describe('Group CRUD', () => {
     })
 
     it('should return a 200', async function () {
-      const group = await Group.create({name: 'new group'})
+      const group = await Group.create({ name: 'new group' })
 
       const res = await test()
         .post('/api/admin/users/' + userUuid + '/add/group')
@@ -184,7 +184,7 @@ describe('Group CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newGroup = await Group.findOne({'uuid': group.uuid}).populate('users')
+      const newGroup = await Group.findOne({ 'uuid': group.uuid }).populate('users')
 
       expect(res.body.data.groups[0].uuid).equal(group.uuid)
       expect(newGroup.users[0].uuid).equal(userUuid)
@@ -229,7 +229,7 @@ describe('Group CRUD', () => {
         .expect(200)
 
       expect(res.body.data.groups.length).equal(0)
-      const newGroup = await Group.findOne({'uuid': groupUuid})
+      const newGroup = await Group.findOne({ 'uuid': groupUuid })
       expect(newGroup.users.length).equal(0)
     })
   })
@@ -258,8 +258,8 @@ describe('Group CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newGroup = await Group.findOne({'uuid': groupUuid})
-      const newUser = await User.findOne({'uuid': userUuid})
+      const newGroup = await Group.findOne({ 'uuid': groupUuid })
+      const newUser = await User.findOne({ 'uuid': userUuid })
       expect(newGroup.isDeleted).equal(true)
       expect(newGroup.users.length).equal(0)
       expect(newUser.groups.length).equal(0)

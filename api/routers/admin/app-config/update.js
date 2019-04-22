@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const Route = require('lib/router/route')
 
-const {AppConfig} = require('models')
+const { AppConfig } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -10,7 +10,7 @@ module.exports = new Route({
     const key = ctx.params.key
     const data = ctx.request.body
 
-    const config = await AppConfig.findOne({key})
+    const config = await AppConfig.findOne({ key })
     ctx.assert(config, 404, 'Group not found')
 
     if (data.value !== undefined) {

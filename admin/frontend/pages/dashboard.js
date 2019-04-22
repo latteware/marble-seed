@@ -6,7 +6,7 @@ import api from '~base/api'
 import { Redirect } from 'react-router-dom'
 import Link from '~base/router/link'
 
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 
 class Dashboard extends PageComponent {
   constructor (props) {
@@ -44,7 +44,7 @@ class Dashboard extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {orgsCount, usersCount, rolesCount, groupsCount, todayIs} = this.state
+    const { orgsCount, usersCount, rolesCount, groupsCount, todayIs } = this.state
 
     if (this.state.redirect) {
       return <Redirect to='/log-in' />

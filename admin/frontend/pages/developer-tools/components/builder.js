@@ -337,7 +337,7 @@ class FormWidget extends Component {
   }
 
   onChange (data, index) {
-    const state = {formData: data}
+    const state = { formData: data }
 
     state.widgetSchema = WidgetSchemas[data.widget] || {}
     this.setState(state)
@@ -355,7 +355,7 @@ class FormWidget extends Component {
   }
 
   render () {
-    const schema = {...baseSchema}
+    const schema = { ...baseSchema }
 
     Object.keys(this.state.widgetSchema).map(key => {
       schema[key] = this.state.widgetSchema[key]
@@ -428,7 +428,7 @@ class FormBuilder extends Component {
     this.onChange()
   }
 
-  onSortEnd ({oldIndex, newIndex}) {
+  onSortEnd ({ oldIndex, newIndex }) {
     this.setState({
       widgets: arrayMove(this.state.widgets, oldIndex, newIndex)
     })

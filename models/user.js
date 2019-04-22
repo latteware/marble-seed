@@ -15,8 +15,8 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, trim: true },
   screenName: { type: String, unique: true, required: true },
 
-  validEmail: {type: Boolean, default: false},
-  isAdmin: {type: Boolean, default: false},
+  validEmail: { type: Boolean, default: false },
+  isAdmin: { type: Boolean, default: false },
   isDeleted: { type: Boolean, default: false },
 
   organizations: [{ type: Schema.Types.ObjectId, ref: 'Organization' }],
@@ -121,7 +121,7 @@ userSchema.statics.toCoreProperties = function (json) {
 
 userSchema.statics.auth = async function (email, password) {
   const userEmail = email.toLowerCase()
-  const user = await this.findOne({email: userEmail})
+  const user = await this.findOne({ email: userEmail })
   assert(user, 401, 'Invalid email/password')
 
   const isValid = await new Promise((resolve, reject) => {
@@ -136,7 +136,7 @@ userSchema.statics.auth = async function (email, password) {
 }
 
 userSchema.statics.register = async function (options) {
-  const {screenName, email} = options
+  const { screenName, email } = options
 
   const emailTaken = await this.findOne({ email })
   assert(!emailTaken, 422, 'Email already in use')
