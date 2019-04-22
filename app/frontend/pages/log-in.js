@@ -6,7 +6,7 @@ import tree from '~core/tree'
 import api from '~base/api'
 import Link from '~base/router/link'
 import env from '~base/env-variables'
-import {forcePublic} from '~base/middlewares/'
+import { forcePublic } from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
 
@@ -38,7 +38,7 @@ class LogIn extends PageComponent {
   }
 
   removeExpiredSession () {
-    this.setState({expiredSession: false})
+    this.setState({ expiredSession: false })
   }
 
   async submitHandler (formData) {

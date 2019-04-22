@@ -24,9 +24,9 @@ class Layout extends Component {
   async componentWillMount () {
     const userCursor = tree.select('user')
 
-    userCursor.on('update', ({data}) => {
+    userCursor.on('update', ({ data }) => {
       const user = data.currentData
-      this.setState({user})
+      this.setState({ user })
     })
 
     var me
@@ -62,7 +62,7 @@ class Layout extends Component {
 
     tree.set('config', config)
     tree.commit()
-    this.setState({loaded: true})
+    this.setState({ loaded: true })
   }
 
   render () {

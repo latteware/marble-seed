@@ -1,6 +1,6 @@
 const Route = require('lib/router/route')
 
-const {RequestLog} = require('models')
+const { RequestLog } = require('models')
 
 module.exports = new Route({
   method: 'get',

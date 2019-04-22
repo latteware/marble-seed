@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import ConfirmButton from '~base/components/confirm-button'
 
@@ -23,7 +23,7 @@ class AppConfigItem extends Component {
   }
 
   componentWillReceiveProps (nextProp) {
-    const {appConfig} = this.props
+    const { appConfig } = this.props
 
     if (nextProp.collapsed !== this.state.currentValue) {
       let value = appConfig.type === 'boolean' ? false : ''
@@ -35,12 +35,12 @@ class AppConfigItem extends Component {
         }
       }
 
-      this.setState({currentValue: value})
+      this.setState({ currentValue: value })
     }
   }
 
   async handleRemoveItem () {
-    const {appConfig} = this.props
+    const { appConfig } = this.props
 
     this.props.removeItem(appConfig)
   }
@@ -48,11 +48,11 @@ class AppConfigItem extends Component {
   async handleUpdateItem (e) {
     e.preventDefault()
 
-    const {appConfig} = this.props
-    const {currentValue} = this.state
-    const nextState = {submitting: false}
+    const { appConfig } = this.props
+    const { currentValue } = this.state
+    const nextState = { submitting: false }
 
-    this.setState({submitting: true})
+    this.setState({ submitting: true })
 
     try {
       await this.props.updateItem({
@@ -74,8 +74,8 @@ class AppConfigItem extends Component {
   }
 
   render () {
-    const {appConfig} = this.props
-    const {currentValue, error, submitting} = this.state
+    const { appConfig } = this.props
+    const { currentValue, error, submitting } = this.state
     let previousValue = appConfig.value
     if (appConfig.type === 'object') {
       previousValue = JSON.stringify(appConfig.value)

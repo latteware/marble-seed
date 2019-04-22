@@ -32,7 +32,7 @@ const TextWidget = (props) => {
 }
 
 function CustomFieldTemplate (props) {
-  const {id, classNames, label, help, required, description, errors, children} = props
+  const { id, classNames, label, help, required, description, errors, children } = props
 
   if (id === 'root') {
     return (<div className={classNames}>
@@ -62,4 +62,4 @@ class BaseForm extends Component {
   }
 }
 
-export {BaseForm, PasswordWidget, EmailWidget, TextWidget}
+export { BaseForm, PasswordWidget, EmailWidget, TextWidget }

@@ -1,6 +1,6 @@
 const Route = require('lib/router/route')
 
-const {Group} = require('models')
+const { Group } = require('models')
 
 module.exports = new Route({
   method: 'delete',
@@ -8,10 +8,10 @@ module.exports = new Route({
   handler: async function (ctx) {
     var groupId = ctx.params.uuid
 
-    var group = await Group.findOne({'uuid': groupId}).populate('users')
+    var group = await Group.findOne({ 'uuid': groupId }).populate('users')
     ctx.assert(group, 404, 'Group not found')
 
-    group.set({isDeleted: true})
+    group.set({ isDeleted: true })
 
     for (var user of group.users) {
       var pos = user.groups.indexOf(group._id)
@@ -19,7 +19,7 @@ module.exports = new Route({
       user.save()
     }
 
-    group.set({users: []})
+    group.set({ users: [] })
 
     group.save()
 

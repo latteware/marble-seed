@@ -11,7 +11,7 @@ const task = new Task(async function (argv) {
     throw new Error('screenName, email and password are required')
   }
 
-  const user = await User.findOne({email: argv.email})
+  const user = await User.findOne({ email: argv.email })
 
   console.log('in task =>', user)
 

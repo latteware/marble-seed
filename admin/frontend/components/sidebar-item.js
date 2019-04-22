@@ -16,7 +16,7 @@ class SidebarItem extends Component {
   }
 
   componentWillMount () {
-    this.setState({open: this.props.status})
+    this.setState({ open: this.props.status })
   }
 
   componentWillReceiveProps (nextProp) {
@@ -24,7 +24,7 @@ class SidebarItem extends Component {
     const mainPath = new RegExp(to.replace(/\//g, ''))
 
     if (nextProp.collapsed !== this.state.menuIsCollapsed) {
-      this.setState({menuIsCollapsed: nextProp.collapsed}, function () {
+      this.setState({ menuIsCollapsed: nextProp.collapsed }, function () {
         if (mainPath.test(activeItem) && !nextProp.collapsed) {
           dropdownOnClick(index)
         }
@@ -32,7 +32,7 @@ class SidebarItem extends Component {
     }
 
     if (nextProp.status !== this.state.open) {
-      this.setState({open: nextProp.status})
+      this.setState({ open: nextProp.status })
     }
   }
 
@@ -89,7 +89,7 @@ class SidebarItem extends Component {
   }
 
   render () {
-    let {title, icon, to, dropdown, onClick, dropdownOnClick} = this.props
+    let { title, icon, to, dropdown, onClick, dropdownOnClick } = this.props
     let mainLink = this.getItemLink(to, icon, title, onClick)
     let dropdownItems
 

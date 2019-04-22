@@ -2,7 +2,7 @@ const Route = require('lib/router/route')
 const lov = require('lov')
 const slugify = require('underscore.string/slugify')
 
-const {Group} = require('models')
+const { Group } = require('models')
 
 module.exports = new Route({
   method: 'post',

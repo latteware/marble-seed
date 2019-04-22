@@ -4,7 +4,7 @@ import PageComponent from '~base/page-component'
 import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
-import {forcePublic} from '~base/middlewares/'
+import { forcePublic } from '~base/middlewares/'
 
 import MarbleForm from '~base/components/marble-form'
 

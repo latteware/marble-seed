@@ -2,7 +2,7 @@ const Route = require('lib/router/route')
 const lov = require('lov')
 const crypto = require('crypto')
 
-const {User, Role} = require('models')
+const { User, Role } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -27,7 +27,7 @@ module.exports = new Route({
     const user = await User.register(userData)
 
     if (!userData.role) {
-      let defaultRole = await Role.findOne({isDefault: true})
+      let defaultRole = await Role.findOne({ isDefault: true })
       if (!defaultRole) {
         defaultRole = await Role.create({
           name: 'Default',
@@ -39,7 +39,7 @@ module.exports = new Route({
 
       user.role = defaultRole
     } else {
-      user.role = await Role.findOne({uuid: roleUuid})
+      user.role = await Role.findOne({ uuid: roleUuid })
     }
 
     user.save()

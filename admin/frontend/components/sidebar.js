@@ -106,7 +106,7 @@ class Sidebar extends Component {
     if (title && this.props.handleBurguer) {
       this.props.handleBurguer()
     }
-    this.setState({active: item})
+    this.setState({ active: item })
   }
 
   handleCollapse () {
@@ -123,7 +123,7 @@ class Sidebar extends Component {
   handleToggle (index) {
     const menuItems = [...this.state.menuItems]
     menuItems[index].open = !menuItems[index].open
-    this.setState({menuItems})
+    this.setState({ menuItems })
   }
 
   render () {

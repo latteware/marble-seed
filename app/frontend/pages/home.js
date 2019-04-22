@@ -1,7 +1,7 @@
 import React from 'react'
 import PageComponent from '~base/page-component'
 
-import {forcePublic} from '~base/middlewares/'
+import { forcePublic } from '~base/middlewares/'
 
 class Home extends PageComponent {
   constructor (props) {

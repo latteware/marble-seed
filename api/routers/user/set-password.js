@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {UserToken} = require('models')
+const { UserToken } = require('models')
 const lov = require('lov')
 
 module.exports = new Route({
@@ -12,7 +12,7 @@ module.exports = new Route({
   handler: async function (ctx) {
     const { uuid, password } = ctx.request.body
 
-    const token = await UserToken.findOne({uuid: uuid}).populate('user')
+    const token = await UserToken.findOne({ uuid: uuid }).populate('user')
     if (!token) {
       return ctx.throw(401, 'Invalid token')
     }
@@ -22,7 +22,7 @@ module.exports = new Route({
       return ctx.throw(401, 'User has been suspended')
     }
 
-    user.set({password})
+    user.set({ password })
     user.save()
 
     const sessionToken = await user.createToken({

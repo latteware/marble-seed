@@ -4,7 +4,7 @@ import moment from 'moment'
 import env from '~base/env-variables'
 
 import ListPageComponent from '~base/list-page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import CreateOrganization from './create'
 
 class OrganizationList extends ListPageComponent {
@@ -55,11 +55,11 @@ class OrganizationList extends ListPageComponent {
         type: 'object',
         required: [],
         properties: {
-          name: {type: 'text', title: 'Por nombre'}
+          name: { type: 'text', title: 'Por nombre' }
         }
       },
       uiSchema: {
-        name: {'ui:widget': 'SearchFilter'}
+        name: { 'ui:widget': 'SearchFilter' }
       }
     }
 
@@ -67,7 +67,7 @@ class OrganizationList extends ListPageComponent {
   }
 
   exportFormatter (row) {
-    return {name: row.name}
+    return { name: row.name }
   }
 }
 

@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../utils')
 const api = require('api/')
 const request = require('supertest')
-const {AppConfig} = require('models')
+const { AppConfig } = require('models')
 
 function test () {
   return request(http.createServer(api.callback()))
@@ -44,10 +44,10 @@ describe('App Config public API', () => {
 
     it('should return a 200 with multiple keys and types', async function () {
       await AppConfig.create([
-        {key: 'foo', type: 'string', value: 'simple'},
-        {key: 'bar', type: 'number', value: 1},
-        {key: 'quz', type: 'array', value: [1, 2, 3]},
-        {key: 'qip', type: 'object', value: {active: true}}
+        { key: 'foo', type: 'string', value: 'simple' },
+        { key: 'bar', type: 'number', value: 1 },
+        { key: 'quz', type: 'array', value: [1, 2, 3] },
+        { key: 'qip', type: 'object', value: { active: true } }
       ])
 
       const res = await test()
@@ -58,7 +58,7 @@ describe('App Config public API', () => {
       expect(res.body.foo).equal('simple')
       expect(res.body.bar).equal(1)
       expect(res.body.quz).to.deep.equal([1, 2, 3])
-      expect(res.body.qip).to.deep.equal({active: true})
+      expect(res.body.qip).to.deep.equal({ active: true })
     })
   })
 })

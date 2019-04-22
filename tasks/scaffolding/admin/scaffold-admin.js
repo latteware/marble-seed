@@ -11,12 +11,12 @@ const task = new Task(async function (argv) {
 
   for (const api in commands.admin.api) {
     var commandApi = require('./' + commands.admin.api[api].file)
-    await commandApi.run({model})
+    await commandApi.run({ model })
   }
 
   for (const frontend in commands.admin.frontend) {
     var commandFront = require('./' + commands.admin.frontend[frontend].file)
-    await commandFront.run({model})
+    await commandFront.run({ model })
   }
 
   return true

@@ -7,7 +7,7 @@ const Task = require('lib/task')
 const { RequestLog } = require('models')
 
 const task = new Task(async function (argv) {
-  const requestLog = await RequestLog.findOne({'uuid': argv.uuid})
+  const requestLog = await RequestLog.findOne({ 'uuid': argv.uuid })
   if (!requestLog) {
     console.log('Error: RequestLog not found')
     return false

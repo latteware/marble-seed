@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {Organization, User} = require('models')
+const { Organization, User } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -7,10 +7,10 @@ module.exports = new Route({
   handler: async function (ctx) {
     const userId = ctx.params.uuid
 
-    const user = await User.findOne({'uuid': userId})
+    const user = await User.findOne({ 'uuid': userId })
     ctx.assert(user, 404, 'User not found')
 
-    const org = await Organization.findOne({'uuid': ctx.request.body.organization})
+    const org = await Organization.findOne({ 'uuid': ctx.request.body.organization })
     ctx.assert(org, 404, 'Organization not found')
 
     var pos = user.organizations.indexOf(org._id)

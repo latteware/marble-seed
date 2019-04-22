@@ -58,7 +58,7 @@ module.exports = {
     new UglifyWebpackPlugin({
       parallel: true
     }),
-    new CompressionPlugin({algorithm: 'gzip'})
+    new CompressionPlugin({ algorithm: 'gzip' })
   ],
   resolve: {
     modules: ['node_modules'],

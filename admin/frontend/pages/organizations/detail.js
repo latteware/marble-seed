@@ -3,7 +3,7 @@ import Link from '~base/router/link'
 import api from '~base/api'
 
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import OrganizationForm from './form'
 import ConfirmButton from '~base/components/confirm-button'
@@ -75,7 +75,7 @@ class OrganizationDetail extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {organization} = this.state
+    const { organization } = this.state
 
     return (
       <div className='columns c-flex-1 is-marginless'>
@@ -135,8 +135,8 @@ class OrganizationDetail extends PageComponent {
                           branchName='users'
                           baseUrl='/admin/users'
                           columns={this.getColumns()}
-                          filters={{organization: this.props.match.params.uuid}}
-                         />
+                          filters={{ organization: this.props.match.params.uuid }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -155,9 +155,9 @@ OrganizationDetail.config({
   path: '/manage/organizations/:uuid',
   title: '<%= organization.name %> | Organization details',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Organizations', path: '/manage/organizations'},
-    {label: '<%= organization.name %>'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Organizations', path: '/manage/organizations' },
+    { label: '<%= organization.name %>' }
   ],
   exact: true,
   validate: loggedIn

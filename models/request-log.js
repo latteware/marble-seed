@@ -74,7 +74,7 @@ requestLogSchema.methods.replay = async function () {
   return requestLog
 }
 
-requestLogSchema.index({createdAt: 1, uuid: 1, status: 1})
+requestLogSchema.index({ createdAt: 1, uuid: 1, status: 1 })
 
 requestLogSchema.plugin(dataTables)
 

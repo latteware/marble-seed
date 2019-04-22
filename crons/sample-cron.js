@@ -13,8 +13,8 @@ const cron = new Cron({
   task: async function () {
     console.log('Running cron =>', new Date())
 
-    const {jobId} = await fetchBinData.runAsBackgroundJob({bin: 'oazdu'})
-    return {success: true, jobId}
+    const { jobId } = await fetchBinData.runAsBackgroundJob({ bin: 'oazdu' })
+    return { success: true, jobId }
   }
 })
 

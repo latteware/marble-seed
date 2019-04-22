@@ -2,7 +2,7 @@ const Route = require('lib/router/route')
 const lov = require('lov')
 const slugify = require('underscore.string/slugify')
 
-const {Group} = require('models')
+const { Group } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -14,7 +14,7 @@ module.exports = new Route({
     var groupId = ctx.params.uuid
     var data = ctx.request.body
 
-    const group = await Group.findOne({'uuid': groupId})
+    const group = await Group.findOne({ 'uuid': groupId })
     ctx.assert(group, 404, 'Group not found')
 
     data.slug = slugify(data.name)

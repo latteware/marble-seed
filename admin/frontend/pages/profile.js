@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 
 import UpdateProfileForm from '~base/components/update-profile'
 import UpdatePasswordForm from '~base/components/update-password'

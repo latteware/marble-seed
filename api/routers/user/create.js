@@ -1,7 +1,7 @@
 const Route = require('lib/router/route')
 const lov = require('lov')
 
-const {User, Role} = require('models')
+const { User, Role } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -28,7 +28,7 @@ module.exports = new Route({
       return ctx.throw(422, e.message)
     }
 
-    let defaultRole = await Role.findOne({isDefault: true})
+    let defaultRole = await Role.findOne({ isDefault: true })
 
     user.role = defaultRole
     user.save()

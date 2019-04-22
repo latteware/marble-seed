@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../utils')
 const api = require('api/')
 const request = require('supertest')
-const {Role} = require('models')
+const { Role } = require('models')
 
 function test () {
   return request(http.createServer(api.callback()))
@@ -47,7 +47,7 @@ describe('Role CRUD', () => {
         .expect(200)
 
       roleUuid = res.body.data.uuid
-      const newOrg = await Role.findOne({'uuid': roleUuid})
+      const newOrg = await Role.findOne({ 'uuid': roleUuid })
       expect(newOrg.name).equal('Un role')
       expect(newOrg.description).equal('Una descripción')
     })
@@ -92,7 +92,7 @@ describe('Role CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newOrg = await Role.findOne({'uuid': roleUuid})
+      const newOrg = await Role.findOne({ 'uuid': roleUuid })
       expect(newOrg.name).equal('Un role')
       expect(newOrg.description).equal('Otra descripción')
     })
@@ -131,7 +131,7 @@ describe('Role CRUD', () => {
         .set('Accept', 'application/json')
         .expect(200)
 
-      const newOrg = await Role.findOne({'uuid': roleUuid})
+      const newOrg = await Role.findOne({ 'uuid': roleUuid })
       expect(newOrg.isDeleted).equal(true)
     })
   })

@@ -8,8 +8,8 @@ module.exports = new Route({
     name: lov.string().required()
   }),
   handler: async function (ctx) {
-    const {user} = ctx.state
-    const {name} = ctx.request.body
+    const { user } = ctx.state
+    const { name } = ctx.request.body
 
     if (!user) {
       return ctx.throw(403)

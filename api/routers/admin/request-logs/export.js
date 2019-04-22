@@ -1,7 +1,7 @@
 const Route = require('lib/router/route')
 const _ = require('lodash')
 
-const {RequestLog} = require('models')
+const { RequestLog } = require('models')
 
 module.exports = new Route({
   method: 'get',
@@ -10,7 +10,7 @@ module.exports = new Route({
   handler: async function (ctx) {
     var requestId = ctx.params.uuid
 
-    const request = await RequestLog.findOne({'uuid': requestId})
+    const request = await RequestLog.findOne({ 'uuid': requestId })
     ctx.assert(request, 404, 'RequestLog not found')
 
     var headerKeys = _.keys(request.headers)

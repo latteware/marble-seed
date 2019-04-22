@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {User} = require('models')
+const { User } = require('models')
 
 module.exports = new Route({
   method: 'get',
@@ -7,7 +7,7 @@ module.exports = new Route({
   handler: async function (ctx) {
     const userId = ctx.params.uuid
 
-    const user = await User.findOne({'uuid': userId, 'isDeleted': {$ne: true}})
+    const user = await User.findOne({ 'uuid': userId, 'isDeleted': { $ne: true } })
       .populate('organizations')
       .populate('groups')
       .populate('role')

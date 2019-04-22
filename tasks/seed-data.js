@@ -73,7 +73,7 @@ const task = new Task(async function (argv) {
     }
   }
 
-  return {created: createdItems, existing: existingItems, errors}
+  return { created: createdItems, existing: existingItems, errors }
 })
 
 if (require.main === module) {

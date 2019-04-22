@@ -6,7 +6,7 @@ const http = require('http')
 const { clearDatabase } = require('../utils')
 const Koa = require('koa')
 const request = require('supertest')
-const {RequestLog} = require('models')
+const { RequestLog } = require('models')
 
 const Router = require('lib/router/router')
 const Route = require('lib/router/route')
@@ -19,7 +19,7 @@ function test () {
     method: 'get',
     path: '/success',
     handler: async function (ctx) {
-      ctx.body = {success: true}
+      ctx.body = { success: true }
     }
   })
 

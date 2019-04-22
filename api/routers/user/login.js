@@ -1,5 +1,5 @@
 const Route = require('lib/router/route')
-const {User} = require('models')
+const { User } = require('models')
 const lov = require('lov')
 
 module.exports = new Route({

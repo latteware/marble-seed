@@ -1,4 +1,4 @@
-import {isEmpty} from 'lodash'
+import { isEmpty } from 'lodash'
 import React, { Component } from 'react'
 import { root } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router'
@@ -28,19 +28,19 @@ class AdminLayout extends Component {
   }
 
   toggleBurguer () {
-    this.setState({burger: !this.state.burger})
+    this.setState({ burger: !this.state.burger })
   }
 
   toggleSidebarCollapse () {
-    this.setState({menuCollapse: !this.state.menuCollapse})
+    this.setState({ menuCollapse: !this.state.menuCollapse })
   }
 
   async componentWillMount () {
     const userCursor = tree.select('user')
 
-    userCursor.on('update', ({data}) => {
+    userCursor.on('update', ({ data }) => {
       const user = data.currentData
-      this.setState({user})
+      this.setState({ user })
     })
 
     var me
@@ -67,7 +67,7 @@ class AdminLayout extends Component {
 
       if (me) {
         if (!me.user.isAdmin) {
-          const {history} = this.props
+          const { history } = this.props
 
           storage.remove('jwt')
           tree.set('jwt', null)
@@ -89,7 +89,7 @@ class AdminLayout extends Component {
     tree.set('config', config)
     tree.commit()
 
-    this.setState({loaded: true})
+    this.setState({ loaded: true })
   }
 
   render () {

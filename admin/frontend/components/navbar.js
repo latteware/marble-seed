@@ -16,7 +16,7 @@ class AdminNavBar extends Component {
   }
 
   handleLogout () {
-    const {history} = this.props
+    const { history } = this.props
 
     storage.remove('jwt')
     tree.set('jwt', null)
@@ -29,9 +29,9 @@ class AdminNavBar extends Component {
 
   handleNavbarBurgerClick () {
     if (this.state.mobileMenu === 'open') {
-      this.setState({mobileMenu: 'close'})
+      this.setState({ mobileMenu: 'close' })
     } else {
-      this.setState({mobileMenu: 'open'})
+      this.setState({ mobileMenu: 'open' })
     }
   }
 

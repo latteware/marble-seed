@@ -33,7 +33,7 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/',
         handler: async function (ctx) {
-          ctx.body = {success: true}
+          ctx.body = { success: true }
         }
       })
 
@@ -71,7 +71,7 @@ describe('lib/routes', () => {
           base: route
         },
         middlewares: [async function (ctx, next) {
-          ctx.state = {hasState: true}
+          ctx.state = { hasState: true }
 
           await next()
         }],
@@ -104,7 +104,7 @@ describe('lib/routes', () => {
         },
         middlewares: [
           async function (ctx, next) {
-            ctx.state = {hasState: true}
+            ctx.state = { hasState: true }
 
             await next()
           },
@@ -136,7 +136,7 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/:uuid',
         handler: async function (ctx) {
-          ctx.body = {base: true}
+          ctx.body = { base: true }
         }
       })
 
@@ -144,7 +144,7 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/:uuid',
         handler: async function (ctx) {
-          ctx.body = {priority: true}
+          ctx.body = { priority: true }
         }
       })
 
@@ -173,7 +173,7 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/:uuid',
         handler: async function (ctx) {
-          ctx.body = {base: true}
+          ctx.body = { base: true }
         }
       })
 
@@ -182,7 +182,7 @@ describe('lib/routes', () => {
         path: '/:uuid',
         priority: 10,
         handler: async function (ctx) {
-          ctx.body = {priority: true}
+          ctx.body = { priority: true }
         }
       })
 
@@ -213,8 +213,8 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/:label',
         handler: async function (ctx) {
-          const {label} = ctx.params
-          ctx.body = {label}
+          const { label } = ctx.params
+          ctx.body = { label }
         }
       })
 
@@ -246,11 +246,11 @@ describe('lib/routes', () => {
 
       const resSimple = await test.get('/v1/test/simple-route')
       expect(resSimple.status).equal(200)
-      expect(resSimple.body).to.deep.equal({label: 'simple-route'})
+      expect(resSimple.body).to.deep.equal({ label: 'simple-route' })
 
       const resNested = await test.get('/v1/test/nested/complex-route')
       expect(resNested.status).equal(200)
-      expect(resNested.body).to.deep.equal({label: 'complex-route'})
+      expect(resNested.body).to.deep.equal({ label: 'complex-route' })
     })
 
     it('[get] /test should return 200 after multiple middlewares', async function () {
@@ -259,8 +259,8 @@ describe('lib/routes', () => {
         method: 'get',
         path: '/:label',
         handler: async function (ctx) {
-          const {label} = ctx.state
-          ctx.body = {label}
+          const { label } = ctx.state
+          ctx.body = { label }
         }
       })
 
@@ -304,11 +304,11 @@ describe('lib/routes', () => {
 
       const resSimple = await test.get('/v1/test/simple-route')
       expect(resSimple.status).equal(200)
-      expect(resSimple.body).to.deep.equal({label: 'simple-route'})
+      expect(resSimple.body).to.deep.equal({ label: 'simple-route' })
 
       const resNested = await test.get('/v1/test/nested/complex-route')
       expect(resNested.status).equal(200)
-      expect(resNested.body).to.deep.equal({label: 'complex-route'})
+      expect(resNested.body).to.deep.equal({ label: 'complex-route' })
     })
   })
 })

@@ -2,7 +2,7 @@ import React from 'react'
 
 import PageComponent from '~base/page-component'
 import api from '~base/api'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import MarbleForm from '~base/components/marble-form'
 
 const schema = {
@@ -25,7 +25,7 @@ class ImportUsers extends PageComponent {
   }
 
   changeHandler (formData) {
-    this.setState({formData})
+    this.setState({ formData })
   }
 
   async submitHandler (formData) {
@@ -45,7 +45,7 @@ class ImportUsers extends PageComponent {
             <div className='card'>
               <div className='card-content'>
                 <div className='columns'>
-                  <div className='column' style={{maxWidth: 560, margin: '0 auto'}}>
+                  <div className='column' style={{ maxWidth: 560, margin: '0 auto' }}>
                     <MarbleForm
                       schema={schema}
                       formData={this.state.formData}
@@ -78,9 +78,9 @@ ImportUsers.config({
   icon: 'user',
   title: 'Import Users',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Import'},
-    {label: 'Users'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Import' },
+    { label: 'Users' }
   ],
   exact: true,
   validate: loggedIn

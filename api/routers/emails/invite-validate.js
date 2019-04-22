@@ -1,7 +1,7 @@
 const Route = require('lib/router/route')
 const lov = require('lov')
 
-const {User} = require('models')
+const { User } = require('models')
 
 module.exports = new Route({
   method: 'post',

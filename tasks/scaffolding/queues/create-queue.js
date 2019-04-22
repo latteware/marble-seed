@@ -21,7 +21,7 @@ const task = new Task(async function (argv) {
   const templatePath = path.join('./tasks/scaffolding/templates/queues/queue.js')
   const dirPath = path.join('./queues/')
   const filePath = path.join('./queues/' + queue + '.js')
-  const fileQueue = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, {queue: queue})
+  const fileQueue = await scaffolding.createFileFromTemplate(dirPath, filePath, templatePath, { queue: queue })
 
   const cronIndexPath = path.join('./queues/index.js')
 

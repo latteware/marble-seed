@@ -7,7 +7,7 @@ const cron = new Cron({
   tick: '* * * * *',
   task: async function () {
     console.log('Running cron =>', new Date())
-    return {success: true}
+    return { success: true }
   }
 })
 

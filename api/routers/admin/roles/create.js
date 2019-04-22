@@ -2,7 +2,7 @@ const Route = require('lib/router/route')
 const lov = require('lov')
 const slugify = require('underscore.string/slugify')
 
-const {Role} = require('models')
+const { Role } = require('models')
 
 module.exports = new Route({
   method: 'post',
@@ -14,7 +14,7 @@ module.exports = new Route({
     var data = ctx.request.body
 
     data.slug = slugify(data.name)
-    const auxRole = await Role.findOne({slug: data.slug})
+    const auxRole = await Role.findOne({ slug: data.slug })
     if (auxRole && !auxRole.isDeleted) {
       ctx.throw(400, "You can't have two roles with the same name")
     }

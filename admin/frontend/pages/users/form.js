@@ -87,9 +87,9 @@ class UserForm extends Component {
   }
 
   render () {
-    const {schema} = this.state
+    const { schema } = this.state
     schema.role.options = this.props.roles.map(item => {
-      return {label: item.name, value: item.uuid}
+      return { label: item.name, value: item.uuid }
     })
 
     let successMessage, formData

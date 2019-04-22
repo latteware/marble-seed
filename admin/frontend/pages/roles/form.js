@@ -27,7 +27,7 @@ class RoleForm extends Component {
   }
 
   changeHandler (formData) {
-    this.setState({formData})
+    this.setState({ formData })
   }
 
   async submitHandler (formData) {

@@ -4,7 +4,7 @@ require('lib/databases/mongo')
 
 const Task = require('lib/task')
 const fs = require('fs')
-const {User, Role} = require('models')
+const { User, Role } = require('models')
 
 const today = new Date()
 const timestamp = today.getTime()
@@ -16,7 +16,7 @@ const task = new Task(async function (argv) {
   console.log('Fetching users .....')
   var users = await User.find({})
 
-  let defaultRole = await Role.findOne({name: 'Default'})
+  let defaultRole = await Role.findOne({ name: 'Default' })
   if (!defaultRole) {
     defaultRole = await Role.create({
       name: 'Default',
