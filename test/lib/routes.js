@@ -205,4 +205,110 @@ describe('lib/routes', () => {
       expect(res.body.base).equal(undefined)
     })
   })
+
+  describe('Nested routers', () => {
+    it('[get] /test should return 200', async function () {
+      const app = new Koa()
+      const route = new Route({
+        method: 'get',
+        path: '/:label',
+        handler: async function (ctx) {
+          const {label} = ctx.params
+          ctx.body = {label}
+        }
+      })
+
+      const childRouter = new Router({
+        routes: {
+          nested: route
+        },
+        prefix: '/nested'
+      })
+
+      const router = new Router({
+        routes: {
+          child: childRouter,
+          simple: route
+        },
+        prefix: '/test'
+      })
+
+      const v1 = new Router({
+        routes: {
+          v1: router
+        },
+        prefix: '/v1'
+      })
+
+      v1.add(app)
+
+      const test = request(http.createServer(app.callback()))
+
+      const resSimple = await test.get('/v1/test/simple-route')
+      expect(resSimple.status).equal(200)
+      expect(resSimple.body).to.deep.equal({label: 'simple-route'})
+
+      const resNested = await test.get('/v1/test/nested/complex-route')
+      expect(resNested.status).equal(200)
+      expect(resNested.body).to.deep.equal({label: 'complex-route'})
+    })
+
+    it('[get] /test should return 200 after multiple middlewares', async function () {
+      const app = new Koa()
+      const route = new Route({
+        method: 'get',
+        path: '/:label',
+        handler: async function (ctx) {
+          const {label} = ctx.state
+          ctx.body = {label}
+        }
+      })
+
+      const childRouter = new Router({
+        routes: {
+          nested: route
+        },
+        middlewares: [
+          async function (ctx, next) {
+            ctx.state.label = 'complex-route'
+            await next()
+          }
+        ],
+        prefix: '/nested'
+      })
+
+      const router = new Router({
+        routes: {
+          child: childRouter,
+          simple: route
+        },
+        middlewares: [
+          async function (ctx, next) {
+            ctx.state.label = 'simple-route'
+            await next()
+          }
+        ],
+        prefix: '/test'
+      })
+
+      const v1 = new Router({
+        routes: {
+          v1: router
+        },
+        prefix: '/v1'
+      })
+
+      v1.add(app)
+
+      const test = request(http.createServer(app.callback()))
+
+      const resSimple = await test.get('/v1/test/simple-route')
+      expect(resSimple.status).equal(200)
+      expect(resSimple.body).to.deep.equal({label: 'simple-route'})
+
+      const resNested = await test.get('/v1/test/nested/complex-route')
+      expect(resNested.status).equal(200)
+      expect(resNested.body).to.deep.equal({label: 'complex-route'})
+    })
+  })
 })

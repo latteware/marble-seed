@@ -6,7 +6,7 @@ const _ = require('lodash')
 const { User } = require('models')
 const Task = require('lib/task')
 
-const task = new Task(function * (argv) {
+const task = new Task(async function (argv) {
   if (!argv.password || !argv.email || !argv.screenName) {
     throw new Error('screenName, email and password are required')
   }
@@ -21,7 +21,7 @@ const task = new Task(function * (argv) {
     validEmail: true
   })
 
-  yield admin.save()
+  await admin.save()
 
   return admin
 })

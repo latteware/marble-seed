@@ -1,6 +1,7 @@
 import React from 'react'
 import PageComponent from '~base/page-component'
 
+import storage from '~base/storage'
 import api from '~base/api'
 import tree from '~core/tree'
 import {forcePublic} from '~base/middlewares/'
@@ -45,7 +46,7 @@ class SignUp extends PageComponent {
   }
 
   successHandler (data) {
-    window.localStorage.setItem('jwt', data.jwt)
+    storage.set('jwt', data.jwt)
     tree.set('jwt', data.jwt)
     tree.set('user', data.user)
     tree.set('loggedIn', true)
@@ -75,7 +76,7 @@ class SignUp extends PageComponent {
             <div className='content'>
               <MarbleForm
                 schema={schema}
-                onSubmit={(e) => { this.submitHandler(e) }}
+                onSubmit={(e) => this.submitHandler(e)}
                 onSuccess={(data) => this.successHandler(data)}
                 buttonLabel='Sign up'
               />
