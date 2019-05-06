@@ -13,6 +13,7 @@
     "url": "github.com/latteware/marble-seed"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.0.1",
     "app-module-path": "^2.2.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -42,7 +43,7 @@
     "file-loader": "^0.11.2",
     "file-saver": "^1.3.8",
     "font-awesome": "^4.7.0",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^4.0.3",
     "inline-css": "^2.2.2",
     "inquirer": "^4.0.0",
     "json2csv": "^4.1.3",
