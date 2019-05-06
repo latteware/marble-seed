@@ -38,6 +38,12 @@ make app-server
 
 Api server will run a koa api, admin and app are two react projects that consume that API
 
+You need run this task for generate initial translations.
+
+```bash
+node tasks/translations/synchronize-translations.js
+```
+
 By default, Marble Seeds have an admin application that will allow to visualize the database, users and more.
 
 The easiest way to create your first user in the database is:

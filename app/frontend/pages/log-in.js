@@ -53,9 +53,19 @@ class LogIn extends PageComponent {
     tree.set('user', data.user)
     tree.set('loggedIn', true)
     tree.commit()
+    this.languageSettingDispatcher(data.user.lang || 'es-MX')
 
     this.props.history.push('/app', {})
+
   }
+
+  languageSettingDispatcher (lang) {
+     window.dispatchEvent(
+       new CustomEvent('lang', {
+         detail: { lang },
+       })
+     )
+   }
 
   render () {
     const basicStates = super.getBasicStates()

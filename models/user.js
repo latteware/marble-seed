@@ -14,6 +14,7 @@ const userSchema = new Schema({
   password: { type: String },
   email: { type: String, required: true, unique: true, trim: true },
   screenName: { type: String, unique: true, required: true },
+  lang: { type: String, default: 'es-MX' },
 
   validEmail: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
@@ -61,6 +62,7 @@ userSchema.methods.toPublic = function () {
   return {
     uuid: this.uuid,
     screenName: this.screenName,
+    lang: this.lang,
     name: this.name,
     email: this.email,
     validEmail: this.validEmail,
@@ -73,6 +75,7 @@ userSchema.methods.toAdmin = function () {
   const data = {
     uuid: this.uuid,
     screenName: this.screenName,
+    lang: this.lang,
     name: this.name,
     email: this.email,
     isAdmin: this.isAdmin,

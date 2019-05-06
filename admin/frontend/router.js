@@ -24,6 +24,7 @@ import RoleDetail from './pages/roles/detail'
 import Groups from './pages/groups/list'
 import GroupDetail from './pages/groups/detail'
 import RequestLogs from './pages/developer-tools/request-logs'
+import Translations from './pages/translations/list'
 import AppConfig from './pages/developer-tools/app-config'
 import Buttons from './pages/ui-components/buttons'
 import FormBuilder from './pages/developer-tools/form-builder'
@@ -72,6 +73,7 @@ const AppRouter = () => {
           {AppConfig.asRouterItem()}
           {Buttons.asRouterItem()}
           {FormBuilder.asRouterItem()}
+          {Translations.asRouterItem()}
           {EmailBuilder.asRouterItem()}
           {EmailDetail.asRouterItem()}
 

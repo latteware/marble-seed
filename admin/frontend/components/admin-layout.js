@@ -13,6 +13,8 @@ import Loader from '~base/components/spinner'
 import Sidebar from '~components/sidebar'
 import Footer from '~components/footer'
 import AdminNavBar from '~components/admin-navbar'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 class AdminLayout extends Component {
   constructor (props) {
@@ -103,6 +105,7 @@ class AdminLayout extends Component {
 
     if (!isEmpty(this.state.user)) {
       return (<div className='columns wrap is-gapless c-flex-1 is-flex'>
+        <ToastContainer />
         <Sidebar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
         <div className='column is-flex is-flex-column'>
           <AdminNavBar burgerState={this.state.burger} handleBurguer={() => this.toggleBurguer()} />
@@ -116,6 +119,7 @@ class AdminLayout extends Component {
       </div>)
     } else {
       return (<div>
+        <ToastContainer />
         {this.props.children}
       </div>)
     }

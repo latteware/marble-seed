@@ -3,6 +3,7 @@ import React from 'react'
 import request from '~core/request'
 import PageComponent from '~base/page-component'
 import { loggedIn } from '~base/middlewares/'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 class App extends PageComponent {
   constructor (props) {
@@ -38,7 +39,9 @@ class App extends PageComponent {
     return (
       <div className='App'>
         <div className='App-header'>
-          <h2>Post list</h2>
+          <h2>
+            <FormattedMessage id="general.postsListTitle" />
+          </h2>
         </div>
         {postsList}
       </div>
@@ -53,4 +56,4 @@ App.config({
   validate: loggedIn
 })
 
-export default App
+export default injectIntl(App)

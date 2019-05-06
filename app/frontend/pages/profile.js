@@ -1,10 +1,10 @@
 import React from 'react'
 import PageComponent from '~base/page-component'
 import { loggedIn } from '~base/middlewares/'
-
 import UpdatePasswordForm from '~base/components/update-password'
 import UpdateProfileForm from '~base/components/update-profile'
 import TokensList from '~base/components/token-list'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 class Profile extends PageComponent {
   constructor (props) {
@@ -18,21 +18,23 @@ class Profile extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
+    let { intl } = this.props
+
     return (
       <section className='section'>
         <div className='columns is-multiline'>
           <div className='column is-full is-one-third-desktop'>
             <div className='panel is-bg-white'>
               <p className='panel-heading'>
-                Perfil
+                <FormattedMessage id='general.profile' />
               </p>
               <div className='panel-block panel-body'>
-                <UpdateProfileForm />
+                <UpdateProfileForm intl={intl} />
               </div>
             </div>
             <div className='panel is-bg-white'>
               <p className='panel-heading'>
-                Perfil
+                <FormattedMessage id='general.security' />
               </p>
               <div className='panel-block panel-body'>
                 <UpdatePasswordForm />
@@ -56,4 +58,4 @@ Profile.config({
   component: Profile
 })
 
-export default Profile
+export default injectIntl(Profile)

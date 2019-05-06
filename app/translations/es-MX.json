@@ -1,0 +1,86 @@
+[
+  {
+    "id": "marbleseeds",
+    "modules": [
+      "general"
+    ],
+    "content": "Bienvenido a marbleseeds"
+  },
+  {
+    "id": "welcome",
+    "modules": [
+      "general"
+    ],
+    "content": "Bienvenido"
+  },
+  {
+    "id": "home",
+    "modules": [
+      "general"
+    ],
+    "content": "Inicio"
+  },
+  {
+    "id": "regards",
+    "modules": [
+      "general"
+    ],
+    "content": "¡Hola {name}!"
+  },
+  {
+    "id": "dashboardTitle",
+    "modules": [
+      "general"
+    ],
+    "content": "Dashboard"
+  },
+  {
+    "id": "postsListTitle",
+    "modules": [
+      "general"
+    ],
+    "content": "Lista de posts\n"
+  },
+  {
+    "id": "testLabel",
+    "modules": [
+      "general"
+    ],
+    "content": "Test"
+  },
+  {
+    "id": "profile",
+    "modules": [
+      "general"
+    ],
+    "content": "Perfil"
+  },
+  {
+    "id": "security",
+    "modules": [
+      "general"
+    ],
+    "content": "Seguridad"
+  },
+  {
+    "id": "name",
+    "modules": [
+      "general"
+    ],
+    "content": "Nombre"
+  },
+  {
+    "id": "email",
+    "modules": [
+      "general"
+    ],
+    "content": "Correo"
+  },
+  {
+    "id": "lang",
+    "modules": [
+      "general"
+    ],
+    "content": "Lenguaje"
+  }
+]

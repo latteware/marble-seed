@@ -15,6 +15,7 @@ import Link from '~base/router/link'
 
 import AppConfig from '../pages/developer-tools/app-config'
 import RequestLogs from '../pages/developer-tools/request-logs'
+import Translations from '../pages/translations/list'
 import FormBuilder from '../pages/developer-tools/form-builder'
 import EmailBuilder from '../pages/developer-tools/email-builder/list'
 
@@ -81,6 +82,7 @@ class Sidebar extends Component {
           RequestLogs.asSidebarItem(),
           AppConfig.asSidebarItem(),
           FormBuilder.asSidebarItem(),
+          Translations.asSidebarItem(),
           EmailBuilder.asSidebarItem()
         ]
       }, {
