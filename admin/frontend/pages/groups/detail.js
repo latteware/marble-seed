@@ -3,7 +3,7 @@ import Link from '~base/router/link'
 import api from '~base/api'
 
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import GroupForm from './form'
 import ConfirmButton from '~base/components/confirm-button'
@@ -70,7 +70,7 @@ class GroupDetail extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {group} = this.state
+    const { group } = this.state
 
     return (<div className='columns c-flex-1 is-marginless'>
       <div className='column is-paddingless'>
@@ -129,7 +129,7 @@ class GroupDetail extends PageComponent {
                         branchName='users'
                         baseUrl='/admin/users'
                         columns={this.getColumns()}
-                        filters={{group: this.props.match.params.uuid}}
+                        filters={{ group: this.props.match.params.uuid }}
                       />
                     </div>
                   </div>
@@ -148,9 +148,9 @@ GroupDetail.config({
   path: '/manage/groups/:uuid',
   title: '<%= group.name %> | Group details',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Groups', path: '/manage/groups'},
-    {label: '<%= group.name %>'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Groups', path: '/manage/groups' },
+    { label: '<%= group.name %>' }
   ],
   exact: true,
   validate: loggedIn

@@ -100,3 +100,6 @@ To use this in the application, you will need to create your own API call outsid
 
 To set up servers to run you app in production, follow this guide: https://www.notion.so/marbleform/Marble-seeds-server-from-0-e678d21f951546abae66f3f35bc7a420
 
+## Current development branch
+
+For new features on marble seeds send pull request to `v0.6.5` and contact [@siedrix](https://twitter.com/Siedrix)

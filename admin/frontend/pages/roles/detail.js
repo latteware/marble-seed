@@ -3,7 +3,7 @@ import Link from '~base/router/link'
 import api from '~base/api'
 
 import PageComponent from '~base/page-component'
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import RoleForm from './form'
 import { BranchedPaginatedTable } from '~base/components/base-paginated-table'
 import ConfirmButton from '~base/components/confirm-button'
@@ -77,7 +77,7 @@ class RoleDetail extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {role} = this.state
+    const { role } = this.state
 
     let defaultButton
     if (!role.isDefault) {
@@ -88,9 +88,9 @@ class RoleDetail extends PageComponent {
               className='button is-primary'
               type='button'
               onClick={() => this.defaultOnClick()}
-              >
+            >
                 Set as default
-              </button>
+            </button>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ class RoleDetail extends PageComponent {
                             branchName='users'
                             baseUrl='/admin/users'
                             columns={this.getColumns()}
-                            filters={{role: this.props.match.params.uuid}}
+                            filters={{ role: this.props.match.params.uuid }}
                           />
                         </div>
                       </div>
@@ -184,9 +184,9 @@ RoleDetail.config({
   path: '/manage/roles/:uuid',
   title: '<%= role.name %> | Roles details',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Roles', path: '/manage/roles'},
-    {label: '<%= role.name %>'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Roles', path: '/manage/roles' },
+    { label: '<%= role.name %>' }
   ],
   exact: true,
   validate: loggedIn
