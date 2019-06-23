@@ -7,7 +7,7 @@ import api from '~base/api'
 import env from '~base/env-variables'
 import FontAwesome from 'react-fontawesome'
 
-import {loggedIn} from '~base/middlewares/'
+import { loggedIn } from '~base/middlewares/'
 import UserForm from './form'
 import Multiselect from '~base/components/base-multiselect'
 import ConfirmButton from '~base/components/confirm-button'
@@ -36,7 +36,7 @@ class UserDetail extends PageComponent {
     const orgs = await this.loadOrgs()
     const groups = await this.loadGroups()
 
-    return {roles, orgs, groups}
+    return { roles, orgs, groups }
   }
 
   async onPageEnter () {
@@ -220,7 +220,7 @@ class UserDetail extends PageComponent {
 
   async resetOnClick () {
     var url = '/user/reset-password'
-    const res = await api.post(url, {email: this.state.user.email})
+    const res = await api.post(url, { email: this.state.user.email })
 
     return res.data
   }
@@ -249,15 +249,15 @@ class UserDetail extends PageComponent {
   getSavingMessage (saving, saved) {
     if (saving) {
       return (
-        <p className='card-header-title' style={{fontWeight: '200', color: 'grey'}}>
-          Saving <span style={{paddingLeft: '5px'}}><FontAwesome className='fa-spin' name='spinner' /></span>
+        <p className='card-header-title' style={{ fontWeight: '200', color: 'grey' }}>
+          Saving <span style={{ paddingLeft: '5px' }}><FontAwesome className='fa-spin' name='spinner' /></span>
         </p>
       )
     }
 
     if (saved) {
       return (
-        <p className='card-header-title' style={{fontWeight: '200', color: 'grey'}}>
+        <p className='card-header-title' style={{ fontWeight: '200', color: 'grey' }}>
           Saved
         </p>
       )
@@ -304,7 +304,7 @@ class UserDetail extends PageComponent {
     const basicStates = super.getBasicStates()
     if (basicStates) { return basicStates }
 
-    const {user} = this.state
+    const { user } = this.state
     const currentUser = tree.get('user')
 
     const availableGroupsList = this.state.groups.filter(item => {
@@ -446,9 +446,9 @@ UserDetail.config({
   path: '/manage/users/:uuid',
   title: '<%= user.name %> | User details',
   breadcrumbs: [
-    {label: 'Dashboard', path: '/'},
-    {label: 'Users', path: '/manage/users'},
-    {label: '<%= user.name %>'}
+    { label: 'Dashboard', path: '/' },
+    { label: 'Users', path: '/manage/users' },
+    { label: '<%= user.name %>' }
   ],
   exact: true,
   validate: loggedIn

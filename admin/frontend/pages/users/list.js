@@ -34,28 +34,32 @@ class UserList extends ListPageComponent {
   }
 
   getFilters () {
-    const data = {
-      schema: {
-        type: 'object',
-        required: [],
-        properties: {
-          screenName: { type: 'text', title: 'Por nombre' },
-          email: { type: 'text', title: 'Por email' },
-          organization: { type: 'text', title: 'Por organización', values: [] }
-        }
+    const schema = {
+      name: {
+        widget: 'TextWidget',
+        name: 'name',
+        placeholder: 'By name'
       },
-      uiSchema: {
-        screenName: { 'ui:widget': 'SearchFilter' },
-        email: { 'ui:widget': 'SearchFilter' },
-        organization: { 'ui:widget': 'SelectSearchFilter' }
+      email: {
+        widget: 'TextWidget',
+        name: 'email',
+        placeholder: 'By email'
+      },
+      organization: {
+        widget: 'SelectWidget',
+        name: 'organization',
+        placeholder: 'By organization',
+        options: []
       }
     }
 
     if (this.state.organizations) {
-      data.schema.properties.organization.values = this.state.organizations.map(item => { return { uuid: item.uuid, name: item.name } })
+      schema.organization.options = this.state.organizations.map(item => {
+        return { value: item.uuid, label: item.name }
+      })
     }
 
-    return data
+    return schema
   }
 
   exportFormatter (row) {
