@@ -28,12 +28,27 @@
     position: relative;
     &.menu-collapsed{
       .menu-list > li a, .dropdown {
+        width: 100%;
         text-align: center;
+        padding: 0.5em 0.75em;
+        position: relative;
+
+        .icon {
+          display: block;
+          text-align: center;
+          width: 100%;
+        }
+
+        > ul {
+          position: absolute;
+          top: 0;
+          right: -15px;
+          z-index: 1000;
+        }
       }
     }
     .menu-container{
       height: 80vh;
-      overflow-y: auto;
     }
     .menu-list {
       li {

@@ -16,7 +16,7 @@ class SidebarItem extends Component {
   }
 
   componentWillMount () {
-    this.setState({open: this.props.status})
+    this.setState({ open: this.props.status })
   }
 
   componentWillReceiveProps (nextProp) {
@@ -24,7 +24,7 @@ class SidebarItem extends Component {
     const mainPath = new RegExp(to.replace(/\//g, ''))
 
     if (nextProp.collapsed !== this.state.menuIsCollapsed) {
-      this.setState({menuIsCollapsed: nextProp.collapsed}, function () {
+      this.setState({ menuIsCollapsed: nextProp.collapsed }, function () {
         if (mainPath.test(activeItem) && !nextProp.collapsed) {
           dropdownOnClick(index)
         }
@@ -32,12 +32,17 @@ class SidebarItem extends Component {
     }
 
     if (nextProp.status !== this.state.open) {
-      this.setState({open: nextProp.status})
+      this.setState({ open: nextProp.status })
     }
   }
 
   getItemLink (to, icon, title, onClick) {
     let activeLink = to.replace(/\//g, '')
+
+    const linkTitleClass = classNames('item-link-title', {
+      'is-hidden': this.state.menuIsCollapsed
+    })
+
     return (<Link
       className={this.props.activeItem === activeLink ? 'is-active' : ''}
       to={to}
@@ -45,7 +50,7 @@ class SidebarItem extends Component {
       <span className='icon'>
         <FontAwesome className='has-text-white' name={icon} />
       </span>
-      <span className='item-link-title'> {title}</span>
+      <span className={linkTitleClass}> {title}</span>
     </Link>)
   }
 
@@ -56,10 +61,12 @@ class SidebarItem extends Component {
       'has-text-primary': !isActive,
       'has-text-white': isActive
     })
+
     const dropdownClass = classNames('', {
       'dropdown': this.state.menuIsCollapsed,
       'is-active': isActive
     })
+
     if (this.state.menuIsCollapsed) {
       return (<div
         className={dropdownClass}
@@ -71,25 +78,26 @@ class SidebarItem extends Component {
         </span>
         {dropdownItems}
       </div>)
+    } else {
+      return (<div>
+        <a href='javascript:void(0)'
+          className={isActive ? 'is-active' : ''}
+          onClick={() => toggle(this.props.index)}>
+          <span className='icon'>
+            <FontAwesome className='has-text-white' name={icon} />
+          </span>
+          <span className='item-link-title'> {title}</span>
+          <span className={arrowColorClass}>
+            <FontAwesome name={this.state.open ? 'angle-down' : 'angle-right'} />
+          </span>
+        </a>
+        {dropdownItems}
+      </div>)
     }
-    return (<div>
-      <a href='javascript:void(0)'
-        className={isActive ? 'is-active' : ''}
-        onClick={() => toggle(this.props.index)}>
-        <span className='icon'>
-          <FontAwesome className='has-text-white' name={icon} />
-        </span>
-        <span className='item-link-title'> {title}</span>
-        <span className={arrowColorClass}>
-          <FontAwesome name={this.state.open ? 'angle-down' : 'angle-right'} />
-        </span>
-      </a>
-      {dropdownItems}
-    </div>)
   }
 
   render () {
-    let {title, icon, to, dropdown, onClick, dropdownOnClick} = this.props
+    let { title, icon, to, dropdown, onClick, dropdownOnClick } = this.props
     let mainLink = this.getItemLink(to, icon, title, onClick)
     let dropdownItems
 
