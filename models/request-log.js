@@ -21,7 +21,8 @@ const requestLogSchema = new Schema({
   error: {
     message: { type: String },
     stack: { type: String }
-  }
+  },
+  createdAt: { type: Date, expires: config.server.requestLogsExpiration, default: Date.now }
 }, {
   timestamps: true,
   usePushEach: true
@@ -74,7 +75,7 @@ requestLogSchema.methods.replay = async function () {
   return requestLog
 }
 
-requestLogSchema.index({createdAt: 1, uuid: 1, status: 1})
+requestLogSchema.index({ createdAt: 1, uuid: 1, status: 1 })
 
 requestLogSchema.plugin(dataTables)
 

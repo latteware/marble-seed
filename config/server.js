@@ -11,5 +11,6 @@ module.exports = {
   adminPrefix: process.env.ADMIN_PREFIX || '',
   adminTitle: process.env.ADMIN_TITLE || 'Marble seeds admin',
 
-  static: process.env.WEBPACK_PUBLIC_PATH
+  static: process.env.WEBPACK_PUBLIC_PATH,
+  requestLogsExpiration: process.env.REQUEST_LOGS_EXPIRATION
 }
