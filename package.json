@@ -6,6 +6,10 @@
   "scripts": {
     "test": "mocha --exit"
   },
+  "engines" : {
+    "node": ">=12",
+    "npm": ">=6"
+  },
   "author": "Common Sense People",
   "license": "MIT",
   "repository": {
