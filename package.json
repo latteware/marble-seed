@@ -30,7 +30,7 @@
     "bulma-tooltip": "^2.0.2",
     "compression-webpack-plugin": "^1.1.10",
     "css-loader": "^0.28.5",
-    "csv-parse": "^2.0.0",
+    "csv-parse": "^4.11.1",
     "debug": "^2.6.8",
     "dotenv": "^4.0.0",
     "downloadjs": "^1.4.7",
