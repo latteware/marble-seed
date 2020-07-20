@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'development'
 const envPath = path.resolve(__dirname, `../.env.${env}`)
 
 try {
-  dotenv.load({
+  dotenv.config({
     path: envPath,
     silent: true
   })
@@ -15,7 +15,7 @@ try {
   console.error('Failed to resolve', envPath, e)
 }
 
-dotenv.load({
+dotenv.config({
   path: path.resolve('.env.default')
 })
 
