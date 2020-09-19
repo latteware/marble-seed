@@ -1,6 +1,4 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
 
 const config = require('../../config')
 
@@ -49,16 +47,7 @@ module.exports = {
       'EMAIL_SEND': JSON.stringify(config.mailer.active),
       'BASE_TITLE': JSON.stringify(config.server.adminTitle),
       'STORAGE_PREFIX': JSON.stringify(config.storage.prefix)
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new UglifyWebpackPlugin({
-      parallel: true
-    }),
-    new CompressionPlugin({algorithm: 'gzip'})
+    })
   ],
   resolve: {
     modules: ['node_modules'],
