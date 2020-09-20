@@ -1,4 +1,6 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const config = require('../../config')
 
@@ -7,6 +9,7 @@ const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
+  mode: 'production',
   entry: [
     'babel-polyfill',
     '../frontend/index.js'
@@ -26,19 +29,31 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|scss)/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' }
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
+      }
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'bundle.css'
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new webpack.DefinePlugin({
       'ENV': JSON.stringify(config.env),
@@ -56,5 +71,9 @@ module.exports = {
       '~core': path.resolve('./app/frontend/core'),
       '~components': path.resolve('./app/frontend/components')
     }
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
   }
 }

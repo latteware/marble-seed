@@ -4,6 +4,7 @@ const config = require('config')
 
 module.exports = {
   context: __dirname,
+  mode: 'development',
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
